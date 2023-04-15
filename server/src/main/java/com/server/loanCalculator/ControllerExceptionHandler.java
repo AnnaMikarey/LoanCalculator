@@ -1,6 +1,6 @@
 package com.server.loanCalculator;
 
-import com.server.loanCalculator.calculator.exception.RequestedMortgageTooHighException;
+import com.server.loanCalculator.calculator.exception.ValueOutOfRangeException;
 import com.server.loanCalculator.calculator.exception.ValidationException;
 import com.server.loanCalculator.errors.ErrorMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -15,26 +15,23 @@ import java.util.Date;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(RequestedMortgageTooHighException.class)
-    public ResponseEntity<ErrorMessage> requestedMortgageTooHighException( RequestedMortgageTooHighException exception){
-        ErrorMessage error = ErrorMessage.builder()
+    private ErrorMessage errorMessageBuilder (RuntimeException exception) {
+        return ErrorMessage.builder()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .timestamp(new Date())
                 .message(exception.getMessage())
                 .build();
+    }
 
+    @ExceptionHandler(ValueOutOfRangeException.class)
+    public ResponseEntity<ErrorMessage> requestedMortgageTooHighException (ValueOutOfRangeException exception) {
+        ErrorMessage error = errorMessageBuilder(exception);
         return new ResponseEntity<ErrorMessage>(error, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<ErrorMessage> validationException (ValidationException exception){
-        ErrorMessage error = ErrorMessage.builder()
-                .statusCode(HttpStatus.BAD_REQUEST.value())
-                .timestamp(new Date())
-                .message(exception.getMessage())
-                .build();
-
+    public ResponseEntity<ErrorMessage> validationException (ValidationException exception) {
+        ErrorMessage error = errorMessageBuilder(exception);
         return new ResponseEntity<ErrorMessage>(error, HttpStatus.NOT_FOUND);
     }
-
 }
