@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @Slf4j
 @RestController
 @RequestMapping("")
@@ -18,7 +17,7 @@ public class CalculatorController {
 
     @GetMapping
     @ResponseBody
-    public String returnCalculatedMortgage() {
+    public String returnCalculatedMortgage () {
         return calculator.returnInfo();
     }
 

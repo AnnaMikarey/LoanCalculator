@@ -3,7 +3,7 @@ package com.server.loanCalculator.calculator.validators;
 import com.server.loanCalculator.calculator.exception.ValidationException;
 
 
-public class PropertyPriceInRangeValidator extends Validator <Double>{
+public class PropertyPriceInRangeValidator extends Validator<Double>{
     @Override
     public void validate(Double propertyPrice) {
         if(propertyPrice > 800000 || propertyPrice < 20000){

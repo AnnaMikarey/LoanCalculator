@@ -15,7 +15,7 @@ public class CalculatorService {
     private double bankInterestMargin = 1.99;
     private double contractFee = 500;
     private double registrationFee = 10;
-    private double mortgagePeriodYears =10;
+    private double mortgagePeriodYears = 10;
     private double propertyValue = 15000;
     private double initialDeposit = 15000;
     private double totalLoan = propertyValue - initialDeposit;
@@ -23,36 +23,34 @@ public class CalculatorService {
     private double financialObligations = 100;
     private PropertyPriceInRangeValidator propertyPriceInRangeValidator = new PropertyPriceInRangeValidator();
 
-
-    private double calculateMonthlyInterestRateDecimals(){
-       return ((euriborInterestRate + bankInterestMargin)/100) / 12;
+    private double calculateMonthlyInterestRateDecimals () {
+        return ((euriborInterestRate + bankInterestMargin) / 100) / 12;
     }
 
-    private double calculateMaxAvailableLoan() {
-        double monthlyAvailableMoney = (salary *0.4) - financialObligations;
+    private double calculateMaxAvailableLoan () {
+        double monthlyAvailableMoney = (salary * 0.4) - financialObligations;
         double mathPower = Math.pow(1 + (calculateMonthlyInterestRateDecimals()), -(12 * mortgagePeriodYears));
-        return (monthlyAvailableMoney * (1-mathPower)) / (calculateMonthlyInterestRateDecimals());
+        return (monthlyAvailableMoney * (1 - mathPower)) / (calculateMonthlyInterestRateDecimals());
 
     }
 
-    private double calculateMonthlyPayment() {
+    private double calculateMonthlyPayment () {
         propertyPriceInRangeValidator.validate(propertyValue);
         double mathPower = Math.pow(1 + calculateMonthlyInterestRateDecimals(), mortgagePeriodYears * 12);
         return totalLoan * (calculateMonthlyInterestRateDecimals() * mathPower / (mathPower - 1));
 
     }
 
-    public String returnInfo(){
-        if(totalLoan<calculateMaxAvailableLoan()){
-            String output = "You can borrow up to " + calculateMaxAvailableLoan() + ". You requested " + totalLoan +
-                    " and the current monthly payment would be " + calculateMonthlyPayment();
+    public String returnInfo () {
+        if (totalLoan < calculateMaxAvailableLoan()) {
+            String output = "You can borrow up to " + calculateMaxAvailableLoan() + ". You requested " + totalLoan
+                    + " and the current monthly payment would be " + calculateMonthlyPayment();
             return output;
 
-        }else{
+        } else {
             throw new RequestedMortgageTooHighException("Requested mortgage amount too high for income");
         }
 
     }
-
 
 }
