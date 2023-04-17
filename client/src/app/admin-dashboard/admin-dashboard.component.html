@@ -1,0 +1,84 @@
+<div class="container mt-5">
+  <h2>Calculator Values</h2>
+
+  <form [formGroup]="adminForm" (ngSubmit)="saveChanges()" class="row g-3 mt-5">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="euribor" class="form-label">Euribor</label>
+          <input type="text" class="form-control" formControlName="euribor" />
+        </div>
+        <div class="mb-3">
+          <label for="bankMargin" class="form-label">Bank Margin</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="bankMargin"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="minDeposit" class="form-label">Min Deposit</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="depositPercent"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="priceMin" class="form-label">Price Min</label>
+          <input type="text" class="form-control" formControlName="priceMin" />
+        </div>
+        <div class="mb-3">
+          <label for="priceMax" class="form-label">Price Max</label>
+          <input type="text" class="form-control" formControlName="priceMax" />
+        </div>
+        <div class="mb-3">
+          <label for="priceDefault" class="form-label">Price Default</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="priceDefault"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="contractFee" class="form-label">Contract Fee</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="contractFee"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="bankFee" class="form-label">Bank Fee</label>
+          <input type="text" class="form-control" formControlName="bankFee" />
+        </div>
+        <div class="mb-3">
+          <label for="mortgageFee" class="form-label">Mortgage Fee</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="mortgageFee"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <button class="btn btn-primary mx-2" type="submit">Save Changes</button>
+        <button
+          class="btn btn-secondary mx-2"
+          type="button"
+          (click)="discardChanges()"
+        >
+          Discard Changes
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
