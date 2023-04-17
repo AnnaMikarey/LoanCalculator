@@ -17,11 +17,6 @@ export class DisclaimerComponent {
     this.dialog.open(ModalComponent);
 }
 
-/*let modal = document.getElementById("modal");
-let btn = document.getElementById("modal-btn");
-btn.onclick = function() {
-  modalTitle-disclaimer.style.display = "block";
-  modal-btn.disabled = true;
-  }*/
+
 }
 
