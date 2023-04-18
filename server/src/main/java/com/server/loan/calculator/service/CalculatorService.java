@@ -1,11 +1,8 @@
-package com.server.loan.calculator.services;
+package com.server.loan.calculator.service;
 
 import com.server.loan.calculator.exception.ValueOutOfRangeException;
-import com.server.loan.calculator.models.CalculatorData;
-import com.server.loan.calculator.validators.BigDecimalInputAsCorrectNumberValidator;
-import com.server.loan.calculator.validators.BigDecimalValueInRangeValidator;
-import com.server.loan.calculator.validators.MortgageYearsValidator;
-import lombok.Data;
+import com.server.loan.calculator.model.CalculatorData;
+import com.server.loan.calculator.validator.CalculatorDataValidator;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,24 +10,20 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 @Service
-@Data
 public class CalculatorService {
 
-    private final CalculatorData data;
-    private final BigDecimalValueInRangeValidator bigDecimalValueInRangeValidator;
-    private final BigDecimalInputAsCorrectNumberValidator bigDecimalInputValidator;
-    private final MortgageYearsValidator mortgageYearsValidator;
+    private final CalculatorData data = new CalculatorData();
+    private final CalculatorDataValidator calculatorDataValidator = new CalculatorDataValidator(data);
 
     private BigDecimal calculateMonthlyInterestRateDecimals () {
-        BigDecimal addedRates = data.getEuriborInterestRate()
-                .add(data.getBankInterestMargin());
+        BigDecimal addedRates = data.getEuriborRate()
+                .add(data.getBankInterestRate());
         return addedRates.divide(new BigDecimal("1200"), 32, RoundingMode.HALF_UP);
     }
 
     private BigDecimal calculateMaxAvailableLoan () {
-        bigDecimalInputValidator.validate(data.getSalary());
-        bigDecimalInputValidator.validate(data.getFinancialObligations());
-        mortgageYearsValidator.validate(data.getMortgagePeriodYears());
+        calculatorDataValidator.validateDatabaseValues();
+        calculatorDataValidator.validateUserInput();
         BigDecimal monthlyAvailableMoney = (data.getSalary()
                 .multiply(new BigDecimal("0.4"))).subtract(data.getFinancialObligations());
         BigDecimal powerDenominator = ((BigDecimal.ONE).add(calculateMonthlyInterestRateDecimals())).pow((12 * data.getMortgagePeriodYears()), MathContext.DECIMAL32);
@@ -39,11 +32,8 @@ public class CalculatorService {
     }
 
     private BigDecimal calculateMonthlyPayment () {
-        bigDecimalValueInRangeValidator.validate(data.getPropertyPrice(), data.getMinPropertyPrice(), data.getMaxPropertyPrice());
-        mortgageYearsValidator.validate(data.getMortgagePeriodYears());
-        bigDecimalValueInRangeValidator.validate(data.getInitialDeposit(), (data.getPropertyPrice()
-                .multiply(data.getMinDepositPercent())
-                .divide(new BigDecimal("100"), 32, RoundingMode.HALF_UP)), data.getPropertyPrice());
+        calculatorDataValidator.validateDatabaseValues();
+        calculatorDataValidator.validateUserInput();
         BigDecimal mathPower = BigDecimal.valueOf(Math.pow(calculateMonthlyInterestRateDecimals().add(new BigDecimal("1"))
                 .doubleValue(), data.getMortgagePeriodYears() * 12));
         return data.getTotalLoan()
@@ -55,14 +45,11 @@ public class CalculatorService {
     public String returnInfo () {
         if (data.getTotalLoan()
                 .compareTo(calculateMaxAvailableLoan()) < 0) {
-            String output = "You can borrow up to " + calculateMaxAvailableLoan() + ". You requested " + data.getTotalLoan()
-                    + " and the current monthly payment would be " + calculateMonthlyPayment();
+            String output = "You can borrow up to " + calculateMaxAvailableLoan() + ". You requested " + data.getTotalLoan() + " and the current monthly payment would be " + calculateMonthlyPayment();
             return output;
 
         } else {
             throw new ValueOutOfRangeException("Requested mortgage amount too high for income");
         }
-
     }
-
 }

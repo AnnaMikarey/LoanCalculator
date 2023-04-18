@@ -1,16 +1,14 @@
-package com.server.loan.calculator.models;
+package com.server.loan.calculator.model;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Data
-@Component
 public class AdminData {
-
-    private BigDecimal adminEuriborInterestRate = new BigDecimal("3.31");
-    private BigDecimal adminBankInterestMargin = new BigDecimal("1.99");
+    private BigDecimal adminEuriborRate = new BigDecimal("3.31");
+    private String adminEuriborDate = "2023-04-18";
+    private BigDecimal adminBankInterestRate = new BigDecimal("1.99");
     private BigDecimal adminContractFee = new BigDecimal("500");
     private BigDecimal adminRegistrationFee = new BigDecimal("10");
     private BigDecimal adminMonthlyBankFee = new BigDecimal("50");
@@ -18,5 +16,4 @@ public class AdminData {
     private BigDecimal adminMaxPropertyPrice = new BigDecimal("500000");
     private BigDecimal adminDefaultPropertyPrice = new BigDecimal("35000");
     private BigDecimal adminMinDepositPercent = new BigDecimal("20");
-
 }

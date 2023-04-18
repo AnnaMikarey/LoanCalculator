@@ -1,4 +1,4 @@
-package com.server.loan;
+package com.server.loan.calculator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

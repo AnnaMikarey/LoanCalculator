@@ -1,16 +1,13 @@
-package com.server.loan.calculator.models;
+package com.server.loan.calculator.model;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Data
-@Component
 public class CalculatorData {
-
-    private BigDecimal euriborInterestRate = new BigDecimal("3.31");
-    private BigDecimal bankInterestMargin = new BigDecimal("1.99");
+    private BigDecimal euriborRate = new BigDecimal("3.31");
+    private BigDecimal bankInterestRate = new BigDecimal("1.99");
     private BigDecimal contractFee = new BigDecimal("500");
     private BigDecimal monthlyBankFee = new BigDecimal("50");
     private BigDecimal registrationFee = new BigDecimal("10");
