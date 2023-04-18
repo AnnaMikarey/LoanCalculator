@@ -1,4 +1,4 @@
-package com.server.loanCalculator.errors;
+package com.server.loan.calculator.errors;
 
 import lombok.Builder;
 import lombok.Data;
