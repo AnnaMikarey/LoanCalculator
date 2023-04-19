@@ -9,10 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class AdminDashboardComponent implements OnInit {
   adminForm: FormGroup;
 
-  saveDate!: string;
-  saveTime!: string;
-  saveDateCurrent!: string;
-  saveTimeCurrent!: string;
+  adminEuriborDate!: string;
 
   validatorsNum = [Validators.required, Validators.pattern(/^\d+\.?\d*$/)];
   validatorsPercent = [
@@ -23,44 +20,35 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.adminForm = new FormGroup({
-      euribor: new FormControl(3.6, this.validatorsPercent),
-      bankMargin: new FormControl(2.5, this.validatorsPercent),
-      priceMin: new FormControl(20000, this.validatorsNum),
-      priceMax: new FormControl(800000, this.validatorsNum),
-      priceDefault: new FormControl(250000, this.validatorsNum),
-      depositPercent: new FormControl(20, this.validatorsPercent),
-      contractFee: new FormControl(350, this.validatorsNum),
-      bankFee: new FormControl(25, this.validatorsNum),
-      mortgageFee: new FormControl(250, this.validatorsNum),
+      adminEuriborRate: new FormControl(3.6, this.validatorsPercent),
+      adminBankMargin: new FormControl(2.5, this.validatorsPercent),
+      adminMinPropertyPrice: new FormControl(20000, this.validatorsNum),
+      adminMaxPropertyPrice: new FormControl(800000, this.validatorsNum),
+      adminDefaultPropertyPrice: new FormControl(250000, this.validatorsNum),
+      adminMinDepositPercent: new FormControl(20, this.validatorsPercent),
+      adminContractFee: new FormControl(350, this.validatorsNum),
+      adminMonthlyBankFee: new FormControl(25, this.validatorsNum),
+      adminRegistrationFee: new FormControl(250, this.validatorsNum),
     });
 
-    this.saveDate = String(localStorage.getItem('saveDate')).slice(0, 10);
-    this.saveTime = String(localStorage.getItem('saveDate')).slice(11, 16);
-    this.saveDateCurrent = this.saveDate;
-    this.saveTimeCurrent = this.saveTime;
+    this.adminEuriborDate = JSON.parse(
+      String(localStorage.getItem('adminFormData'))
+    ).adminEuriborDate;
   }
 
   saveChanges() {
-    console.log(this.adminForm, '---', this.adminForm.value);
+    this.adminEuriborDate = new Date(Date.now()).toISOString().slice(0, 10);
+    this.adminForm.value.adminEuriborDate = this.adminEuriborDate;
     localStorage.setItem('adminFormData', JSON.stringify(this.adminForm.value));
-    this.saveDateCurrent = this.saveDate;
-    this.saveTimeCurrent = this.saveTime;
-    localStorage.setItem(
-      'saveDate',
-      new Date(
-        Date.now() - new Date().getTimezoneOffset() * 60 * 1000
-      ).toISOString()
-    );
   }
 
   discardChanges() {
-    console.log('Changes discarded');
     this.ngOnInit();
   }
 
   handleMinMaxPrices() {
-    const priceMin = this.adminForm.get('priceMin').value;
-    const priceMax = this.adminForm.get('priceMax').value;
+    const priceMin = this.adminForm.value.adminMinPropertyPrice;
+    const priceMax = this.adminForm.value.adminMaxPropertyPrice;
 
     if (priceMin > priceMax) {
       this.adminForm.patchValue({

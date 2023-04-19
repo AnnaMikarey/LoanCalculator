@@ -1,32 +1,36 @@
 <div class="container card m-5">
   <h2>Calculator Values</h2>
-  <h4>Last updated on {{ saveDateCurrent }} at {{ saveTimeCurrent }}</h4>
+  <h4>Last updated on {{ adminEuriborDate }}</h4>
   <form [formGroup]="adminForm" (ngSubmit)="saveChanges()" class="row g-3 mt-5">
     <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="euribor" class="form-label">Euribor</label>
-          <input type="text" class="form-control" formControlName="euribor" />
+          <label for="adminEuriborRate" class="form-label">Euribor</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="adminEuriborRate"
+          />
           <div
             *ngIf="
-              adminForm.get('euribor').invalid &&
-              adminForm.get('euribor').touched
+              adminForm.get('adminEuriborRate').invalid &&
+              adminForm.get('adminEuriborRate').touched
             "
           >
             <span class="error-msg"> Error: Could not fetch the value </span>
           </div>
         </div>
         <div class="mb-3">
-          <label for="bankMargin" class="form-label">Bank Margin</label>
+          <label for="adminBankMargin" class="form-label">Bank Margin</label>
           <input
-            type="text"
+            type="number"
             class="form-control"
-            formControlName="bankMargin"
+            formControlName="adminBankMargin"
           />
           <div
             *ngIf="
-              adminForm.get('bankMargin').invalid &&
-              adminForm.get('bankMargin').touched
+              adminForm.get('adminBankMargin').invalid &&
+              adminForm.get('adminBankMargin').touched
             "
           >
             <span class="error-msg">
@@ -35,16 +39,18 @@
           </div>
         </div>
         <div class="mb-3">
-          <label for="minDeposit" class="form-label">Min Deposit</label>
+          <label for="adminMinDepositPercent" class="form-label"
+            >Min Deposit</label
+          >
           <input
-            type="text"
+            type="number"
             class="form-control"
-            formControlName="depositPercent"
+            formControlName="adminMinDepositPercent"
           />
           <div
             *ngIf="
-              adminForm.get('depositPercent').invalid &&
-              adminForm.get('depositPercent').touched
+              adminForm.get('adminMinDepositPercent').invalid &&
+              adminForm.get('adminMinDepositPercent').touched
             "
           >
             <span class="error-msg">
@@ -56,51 +62,57 @@
 
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="priceMin" class="form-label">Price Min</label>
+          <label for="adminMinPropertyPrice" class="form-label"
+            >Price Min</label
+          >
           <input
-            type="text"
+            type="number"
             class="form-control"
-            formControlName="priceMin"
+            formControlName="adminMinPropertyPrice"
             (input)="handleMinMaxPrices()"
           />
           <div
             *ngIf="
-              adminForm.get('priceMin').invalid &&
-              adminForm.get('priceMin').touched
+              adminForm.get('adminMinPropertyPrice').invalid &&
+              adminForm.get('adminMinPropertyPrice').touched
             "
           >
             <span class="error-msg"> Error: Invalid value </span>
           </div>
         </div>
         <div class="mb-3">
-          <label for="priceMax" class="form-label">Price Max</label>
+          <label for="adminMaxPropertyPrice" class="form-label"
+            >Price Max</label
+          >
           <input
-            type="text"
+            type="number"
             class="form-control"
-            formControlName="priceMax"
+            formControlName="adminMaxPropertyPrice"
             (input)="handleMinMaxPrices()"
           />
           <div
             *ngIf="
-              adminForm.get('priceMax').invalid &&
-              adminForm.get('priceMax').touched
+              adminForm.get('adminMaxPropertyPrice').invalid &&
+              adminForm.get('adminMaxPropertyPrice').touched
             "
           >
             <span class="error-msg"> Error: Invalid value </span>
           </div>
         </div>
         <div class="mb-3">
-          <label for="priceDefault" class="form-label">Price Default</label>
+          <label for="adminDefaultPropertyPrice" class="form-label"
+            >Price Default</label
+          >
           <input
-            type="text"
+            type="number"
             class="form-control"
-            formControlName="priceDefault"
+            formControlName="adminDefaultPropertyPrice"
           />
           <div
             *ngIf="
-              adminForm.get('priceDefault').invalid &&
-              adminForm.get('priceDefault').touched || 
-              adminForm.get('priceDefault').errors?.['priceDefaultInvalid']
+              adminForm.get('adminDefaultPropertyPrice').invalid &&
+              adminForm.get('adminDefaultPropertyPrice').touched || 
+              adminForm.get('adminDefaultPropertyPrice').errors?.['priceDefaultInvalid']
             "
           >
             <span class="error-msg"> Error: Invalid value </span>
@@ -110,44 +122,50 @@
 
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="contractFee" class="form-label">Contract Fee</label>
+          <label for="adminContractFee" class="form-label">Contract Fee</label>
           <input
-            type="text"
+            type="number"
             class="form-control"
-            formControlName="contractFee"
+            formControlName="adminContractFee"
           />
           <div
             *ngIf="
-              adminForm.get('contractFee').invalid &&
-              adminForm.get('contractFee').touched
+              adminForm.get('adminContractFee').invalid &&
+              adminForm.get('adminContractFee').touched
             "
           >
             <span class="error-msg"> Error: Invalid value </span>
           </div>
         </div>
         <div class="mb-3">
-          <label for="bankFee" class="form-label">Bank Fee</label>
-          <input type="text" class="form-control" formControlName="bankFee" />
+          <label for="adminMonthlyBankFee" class="form-label">Bank Fee</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="adminMonthlyBankFee"
+          />
           <div
             *ngIf="
-              adminForm.get('bankFee').invalid &&
-              adminForm.get('bankFee').touched
+              adminForm.get('adminMonthlyBankFee').invalid &&
+              adminForm.get('adminMonthlyBankFee').touched
             "
           >
             <span class="error-msg"> Error: Invalid value </span>
           </div>
         </div>
         <div class="mb-3">
-          <label for="mortgageFee" class="form-label">Mortgage Fee</label>
+          <label for="adminRegistrationFee" class="form-label"
+            >Mortgage Fee</label
+          >
           <input
-            type="text"
+            type="number"
             class="form-control"
-            formControlName="mortgageFee"
+            formControlName="adminRegistrationFee"
           />
           <div
             *ngIf="
-              adminForm.get('mortgageFee').invalid &&
-              adminForm.get('mortgageFee').touched
+              adminForm.get('adminRegistrationFee').invalid &&
+              adminForm.get('adminRegistrationFee').touched
             "
           >
             <span class="error-msg"> Error: Invalid value </span>
