@@ -1,6 +1,4 @@
-import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
