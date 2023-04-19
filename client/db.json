@@ -1,0 +1,36 @@
+{
+  "data": {
+    "lastUpdatedOn": "2023/04/13",
+    "euribor": 3.49,
+    "bankMargin": 1.99,
+    "minInitialDeposit": 15,
+    "minPriceOfProperty": 20000,
+    "maxPriceOfProperty": 800000,
+    "defaultPriceOfProperty": 60000,
+    "contractFee": 100,
+    "bankFee": 16,
+    "mortgageRegistrationFee": 9
+  },
+  "userInputs": {
+    "priceOfProperty": 19997,
+    "deposit": 2999.55,
+    "depositPercent": 15,
+    "mortgagePeriod": 1,
+    "salary": 100000,
+    "financialObligation": 0
+  },
+  "calculatedValues": {
+    "requestedLoanAmount": 16997.45,
+    "contractFee": 100,
+    "bankFee": 16,
+    "mortgageRegistration": 9,
+    "euroborAndRate": 5.48,
+    "maxLoanAvailable": 466050.51587925997,
+    "monthlyPayment": 1458.8504396723827,
+    "annualInterestRateTotal": 5.490801620243037
+  },
+  "adminLogIn": {
+    "username": "admin",
+    "password": "password123"
+  }
+}

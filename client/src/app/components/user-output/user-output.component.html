@@ -1,0 +1,14 @@
+<div>
+    <p>REQUESTED LOAN AMOUNT: {{requestedLoanAmount}} EUR</p>
+    <p>MAX. LOAN AVAILABLE: {{maxLoanAvailable}} EUR</p>
+    <p>MONTHLY PAYMENT*: {{monthlyPayment}} EUR</p>
+    <span *ngIf="monthlyPaymentError" style="color:orange; margin-top: 0;">Monthly payment + financial obligations > 40%
+        of salary</span>
+    <br />
+    <br />
+    <p>ANNUAL INTEREST RATE TOTAL: {{annualInterestRateTotal}} %</p>
+    <p>EUROIBOR+RATE IN BRACKETS: {{euroiborRate}} %</p>
+    <p>CONTRACT FEE: {{contractFee}} EUR</p>
+    <p>BANK FEE: {{bankFee}} EUR</p>
+    <p>MORTGAGE REGISTRATION FEE: {{mortgageRegistrationFee}} EUR</p>
+</div>

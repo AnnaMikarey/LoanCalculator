@@ -1,0 +1,8 @@
+<div class="container" *ngIf="data">
+    <app-user-input class="box a" [minPriceOfProperty]="data.minPriceOfProperty"
+        [maxPriceOfProperty]="data.maxPriceOfProperty" [defaultPriceOfProperty]="data.defaultPriceOfProperty"
+        [minInitialDeposit]="data.minInitialDeposit" (onUserInput)="postUserData($event)"></app-user-input>
+
+    <app-user-output class="box b" [monthlyPaymentError]="monthlyPaymentError"
+        [calculations]="calculations"></app-user-output>
+</div>
