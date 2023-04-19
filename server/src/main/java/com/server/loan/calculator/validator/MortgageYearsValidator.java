@@ -2,7 +2,9 @@ package com.server.loan.calculator.validator;
 
 import com.server.loan.calculator.exception.ValidationException;
 import com.server.loan.calculator.exception.ValueOutOfRangeException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MortgageYearsValidator {
     public void validate (Integer years) {
         if (years == null || years.compareTo(0) <= 0) {

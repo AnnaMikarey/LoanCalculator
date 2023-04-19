@@ -2,19 +2,20 @@ package com.server.loan.calculator.validator;
 
 import com.server.loan.calculator.model.CalculatorData;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @RequiredArgsConstructor
+@Component
 public class CalculatorDataValidator {
-    private final CalculatorData calculatorData;
-    private final BigDecimalValueInRangeValidator valueInRangeValidator = new BigDecimalValueInRangeValidator();
-    private final BigDecimalInputAsCorrectNumberValidator inputValidator = new BigDecimalInputAsCorrectNumberValidator();
-    private final MortgageYearsValidator mortgageYearsValidator = new MortgageYearsValidator();
-    private final DataExistsValidator dataExistsValidator = new DataExistsValidator();
+    private final BigDecimalValueInRangeValidator valueInRangeValidator;
+    private final BigDecimalInputAsCorrectNumberValidator inputValidator;
+    private final MortgageYearsValidator mortgageYearsValidator;
+    private final DataExistsValidator dataExistsValidator;
 
-    public void validateDatabaseValues () {
+    public void validateDatabaseValues (CalculatorData calculatorData) {
         dataExistsValidator.validate(calculatorData.getEuriborRate());
         dataExistsValidator.validate(calculatorData.getBankInterestRate());
         dataExistsValidator.validate(calculatorData.getContractFee());
@@ -29,7 +30,7 @@ public class CalculatorDataValidator {
         valueInRangeValidator.validate(calculatorData.getMinDepositPercent(), BigDecimal.ONE, new BigDecimal("100"));
     }
 
-    public void validateUserInput () {
+    public void validateUserInput (CalculatorData calculatorData) {
         mortgageYearsValidator.validate(calculatorData.getMortgagePeriodYears());
         inputValidator.validate(calculatorData.getPropertyPrice());
         inputValidator.validate(calculatorData.getInitialDeposit());

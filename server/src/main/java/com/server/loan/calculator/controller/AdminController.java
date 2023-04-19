@@ -15,6 +15,7 @@ public class AdminController {
 
     @GetMapping("/get-values")
     public AdminData returnAllValues () {
+
         return adminService.returnAllValues();
     }
 }

@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/calculate-mortgage")
+@RequestMapping("/client")
 @RequiredArgsConstructor
 public class CalculatorController {
     private final CalculatorService calculator;
 
-    @GetMapping
+    @GetMapping("/calculate-mortgage")
     public String returnCalculatedMortgage () {
+
         return calculator.returnInfo();
     }
 

@@ -4,16 +4,17 @@ import com.server.loan.calculator.exception.ValidationException;
 import com.server.loan.calculator.model.AdminData;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @RequiredArgsConstructor
+@Component
 public class AdminDataValidator {
-    private final AdminData adminData;
-    private final BigDecimalValueInRangeValidator valueInRangeValidator = new BigDecimalValueInRangeValidator();
-    private final BigDecimalInputAsCorrectNumberValidator inputValidator = new BigDecimalInputAsCorrectNumberValidator();
+    private final BigDecimalValueInRangeValidator valueInRangeValidator;
+    private final BigDecimalInputAsCorrectNumberValidator inputValidator;
 
-    public void validateAdminInput () {
+    public void validateAdminInput (AdminData adminData) {
         inputValidator.validate(adminData.getAdminEuriborRate());
         valueInRangeValidator.validate(adminData.getAdminEuriborRate(), BigDecimal.ONE, new BigDecimal("100"));
         inputValidator.validate(adminData.getAdminBankInterestRate());
