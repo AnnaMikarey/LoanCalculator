@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { AdminService } from '../services/admin.service';
+import { AdminService } from '../services/admin.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,7 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
-  // constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService) {}
 
   adminForm: FormGroup;
 
@@ -23,7 +23,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.adminForm = new FormGroup({
-      adminEuriborRate: new FormControl(3.6, this.validatorsPercent),
+      adminEuriborRate: new FormControl(null, this.validatorsPercent),
       adminBankMargin: new FormControl(2.5, this.validatorsPercent),
       adminMinPropertyPrice: new FormControl(20000, this.validatorsNum),
       adminMaxPropertyPrice: new FormControl(800000, this.validatorsNum),
@@ -38,27 +38,27 @@ export class AdminDashboardComponent implements OnInit {
       String(localStorage.getItem('adminFormData'))
     ).adminEuriborDate;
 
-    // this.adminService.getData().subscribe(data => {
-    //   this.adminForm.setValue({
-    //     adminEuriborRate: data.adminEuriborRate,
-    //     adminBankMargin: data.adminBankMargin,
-    //     adminMinPropertyPrice: data.adminMinPropertyPrice,
-    //     adminMaxPropertyPrice: data.adminMaxPropertyPrice,
-    //     adminDefaultPropertyPrice: data.adminDefaultPropertyPrice,
-    //     adminMinDepositPercent: data.adminMinDepositPercent,
-    //     adminContractFee: data.adminContractFee,
-    //     adminMonthlyBankFee: data.adminMonthlyBankFee,
-    //     adminRegistrationFee: data.adminRegistrationFee,
-    //   });
-    //   this.adminEuriborDate = data.adminEuriborDate;
-    // });
+    this.adminService.getData().subscribe((data) => {
+      this.adminForm.setValue({
+        adminEuriborRate: data.adminEuriborRate,
+        adminBankMargin: data.adminBankMargin,
+        adminMinPropertyPrice: data.adminMinPropertyPrice,
+        adminMaxPropertyPrice: data.adminMaxPropertyPrice,
+        adminDefaultPropertyPrice: data.adminDefaultPropertyPrice,
+        adminMinDepositPercent: data.adminMinDepositPercent,
+        adminContractFee: data.adminContractFee,
+        adminMonthlyBankFee: data.adminMonthlyBankFee,
+        adminRegistrationFee: data.adminRegistrationFee,
+      });
+      this.adminEuriborDate = data.adminEuriborDate;
+    });
   }
 
   saveChanges() {
     this.adminEuriborDate = new Date(Date.now()).toISOString().slice(0, 10);
     this.adminForm.value.adminEuriborDate = this.adminEuriborDate;
     localStorage.setItem('adminFormData', JSON.stringify(this.adminForm.value));
-    // this.adminService.postData(this.adminForm.value).subscribe();
+    this.adminService.postData(this.adminForm.value).subscribe();
   }
 
   discardChanges() {
