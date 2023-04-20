@@ -1,5 +1,6 @@
 package com.server.loan.calculator.validator;
 
+import com.server.loan.calculator.exception.DataNotFoundException;
 import com.server.loan.calculator.exception.ValidationException;
 import com.server.loan.calculator.model.AdminData;
 import io.micrometer.common.util.StringUtils;
@@ -17,8 +18,8 @@ public class AdminDataValidator {
     public void validateAdminInput (AdminData adminData) {
         inputValidator.validate(adminData.getAdminEuriborRate());
         valueInRangeValidator.validate(adminData.getAdminEuriborRate(), BigDecimal.ONE, new BigDecimal("100"));
-        inputValidator.validate(adminData.getAdminBankInterestRate());
-        valueInRangeValidator.validate(adminData.getAdminBankInterestRate(), BigDecimal.ONE, new BigDecimal("100"));
+        inputValidator.validate(adminData.getAdminBankMargin());
+        valueInRangeValidator.validate(adminData.getAdminBankMargin(), BigDecimal.ONE, new BigDecimal("100"));
         inputValidator.validate(adminData.getAdminRegistrationFee());
         inputValidator.validate(adminData.getAdminMonthlyBankFee());
         inputValidator.validate(adminData.getAdminMinPropertyPrice());
@@ -28,7 +29,7 @@ public class AdminDataValidator {
         valueInRangeValidator.validate(adminData.getAdminMinDepositPercent(), BigDecimal.ONE, new BigDecimal("100"));
         inputValidator.validate(adminData.getAdminContractFee());
         if (StringUtils.isBlank(adminData.getAdminEuriborDate())) {
-            throw new ValidationException("Euribor interest rate date is empty or not a string");
+            throw new ValidationException("Euribor interest rate date empty or not a string");
         }
     }
 }

@@ -1,19 +1,23 @@
 package com.server.loan.calculator.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AdminData {
-    private BigDecimal adminEuriborRate = new BigDecimal("3.31");
-    private String adminEuriborDate = "2023-04-18";
-    private BigDecimal adminBankInterestRate = new BigDecimal("1.99");
-    private BigDecimal adminContractFee = new BigDecimal("500");
-    private BigDecimal adminRegistrationFee = new BigDecimal("10");
-    private BigDecimal adminMonthlyBankFee = new BigDecimal("50");
-    private BigDecimal adminMinPropertyPrice = new BigDecimal("20000");
-    private BigDecimal adminMaxPropertyPrice = new BigDecimal("500000");
-    private BigDecimal adminDefaultPropertyPrice = new BigDecimal("35000");
-    private BigDecimal adminMinDepositPercent = new BigDecimal("20");
+    private BigDecimal adminEuriborRate;
+    private String adminEuriborDate;
+    private BigDecimal adminBankMargin;
+    private BigDecimal adminContractFee;
+    private BigDecimal adminRegistrationFee;
+    private BigDecimal adminMonthlyBankFee;
+    private BigDecimal adminMinPropertyPrice;
+    private BigDecimal adminMaxPropertyPrice;
+    private BigDecimal adminDefaultPropertyPrice;
+    private BigDecimal adminMinDepositPercent;
 }

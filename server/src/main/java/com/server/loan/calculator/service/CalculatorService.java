@@ -1,7 +1,9 @@
 package com.server.loan.calculator.service;
 
 import com.server.loan.calculator.exception.ValueOutOfRangeException;
+import com.server.loan.calculator.model.AdminData;
 import com.server.loan.calculator.model.CalculatorData;
+import com.server.loan.calculator.model.ResultsData;
 import com.server.loan.calculator.validator.CalculatorDataValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,40 +18,52 @@ public class CalculatorService {
 
     private final CalculatorDataValidator calculatorDataValidator;
 
-    private BigDecimal calculateMonthlyInterestRateDecimals (CalculatorData data) {
-        BigDecimal addedRates = data.getEuriborRate()
-                .add(data.getBankInterestRate());
+    private BigDecimal calculateMonthlyInterestRateDecimals (AdminData adminData) {
+        BigDecimal addedRates = adminData.getAdminEuriborRate()
+                .add(adminData.getAdminBankMargin());
         return addedRates.divide(new BigDecimal("1200"), 32, RoundingMode.HALF_UP);
     }
 
-    private BigDecimal calculateMaxAvailableLoan (CalculatorData data) {
+    private BigDecimal calculateMaxAvailableLoan (CalculatorData data, AdminData adminData) {
+
         BigDecimal monthlyAvailableMoney = (data.getSalary()
                 .multiply(new BigDecimal("0.4"))).subtract(data.getFinancialObligations());
-        BigDecimal powerDenominator = ((BigDecimal.ONE).add(calculateMonthlyInterestRateDecimals(data))).pow((12 * data.getMortgagePeriodYears()), MathContext.DECIMAL32);
+        BigDecimal powerDenominator = ((BigDecimal.ONE).add(calculateMonthlyInterestRateDecimals(adminData))).pow((12 * data.getMortgagePeriodYears()), MathContext.DECIMAL32);
         BigDecimal mathPower = BigDecimal.ONE.divide(powerDenominator, 30, RoundingMode.HALF_UP);
-        return (monthlyAvailableMoney.multiply(BigDecimal.ONE.subtract(mathPower))).divide(calculateMonthlyInterestRateDecimals(data), 32, RoundingMode.HALF_UP);
+        return (monthlyAvailableMoney.multiply(BigDecimal.ONE.subtract(mathPower))).divide(calculateMonthlyInterestRateDecimals(adminData), 32, RoundingMode.HALF_UP);
     }
 
-    private BigDecimal calculateMonthlyPayment (CalculatorData data) {
-        BigDecimal mathPower = BigDecimal.valueOf(Math.pow(calculateMonthlyInterestRateDecimals(data).add(new BigDecimal("1"))
+    private BigDecimal calculateMonthlyPayment (CalculatorData data, AdminData adminData, BigDecimal requestedLoan) {
+        BigDecimal mathPower = BigDecimal.valueOf(Math.pow(calculateMonthlyInterestRateDecimals(adminData).add(new BigDecimal("1"))
                 .doubleValue(), data.getMortgagePeriodYears() * 12));
-        return data.getTotalLoan()
-                .multiply(((calculateMonthlyInterestRateDecimals(data).multiply(mathPower)
-                        .divide(mathPower.subtract(BigDecimal.ONE), RoundingMode.HALF_UP))));
+        return requestedLoan.multiply(((calculateMonthlyInterestRateDecimals(adminData).multiply(mathPower)
+                .divide(mathPower.subtract(BigDecimal.ONE), RoundingMode.HALF_UP))));
 
     }
 
-    public String returnInfo () {
-        CalculatorData data = new CalculatorData();
-        calculatorDataValidator.validateDatabaseValues(data);
-        calculatorDataValidator.validateUserInput(data);
-        if (data.getTotalLoan()
-                .compareTo(calculateMaxAvailableLoan(data)) < 0) {
-            String output = "You can borrow up to " + calculateMaxAvailableLoan(data) + ". You requested " + data.getTotalLoan() + " and the current monthly payment would be " + calculateMonthlyPayment(data);
-            return output;
+    public AdminData fetchValuesFromDatabase () {
+        return new AdminData(new BigDecimal("3.31"), "2023-04-17", new BigDecimal("1.99"), new BigDecimal("500"),
+                new BigDecimal("10"), new BigDecimal("50"), new BigDecimal("20000"), new BigDecimal("500000"), new BigDecimal("35000"),
+                new BigDecimal("20"));
+    }
+
+    public ResultsData returnCalculatedData (CalculatorData data) {
+        calculatorDataValidator.validateDatabaseValues(fetchValuesFromDatabase());
+        calculatorDataValidator.validateUserInput(data, fetchValuesFromDatabase());
+        ResultsData results = new ResultsData();
+        results.setResultContractFee(fetchValuesFromDatabase().getAdminContractFee());
+        results.setResultRegistrationFee(fetchValuesFromDatabase().getAdminRegistrationFee());
+        results.setResultMonthlyBankFee(fetchValuesFromDatabase().getAdminMonthlyBankFee());
+        results.setMaxAvailableLoanAmount(calculateMaxAvailableLoan(data, fetchValuesFromDatabase()));
+        BigDecimal requestedLoan = data.getPropertyPrice()
+                .subtract(data.getInitialDeposit());
+        if (requestedLoan.compareTo(results.getMaxAvailableLoanAmount()) <= 0) {
+            results.setRequestedLoanAmount(requestedLoan);
 
         } else {
             throw new ValueOutOfRangeException("Requested mortgage amount too high for income");
         }
+        results.setMonthlyPaymentAmount(calculateMonthlyPayment(data, fetchValuesFromDatabase(), requestedLoan));
+        return results;
     }
 }
