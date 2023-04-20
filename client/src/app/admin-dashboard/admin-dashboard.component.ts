@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+// import { AdminService } from '../services/admin.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,6 +8,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
+  // constructor(private adminService: AdminService) {}
+
   adminForm: FormGroup;
 
   adminEuriborDate!: string;
@@ -34,12 +37,28 @@ export class AdminDashboardComponent implements OnInit {
     this.adminEuriborDate = JSON.parse(
       String(localStorage.getItem('adminFormData'))
     ).adminEuriborDate;
+
+    // this.adminService.getData().subscribe(data => {
+    //   this.adminForm.setValue({
+    //     adminEuriborRate: data.adminEuriborRate,
+    //     adminBankMargin: data.adminBankMargin,
+    //     adminMinPropertyPrice: data.adminMinPropertyPrice,
+    //     adminMaxPropertyPrice: data.adminMaxPropertyPrice,
+    //     adminDefaultPropertyPrice: data.adminDefaultPropertyPrice,
+    //     adminMinDepositPercent: data.adminMinDepositPercent,
+    //     adminContractFee: data.adminContractFee,
+    //     adminMonthlyBankFee: data.adminMonthlyBankFee,
+    //     adminRegistrationFee: data.adminRegistrationFee,
+    //   });
+    //   this.adminEuriborDate = data.adminEuriborDate;
+    // });
   }
 
   saveChanges() {
     this.adminEuriborDate = new Date(Date.now()).toISOString().slice(0, 10);
     this.adminForm.value.adminEuriborDate = this.adminEuriborDate;
     localStorage.setItem('adminFormData', JSON.stringify(this.adminForm.value));
+    // this.adminService.postData(this.adminForm.value).subscribe();
   }
 
   discardChanges() {
@@ -52,8 +71,8 @@ export class AdminDashboardComponent implements OnInit {
 
     if (priceMin > priceMax) {
       this.adminForm.patchValue({
-        priceMin: priceMax,
-        priceMax: priceMin,
+        adminMinPropertyPrice: priceMax,
+        adminMaxPropertyPrice: priceMin,
       });
     }
   }
