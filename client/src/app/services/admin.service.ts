@@ -8,14 +8,11 @@ import { Observable } from 'rxjs';
 export class AdminService {
   constructor(private http: HttpClient) {}
 
-  postData(formData: any): Observable<any> {
-    return this.http.post<any>(
-      'http://localhost:8080/admin/change-values',
-      formData
-    );
+  postData(formData: {}): Observable<any> {
+    return this.http.post<{}>('http://localhost:8080/admin/values', formData);
   }
 
   getData(): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/admin/initial-values');
+    return this.http.get<{}>('http://localhost:8080/admin/values');
   }
 }
