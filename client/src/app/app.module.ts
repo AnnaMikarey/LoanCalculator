@@ -9,11 +9,16 @@ import { ModalComponent } from './modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, AdminDashboardComponent, DisclaimerComponent, ModalComponent],
-  imports: [BrowserModule, ReactiveFormsModule, BrowserAnimationsModule, MatButtonModule, MatDialogModule],
+  declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent],
+  imports: [BrowserModule, 
+    ReactiveFormsModule, 
+    BrowserAnimationsModule, 
+    MatButtonModule, 
+    MatDialogModule,    
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })
