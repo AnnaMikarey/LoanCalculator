@@ -14,7 +14,7 @@
                         Price of property must be at least {{minPriceOfProperty}} EUR
                     </li>
                     <li *ngIf="priceOfProperty.errors['max']">
-                        Price of property must be more than {{maxPriceOfProperty}} EUR
+                        Price of property must be less than {{maxPriceOfProperty}} EUR
                     </li>
                 </ul>
             </div>

@@ -28,7 +28,7 @@ export class GraphAndChartComponent implements OnChanges{
     series: [
       {
         type: 'pie',
-        radius: ['90%', '60%'],
+        radius: ['90%', '80%'],
         avoidLabelOverlap: false,
         label: {
           show: false,
