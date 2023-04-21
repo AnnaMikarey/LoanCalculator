@@ -1,30 +1,8 @@
-
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Optional, Output, SimpleChanges } from '@angular/core';
+import { AbstractControl, DefaultValueAccessor, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserData } from '../../Types/UserData';
-import { Observable } from 'rxjs';
 
 const fb = new FormBuilder().nonNullable;
-
-const isNanOrNullOrUndefined: ValidatorFn = (control) => {
-  return (isNaN(control.value) || control.value == null || control.value == undefined) ? { isNanOrNullOrUndefined: true } : null;
-};
-
-
-
-// function minMaxValidator(numberMin: number, numberMax: number): ValidatorFn {
-//   return (control: AbstractControl): ValidationErrors | null => {
-//     //console.log("i work " + numberMin,numberMax)
-//     //todo naming in return object for specific error
-//     if (parseInt(control.value) < numberMin) {
-//       return { minMaxValidator: true }
-//     }
-//     if (parseInt(control.value) > numberMax) {
-//       return { minMaxValidator: true }
-//     }
-//     return null;
-//   };
-// }
 
 @Component({
   selector: 'app-user-input',
@@ -42,32 +20,31 @@ export class UserInputComponent implements OnInit {
   minMortgagePeriod: number = 1;
   maxMortgagePeriod: number = 30;
 
-  constructor() {
+  maxDeposit: number;
+  minDeposit: number;
 
-  }
-  postForm = fb.group(
-    {//Validators.required Validators.min(this.minPriceOfProperty) minMaxValidator(this.minPriceOfProperty, this.maxPriceOfProperty)
-      priceOfProperty: [0, [Validators.min(this.maxPriceOfProperty), Validators.max(this.maxPriceOfProperty), isNanOrNullOrUndefined, Validators.required]],
-      deposit: [0, [isNanOrNullOrUndefined,]],
-      depositPercent: [0, [isNanOrNullOrUndefined, Validators.min(this.minInitialDeposit), Validators.max(100)]],
-      mortgagePeriod: [0, [isNanOrNullOrUndefined, Validators.min(this.minMortgagePeriod), Validators.max(this.maxMortgagePeriod)]],
-      salary: [0, [isNanOrNullOrUndefined, Validators.min(0)],],
-      financialObligation: [0, [isNanOrNullOrUndefined, Validators.min(0)],],
-    },
-    { updateOn: 'blur' },
-  );
+  constructor() { }
+
+  postForm: FormGroup;
+
   ngOnInit(): void {
-    this.postForm.setValue({
-      priceOfProperty: this.defaultPriceOfProperty,
-      deposit: this.defaultPriceOfProperty * this.minInitialDeposit / 100,
-      depositPercent: this.minInitialDeposit,
-      mortgagePeriod: 1,
-      salary: 0,
-      financialObligation: 0
-    })
-    this.onSubmit()
-  }
 
+    this.postForm = fb.group(
+      {
+        priceOfProperty: [this.defaultPriceOfProperty, [Validators.min(this.minPriceOfProperty), Validators.max(this.maxPriceOfProperty), Validators.pattern(/[0-9]/), Validators.required]],
+        deposit: [(this.defaultPriceOfProperty * this.minInitialDeposit / 100), [Validators.pattern(/[0-9]/), Validators.required, (control: AbstractControl) => Validators.max(this.maxDeposit)(control), (control: AbstractControl) => Validators.min(this.minDeposit)(control)]],
+        depositPercent: [this.minInitialDeposit, [Validators.required, Validators.min(this.minInitialDeposit), Validators.max(100)]],
+        mortgagePeriod: [this.minMortgagePeriod, [Validators.required, Validators.pattern(/[0-9]/), Validators.min(this.minMortgagePeriod), Validators.max(this.maxMortgagePeriod)]],
+        salary: [0, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
+        financialObligation: [0, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
+      },
+      { updateOn: 'change' },
+    );
+    this.resetDepositToDefault();
+    //calls server for calculation on initial load, maybe not needed if data is provided on first load
+    this.onSubmit();
+
+  }
 
   get priceOfProperty() {
     return this.postForm.get('priceOfProperty') as FormControl<number>;
@@ -88,41 +65,70 @@ export class UserInputComponent implements OnInit {
     return this.postForm.get('financialObligation') as FormControl<number>;
   }
 
-  setPriceOfPropertyAndChangeDeposit(event: any) {
-    this.postForm.controls.priceOfProperty.setValue(parseInt(event.target.value))
-    this.postForm.controls.deposit.setValue(parseInt(event.target.value) * this.postForm.get('depositPercent')!.value / 100)
-  }
-  changeDeposit(event: any) {
-    this.postForm.controls.deposit.setValue(parseInt(event.target.value) * this.postForm.get('priceOfProperty')!.value / 100)
-  }
-  changeDepositPercent(event: any) {
-    this.postForm.controls.depositPercent.setValue(parseInt(event.target.value) * 100 / this.postForm.get('priceOfProperty')!.value)
+  resetDepositToDefault() {
+    this.maxDeposit = this.defaultPriceOfProperty;
+    this.minDeposit = this.defaultPriceOfProperty * this.minInitialDeposit / 100;
   }
 
-
-  onInput(event: any) {
-    // if (isNaN(event.target.value) || !/[0-9]/.test(event.target.value)) {
-    //   event.target.value = 0;
-    //   return
-    // }
-    // if (event.target.value[0] == 0 && event.target.value[1] !== ".") {
-    //   event.target.value = event.target.value[1];
-    //   return
-    // } if (!/[0-9.]/.test(event.key) && event.code !== 'Enter' && event.code !== 'Tab' && event.code !== 'Backspace'
-    //   && event.code !== 'ArrowLeft' && event.code !== 'ArrowRight') {
-    //   event.preventDefault()
-    //   return
-    // }
-
-  }
-
-  onSubmit() {
-    if (this.postForm.valid) {
-      this.onUserInput.emit(this.postForm.value as UserData);
+  setPriceOfProperty(event: any) {
+    this.postForm.controls['priceOfProperty'].setValue(parseInt(event.target.value));
+    if (!this.postForm.controls['priceOfProperty'].errors) {
+      this.maxDeposit = parseInt(event.target.value);
+      this.minDeposit = parseInt(event.target.value) * this.minInitialDeposit / 100;
     } else {
-      //todo delete console log
-      console.log("post not valid")
+      if (this.postForm.controls['priceOfProperty'].errors['max']) {
+        this.minDeposit = this.postForm.controls['priceOfProperty'].errors['max'].max * this.minInitialDeposit / 100;
+        this.maxDeposit = this.postForm.controls['priceOfProperty'].errors['max'].max;
+        //need to be just else and get min values
+      } else if (this.postForm.controls['priceOfProperty'].errors['min']) {
+        this.minDeposit = this.postForm.controls['priceOfProperty'].errors['min'].min * this.minInitialDeposit / 100;
+        this.maxDeposit = this.postForm.controls['priceOfProperty'].errors['min'].min;
+      }
     }
+    this.changeDepositGlobal();
   }
 
+  changeDepositGlobal() {
+    this.postForm.controls['deposit'].setValue((this.postForm.get('priceOfProperty').value) * (this.postForm.get('depositPercent').value) / 100);
+  }
+
+  changeDepositPercent(event: any) {
+    this.postForm.controls['depositPercent'].setValue((parseInt(event.target.value) || 0) * 100 / this.postForm.get('priceOfProperty')!.value);
+  }
+
+  setMortgagePeriod(event: any) {
+    this.postForm.controls['mortgagePeriod'].setValue(parseInt(event.target.value));
+  }
+
+  // onInput(event: any){
+  //   this.postForm.controls[event.target.getAttribute('formControlName')].setValue(parseInt(event.target.value)||0)
+  // }
+
+  onSubmit(event?: any) {
+    if (!this.postForm.valid) {
+      const alteredField = this.postForm.controls[event.target.getAttribute('formControlName')].errors;
+
+      if (alteredField['min']) {
+        this.postForm.controls[event.target.getAttribute('formControlName')].setValue(alteredField['min'].min);
+
+      } else if (alteredField['max']) {
+        this.postForm.controls[event.target.getAttribute('formControlName')].setValue(alteredField['max'].max);
+
+      } else {
+        this.postForm.reset();
+        this.resetDepositToDefault();
+      }
+
+      for (let i in this.postForm.controls) {
+        if (this.postForm.controls[i].status == "INVALID") {
+          if (i == "deposit") {
+            this.postForm.controls['deposit'].setValue(this.postForm.get('priceOfProperty').value * this.postForm.get('depositPercent').value / 100);
+          } else if (i == "depositPercent") {
+            this.postForm.controls['depositPercent'].setValue(this.postForm.get('deposit').value * 100 / this.postForm.get('priceOfProperty').value);
+          }
+        }
+      }
+    }
+    this.onUserInput.emit(this.postForm.value as UserData);
+  }
 }

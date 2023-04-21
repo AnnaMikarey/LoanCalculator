@@ -40,6 +40,7 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
       console.error('Error posting input data: ', error);
       return EMPTY;
     })).subscribe((userData) => {
+      console.log("Posting userData" + userData)
       this.calculatorService.postCalculations({
         requestedLoanAmount: userData.priceOfProperty - userData.deposit,
         contractFee: this.data.contractFee,
@@ -54,15 +55,18 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
       )
     });
   }
-  getCalculations() {
-    this.calculatorService.getCalculations().subscribe((calculatedValues) => { console.log("get calculations", this.calculations = calculatedValues); this.checkError() })
 
+  getCalculations() {
+    this.calculatorService.getCalculations().subscribe((calculatedValues) => { console.log("get calculations", this.calculations = calculatedValues); this.checkError() });
   }
+
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
   }
+  
   checkError() {
+    //"error?"
     //console.log("checkerorr"+this.calculations.monthlyPayment+this.obligation,this.salary*40/100)
-    this.monthlyPaymentError = this.calculations.monthlyPayment + this.obligation > this.salary * 40 / 100
+    this.monthlyPaymentError = this.calculations.monthlyPayment + this.obligation > this.salary * 40 / 100;
   }
 }

@@ -25,19 +25,19 @@ export class UserOutputComponent implements OnChanges {
 
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    this.requestedLoanAmount = this.format(this.calculations?.requestedLoanAmount)
-    this.maxLoanAvailable = this.format(this.calculations?.maxLoanAvailable)
-    this.monthlyPayment = this.format(this.calculations?.monthlyPayment)
-    this.annualInterestRateTotal = this.format(this.calculations?.annualInterestRateTotal)
-    this.euroiborRate = this.format(this.calculations?.euroborAndRate)
-    this.contractFee = this.format(this.calculations?.contractFee)
-    this.bankFee = this.format(this.calculations?.bankFee)
-    this.mortgageRegistrationFee = this.format(this.calculations?.mortgageRegistration)
+    this.requestedLoanAmount = this.format(this.calculations?.requestedLoanAmount);
+    this.maxLoanAvailable = this.format(this.calculations?.maxLoanAvailable);
+    this.monthlyPayment = this.format(this.calculations?.monthlyPayment);
+    this.annualInterestRateTotal = this.format(this.calculations?.annualInterestRateTotal);
+    this.euroiborRate = this.format(this.calculations?.euroborAndRate);
+    this.contractFee = this.format(this.calculations?.contractFee);
+    this.bankFee = this.format(this.calculations?.bankFee);
+    this.mortgageRegistrationFee = this.format(this.calculations?.mortgageRegistration);
   }
 
   format(num: number) {
-    if (num == null) return 0
-    return Math.round((num + Number.EPSILON) * 100) / 100
+    if (num == null) return 0;
+    return Math.round((num + Number.EPSILON) * 100) / 100;
   }
 
 }

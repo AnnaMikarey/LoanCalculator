@@ -1,68 +1,91 @@
-<!-- {{ postForm.value | json }} -->
+<!-- (input)="onInput($event)" -->
 <div>
-    <!-- blur ngBlur ng-blur (submit)-->
-    <form [formGroup]="postForm" (change)="onSubmit()" (input)="onInput($event)">
+    <form [formGroup]="postForm" (change)="onSubmit($event)">
         <div>
             <label for="price-of-property">PRICE OF PROPERTY</label>
             <br />
-            <input type="number" formControlName="priceOfProperty" id="price-of-property"
-                (input)="setPriceOfPropertyAndChangeDeposit($event)" />
-            <ul *ngIf="priceOfProperty.errors">
-                <li *ngIf="priceOfProperty.errors['isNanOrNullOrUndefined']">Price of property is required</li>
-                <li *ngIf="priceOfProperty.errors['min']">
-                    Price of property must be at least {{minPriceOfProperty}} EUR
-                </li>
-                <li *ngIf="priceOfProperty.errors['max']">
-                    Price of property must be less than {{minPriceOfProperty}} EUR
-                </li>
-            </ul>
+            <div class="flex">
+                <input type="number" formControlName="priceOfProperty" id="price-of-property"
+                    (input)="setPriceOfProperty($event)" />
+                <span class="currency">EUR</span>
+                <ul *ngIf="priceOfProperty.errors  ">
+                    <li *ngIf="priceOfProperty.errors['pattern']">Price of property is required</li>
+                    <li *ngIf="priceOfProperty.errors['min']">
+                        Price of property must be at least {{minPriceOfProperty}} EUR
+                    </li>
+                    <li *ngIf="priceOfProperty.errors['max']">
+                        Price of property must be more than {{maxPriceOfProperty}} EUR
+                    </li>
+                </ul>
+            </div>
             <datalist>
                 <option label="{{minPriceOfProperty}}"></option>
                 <option label="{{maxPriceOfProperty}}"></option>
             </datalist>
             <input type="range" id="price-of-property-slider" formControlName="priceOfProperty"
-                min="{{minPriceOfProperty}}" max="{{maxPriceOfProperty}}"
-                (input)="setPriceOfPropertyAndChangeDeposit($event)">
+                (input)="setPriceOfProperty($event)" min="{{minPriceOfProperty}}" max="{{maxPriceOfProperty}}" />
         </div>
         <div>
             <label for="deposit">INITIAL DEPOSIT</label>
             <br />
-            <input type="number" formControlName="deposit" id="deposit" style="width: 120px;"
-                (input)="changeDepositPercent($event)" />
-            <input type="number" formControlName="depositPercent" id="deposit-percent" style="width: 90px;"
-                (input)="changeDeposit($event)" />
-            <ul *ngIf="deposit.errors||depositPercent.errors">
-                <!-- why exclamation marks needed-->
-                <li *ngIf="depositPercent.errors!['isNanOrNullOrUndefined']||deposit.errors!['isNanOrNullOrUndefined']">
-                    Deposit is required</li>
-                <li *ngIf="depositPercent.errors!['min']">
+            <div class="flex">
+                <input type="number" formControlName="deposit" id="deposit" style="width: 120px;"
+                    (input)="changeDepositPercent($event)" />
+                <span class="currency">EUR</span>
+            </div>
+            <div class="flex">
+                <input type="number" formControlName="depositPercent" id="deposit-percent" style="width: 90px;"
+                    (input)="changeDepositGlobal()" />
+                <span class="currency">%</span>
+            </div>
+            <ul *ngIf="!priceOfProperty.errors&&(deposit.errors||depositPercent.errors) ">
+                <li *ngIf="depositPercent.errors['required']||deposit?.errors['required']">Deposit is required</li>
+                <li *ngIf="deposit.errors['min']">
+                    Deposit must be less at least {{deposit.errors['min'].min}}
+                </li>
+                <li *ngIf="deposit.errors['max']">
+                    Deposit must be less than {{this.postForm.get('priceOfProperty')!.value}}
+                </li>
+                <li *ngIf="depositPercent?.errors['min']">
                     Deposit must be at least {{minInitialDeposit}}% of property values
+                </li>
+                <li *ngIf="depositPercent?.errors['max']">
+                    Deposit must be less than {{100}}% of property values
                 </li>
             </ul>
         </div>
         <div>
             <label for="mortgage-period">MORTGAGE PERIOD</label>
             <br />
-            <input type="number" formControlName="mortgagePeriod" id="mortgage-period" />
-            <ul *ngIf="mortgagePeriod.errors">
-                <li *ngIf="mortgagePeriod.errors['isNanOrNullOrUndefined']">
-                    Mortgage period is required</li>
-                <li *ngIf="mortgagePeriod.errors['min']">
-                    Mortgage period must be higher or equal to {{minMortgagePeriod}}
-                </li>
-                <li *ngIf="mortgagePeriod.errors['max']">
-                    Mortgage period must be lower or equal to {{maxMortgagePeriod}}</li>
-            </ul>
+            <div class="flex">
+                <input type="number" formControlName="mortgagePeriod" id="mortgage-period"
+                    (input)="setMortgagePeriod($event)" />
+                <span class="currency">YEARS</span>
+                <ul *ngIf="mortgagePeriod.errors">
+                    <li *ngIf="mortgagePeriod.errors['required']">
+                        Mortgage period is required</li>
+                    <li *ngIf="mortgagePeriod.errors['min']">
+                        Mortgage period must be higher or equal to {{minMortgagePeriod}}
+                    </li>
+                    <li *ngIf="mortgagePeriod.errors['max']">
+                        Mortgage period must be lower or equal to {{maxMortgagePeriod}}</li>
+                </ul>
+            </div>
+            <datalist>
+                <option label="{{minMortgagePeriod}}"></option>
+                <option label="{{maxMortgagePeriod}}"></option>
+            </datalist>
+            <input type="range" id="mortgage-period-slider" formControlName="mortgagePeriod" min="{{minMortgagePeriod}}"
+                max="{{maxMortgagePeriod}}" (input)="setMortgagePeriod($event)" />
         </div>
         <div>
             <label for="salary">SALARY</label>
             <br />
-            <!-- oninput is changed here -->
             <div class="flex">
-                <span class="currency">$</span>
                 <input type="number" formControlName="salary" id="salary" />
+                <span class="currency">EUR</span>
                 <ul *ngIf="salary.errors">
-                    <li *ngIf="salary.errors['isNanOrNullOrUndefined']">
+                    <li *ngIf="salary.errors['required']">
                         Salary is required</li>
                     <li *ngIf="salary.errors['min']">
                         Salary must be higher or equal to 0
@@ -73,14 +96,17 @@
         <div>
             <label for="financial-obligation">FINANCIAL OBLIGATION</label>
             <br />
-            <input type="number" formControlName="financialObligation" id="financial-obligation" />
-            <ul *ngIf="financialObligation.errors">
-                <li *ngIf="financialObligation.errors['isNanOrNullOrUndefined']">
-                    Financial obligations is required</li>
-                <li *ngIf="financialObligation.errors['min']">
-                    Financial obligations must be higher or equal to 0
-                </li>
-            </ul>
+            <div class="flex">
+                <input type="number" formControlName="financialObligation" id="financial-obligation" />
+                <span class="currency">EUR</span>
+                <ul *ngIf="financialObligation.errors">
+                    <li *ngIf="financialObligation.errors['required']">
+                        Financial obligations is required</li>
+                    <li *ngIf="financialObligation.errors['min']">
+                        Financial obligations must be higher or equal to 0
+                    </li>
+                </ul>
+            </div>
         </div>
     </form>
 </div>

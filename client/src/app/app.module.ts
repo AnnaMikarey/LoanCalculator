@@ -8,10 +8,19 @@ import { UserParentComponent } from './components/user-parent/user-parent.compon
 import { UserInputComponent } from './components/user-input/user-input.component';
 import { UserOutputComponent } from './components/user-output/user-output.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { GraphAndChartComponent } from './components/graph-and-chart/graph-and-chart.component';
 
 @NgModule({
-  declarations: [AppComponent, AdminDashboardComponent, UserParentComponent, UserInputComponent, UserOutputComponent],
-  imports: [BrowserModule, ReactiveFormsModule, HttpClientModule,],
+  declarations: [AppComponent, AdminDashboardComponent, UserParentComponent, UserInputComponent, UserOutputComponent, GraphAndChartComponent,],
+  imports: [BrowserModule, ReactiveFormsModule, HttpClientModule, NgxEchartsModule.forRoot({
+    /**
+     * This will import all modules from echarts.
+     * If you only need custom modules,
+     * please refer to [Custom Build] section.
+     */
+    echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+  })],
   providers: [],
   bootstrap: [AppComponent],
 })
