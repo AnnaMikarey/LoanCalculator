@@ -13,13 +13,17 @@ import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent],
-  imports: [BrowserModule, 
-    ReactiveFormsModule, 
-    BrowserAnimationsModule, 
-    MatButtonModule, 
-    MatDialogModule,    
-    ],
+  imports: [BrowserModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [
+    DisclaimerComponent,
+    AdminDashboardComponent
+  ]
 })
 export class AppModule {}

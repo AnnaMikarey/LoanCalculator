@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
+import {AppModule} from "./app.module";
 
 
 const appRoutes: Routes = [
@@ -15,8 +16,8 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
-  declarations: [AppComponent, LoginComponent, DisclaimerComponent],
+  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), AppModule],
+  declarations: [AppComponent, LoginComponent],
   bootstrap: [AppComponent],
 })
 export class AppRoutingModule {}
