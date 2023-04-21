@@ -18,8 +18,6 @@ public class AdminService {
     }
 
     public AdminData fetchFromDatabase () {
-        return new AdminData(new BigDecimal("3.31"), "2023-04-17", new BigDecimal("1.99"), new BigDecimal("500"),
-                new BigDecimal("10"), new BigDecimal("50"), new BigDecimal("20000"), new BigDecimal("500000"), new BigDecimal("35000"),
-                new BigDecimal("20"));
+        return new AdminData(new BigDecimal("3.31"), "2023-04-17", new BigDecimal("1.99"), new BigDecimal("500"), new BigDecimal("10"), new BigDecimal("50"), new BigDecimal("20000"), new BigDecimal("500000"), new BigDecimal("35000"), new BigDecimal("15"));
     }
 }

@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin(origins = "http://localhost:4200/")
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;
 
-    @PostMapping(value = "/change-values", consumes = {"application/json"})
+    @PostMapping(value = "/values", consumes = {"application/json"})
     public String saveToDatabase (@RequestBody AdminData data) {
         adminService.addToDatabase(data);
         return "Successfully updated values in database!";
     }
 
-    @PostMapping("/initial-values")
+    @GetMapping("/values")
     public ResponseEntity<AdminData> returnInitialValues () {
         return new ResponseEntity<>(adminService.fetchFromDatabase(), HttpStatus.OK);
     }

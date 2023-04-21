@@ -20,19 +20,19 @@ public class CalculatorDataValidator {
     private final DataExistsValidator dataExistsValidator;
 
     public void validateDatabaseValues (AdminData adminData) {
-        dataExistsValidator.validate(adminData.getAdminEuriborRate());
-        dataExistsValidator.validate(adminData.getAdminBankMargin());
-        dataExistsValidator.validate(adminData.getAdminContractFee());
-        dataExistsValidator.validate(adminData.getAdminMonthlyBankFee());
-        dataExistsValidator.validate(adminData.getAdminRegistrationFee());
-        dataExistsValidator.validate(adminData.getAdminMinDepositPercent());
-        dataExistsValidator.validate(adminData.getAdminMaxPropertyPrice());
-        dataExistsValidator.validate(adminData.getAdminDefaultPropertyPrice());
-        dataExistsValidator.validate(adminData.getAdminMinDepositPercent());
-        valueInRangeValidator.validate(adminData.getAdminEuriborRate(), BigDecimal.ONE, new BigDecimal("100"));
-        valueInRangeValidator.validate(adminData.getAdminBankMargin(), BigDecimal.ONE, new BigDecimal("100"));
-        valueInRangeValidator.validate(adminData.getAdminMinDepositPercent(), BigDecimal.ONE, new BigDecimal("100"));
-        if (StringUtils.isBlank(adminData.getAdminEuriborDate())) {
+        dataExistsValidator.validate(adminData.getEuriborRate());
+        dataExistsValidator.validate(adminData.getBankMargin());
+        dataExistsValidator.validate(adminData.getContractFee());
+        dataExistsValidator.validate(adminData.getMonthlyBankFee());
+        dataExistsValidator.validate(adminData.getRegistrationFee());
+        dataExistsValidator.validate(adminData.getMinDepositPercent());
+        dataExistsValidator.validate(adminData.getMaxPropertyPrice());
+        dataExistsValidator.validate(adminData.getDefaultPropertyPrice());
+        dataExistsValidator.validate(adminData.getMinDepositPercent());
+        valueInRangeValidator.validate(adminData.getEuriborRate(), BigDecimal.ONE, new BigDecimal("100"));
+        valueInRangeValidator.validate(adminData.getBankMargin(), BigDecimal.ONE, new BigDecimal("100"));
+        valueInRangeValidator.validate(adminData.getMinDepositPercent(), BigDecimal.ONE, new BigDecimal("100"));
+        if (StringUtils.isBlank(adminData.getEuriborDate())) {
             throw new DataNotFoundException("Euribor interest rate date not found in database");
         }
     }
@@ -42,13 +42,13 @@ public class CalculatorDataValidator {
         inputValidator.validate(calculatorData.getPropertyPrice());
         inputValidator.validate(calculatorData.getInitialDeposit());
         inputValidator.validate(calculatorData.getSalary());
-        valueInRangeValidator.validate(calculatorData.getPropertyPrice(), adminData.getAdminMinPropertyPrice(), adminData.getAdminMaxPropertyPrice());
+        valueInRangeValidator.validate(calculatorData.getPropertyPrice(), adminData.getMinPropertyPrice(), adminData.getMaxPropertyPrice());
         valueInRangeValidator.validate(calculatorData.getInitialDeposit(), (calculatorData.getPropertyPrice()
-                .multiply(adminData.getAdminMinDepositPercent())
+                .multiply(adminData.getMinDepositPercent())
                 .divide(new BigDecimal("100"), 32, RoundingMode.HALF_UP)), calculatorData.getPropertyPrice());
         inputValidator.validate(calculatorData.getPropertyPrice()
                 .subtract(calculatorData.getInitialDeposit()));
-        if (calculatorData.getFinancialObligations() == null || calculatorData.getFinancialObligations()
+        if (calculatorData.getFinancialObligation() == null || calculatorData.getFinancialObligation()
                 .compareTo(BigDecimal.ZERO) < 0) {
             throw new ValidationException("Received value is negative or not a number");
         }
