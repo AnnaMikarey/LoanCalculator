@@ -15,9 +15,8 @@ public class AdminController {
     private final AdminService adminService;
 
     @PostMapping(value = "/values", consumes = {"application/json"})
-    public String saveToDatabase (@RequestBody AdminData data) {
+    public void saveToDatabase (@RequestBody AdminData data) {
         adminService.addToDatabase(data);
-        return "Successfully updated values in database!";
     }
 
     @GetMapping("/values")
