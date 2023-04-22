@@ -54,7 +54,7 @@
             <br />
             <div class="flex">
                 <input type="text" formControlName="mortgagePeriod" id="mortgage-period"
-                    (input)="setMortgagePeriod($event)" maxlength="3" />
+                    (input)="checkIfNotNumber($event)" maxlength="3" />
                 <span class="currency">YEARS</span>
                 <ul *ngIf="mortgagePeriod.errors">
                     <li *ngIf="mortgagePeriod.errors['required']">
@@ -71,14 +71,14 @@
                 <option label="{{maxMortgagePeriod}}"></option>
             </datalist>
             <input type="range" id="mortgage-period-slider" formControlName="mortgagePeriod" min="{{minMortgagePeriod}}"
-                max="{{maxMortgagePeriod}}" (input)="setMortgagePeriod($event)" maxlength="10" />
+                max="{{maxMortgagePeriod}}" (input)="checkIfNotNumber($event)" maxlength="10" />
         </div>
         <div>
             <label for="salary">SALARY</label>
             <br />
             <div class="flex">
-                <input type="text" formControlName="salary" id="salary" (blur)="onBlur($event)"
-                    (focus)="onFocus($event)" maxlength="10" (input)="setSalary($event)" />
+                <input type="text" formControlName="salary" id="salary" maxlength="10"
+                    (input)="checkIfNotNumber($event)" />
                 <span class="currency">EUR</span>
                 <ul *ngIf="salary.errors">
                     <li *ngIf="salary.errors['required']">
@@ -93,8 +93,8 @@
             <label for="financial-obligation">FINANCIAL OBLIGATION</label>
             <br />
             <div class="flex">
-                <input type="number" formControlName="financialObligation" id="financial-obligation"
-                    (input)="setFinancialObligations($event)" />
+                <input type="text" formControlName="financialObligation" id="financial-obligation"
+                    (input)="checkIfNotNumber($event)" maxlength="10" />
                 <span class="currency">EUR</span>
                 <ul *ngIf="financialObligation.errors">
                     <li *ngIf="financialObligation.errors['required']">

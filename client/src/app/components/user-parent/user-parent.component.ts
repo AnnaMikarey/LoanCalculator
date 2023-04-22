@@ -40,7 +40,7 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
       console.error('Error posting input data: ', error);
       return EMPTY;
     })).subscribe((userData) => {
-      console.log("Posting userData" + userData)
+      console.log("Posting userData" + Object.entries(userData))
       this.calculatorService.postCalculations({
         requestedLoanAmount: userData.priceOfProperty - userData.deposit,
         contractFee: this.data.contractFee,

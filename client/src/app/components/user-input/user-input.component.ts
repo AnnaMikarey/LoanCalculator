@@ -12,19 +12,16 @@ const fb = new FormBuilder().nonNullable;
 export class UserInputComponent implements OnInit {
 
   @Output() onUserInput: EventEmitter<UserData> = new EventEmitter();
-
   @Input() minPriceOfProperty!: number;
   @Input() maxPriceOfProperty!: number;
   @Input() defaultPriceOfProperty!: number;
   @Input() minInitialDeposit!: number;
   minMortgagePeriod: number = 1;
   maxMortgagePeriod: number = 30;
-
   maxDeposit: number;
   minDeposit: number;
   depositPercentMaxLength: number;
   constructor() { }
-
   postForm: FormGroup;
 
   ngOnInit(): void {
@@ -40,15 +37,12 @@ export class UserInputComponent implements OnInit {
       },
       { updateOn: 'change' },
     );
-
     this.postForm.get('priceOfProperty').valueChanges.subscribe(x => {
       this.postForm.controls['deposit'].setValue((x || 0) * (this.postForm.get('depositPercent').value) / 100);
       this.resetDepositMinMax();
     })
     this.resetDepositMinMax();
     this.onSubmit();
-
-
   }
 
   get priceOfProperty() {
@@ -77,131 +71,110 @@ export class UserInputComponent implements OnInit {
 
   setPriceOfProperty(event: any) {
     if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.slice(0, -1)
+      event.target.value = event.target.value.slice(0, -1);
     }
     this.postForm.controls['priceOfProperty'].setValue(Math.abs(parseInt(event.target.value)) || 0);
   }
+
   setDeposit(event: any) {
     if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.slice(0, -1)
+      event.target.value = event.target.value.slice(0, -1);
     }
     this.postForm.controls['deposit'].setValue(Math.abs(parseInt(event.target.value)) || 0);
     this.postForm.controls['depositPercent'].setValue(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('priceOfProperty').value);
   }
+
   setDepositPercent(event: any) {
     if (/[^0-9.]/.test(event.target.value) || (event.target.value).split``.filter(x => x == ".").length > 1) {
-      event.target.value = event.target.value.slice(0, -1)
+      event.target.value = event.target.value.slice(0, -1);
+      event.target.value = event.target.value.split``.filter(x => /[0-9.]/.test(x)).join``;
     }
-    this.depositPercentMaxLength = (event.target.value).split``.filter(x => x == ".").length == 1 ? 5 : 3
-    this.postForm.controls['depositPercent'].setValue(Math.abs(event.target.value) || 0);
-    this.changeDeposit()
+    this.depositPercentMaxLength = (event.target.value).split``.filter(x => x == ".").length == 1 ? 5 : 3;
+    this.postForm.controls['depositPercent'].setValue(event.target.value || 0);
+    this.changeDeposit();
   }
 
   changeDeposit() {
-    this.postForm.controls['deposit'].setValue((this.postForm.get('priceOfProperty').value) * (this.postForm.get('depositPercent').value) / 100);
+    this.postForm.controls['deposit'].setValue(Math.round((this.postForm.get('priceOfProperty').value) * (this.postForm.get('depositPercent').value) / 100));
   }
 
-  onFocus(event: any) {
-    event.target.value = parseFloat(event.target.value.split` `.join``)
-  }
-  onBlur(event: any) {
-    console.log("hi")
-    let temp = ((event.target.value).toString()).split`.`
-    event.target.value = (temp[0].split``.reverse().join``.match(/.{1,3}/g).join` ` + (temp.length == 2 ? ("." + temp[1]) : "")).trim()
-  }
+  //not needed for now
+  // onFocus(event: any) {
+  //   event.target.value = parseFloat(event.target.value.split` `.join``)
+  // }
+  // onBlur(event: any) {
+  //   var parts = event.target.value.toString().split(".");
+  //   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  //   event.target.value=parts.join(".");
+  // }
 
-  setMortgagePeriod(event: any) {
+  checkIfNotNumber(event: any) {
     if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.slice(0, -1)
+      event.target.value = event.target.value.slice(0, -1);
     }
-    this.postForm.controls['mortgagePeriod'].setValue(Math.abs(parseInt(event.target.value)) || 0);
-  }
-  setSalary(event: any) {
-    if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.slice(0, -1)
-    }
-    this.postForm.controls['salary'].setValue(Math.abs(parseInt(event.target.value)) || 0);
-  }
-  setFinancialObligations(event: any) {
-    if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.slice(0, -1)
-    }
-    this.postForm.controls['financialObligation'].setValue(Math.abs(parseInt(event.target.value)) || 0);
+    this.postForm.controls[event.target.getAttribute('formControlName')].setValue(Math.abs(parseInt(event.target.value)) || 0);
   }
 
   depositPercentPlus() {
     this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) + 1);
-    this.changeDeposit()
-    this.onSubmit()
+    this.changeDeposit();
+    this.onSubmit();
   }
+
   depositPercentMinus() {
     this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) - 1);
-    this.changeDeposit()
-    this.onSubmit()
+    this.changeDeposit();
+    this.onSubmit();
   }
 
   onSubmit(event?: any) {
 
     if (!this.postForm.valid) {
-      console.error("there is an error")
+
       if (!event) {
         if (this.postForm.controls["depositPercent"].errors['min']) {
-
           this.postForm.controls["depositPercent"].setValue(this.minInitialDeposit);
           this.postForm.controls["deposit"].setValue(this.minDeposit);
         } else {
           this.postForm.controls["depositPercent"].setValue(100);
           this.postForm.controls["deposit"].setValue(this.maxDeposit);
         }
-
       } else {
+
         const alteredField = this.postForm.controls[event.target.getAttribute('formControlName')].errors;
 
         if (alteredField['max']) {
 
           if (event.target.getAttribute('formControlName') == "depositPercent" || event.target.getAttribute('formControlName') == "deposit") {
             this.postForm.controls["depositPercent"].setValue(100);
-            this.changeDeposit()
           } else {
             this.postForm.controls[event.target.getAttribute('formControlName')].setValue(alteredField['max'].max);
           }
-
           this.resetDepositMinMax();
+
           if (event.target.getAttribute('formControlName') == "deposit") {
             this.postForm.controls["depositPercent"].setValue(100);
           }
+
         } else {
 
           if (event.target.getAttribute('formControlName') == "priceOfProperty") {
             this.postForm.controls["priceOfProperty"].setValue(this.minPriceOfProperty);
-
-          }
-          if (event.target.getAttribute('formControlName') == "depositPercent") {
+          } else if (event.target.getAttribute('formControlName') == "depositPercent") {
             this.postForm.controls["depositPercent"].setValue(this.minInitialDeposit);
-            // this.changeDepositGlobal()
-          }
-          if (event.target.getAttribute('formControlName') == "deposit") {
+          } else if (event.target.getAttribute('formControlName') == "deposit") {
             this.postForm.controls["depositPercent"].setValue(this.minInitialDeposit);
             this.postForm.controls["deposit"].setValue(this.minDeposit);
-
-          }
-          if (event.target.getAttribute('formControlName') == "mortgagePeriod") {
+          } else if (event.target.getAttribute('formControlName') == "mortgagePeriod") {
             this.postForm.controls["mortgagePeriod"].setValue(this.minMortgagePeriod);
+          } else {
+            this.postForm.controls[event.target.getAttribute('formControlName')].setValue(0);
           }
-          if (event.target.getAttribute('formControlName') == "salary") {
-            this.postForm.controls["salary"].setValue(0);
-          }
-          if (event.target.getAttribute('formControlName') == "financialObligation") {
-            this.postForm.controls["financialObligation"].setValue(0);
-          }
-
         }
+
       }
-
-      this.changeDeposit()
+      this.changeDeposit();
     }
-    //console.error({...Object.entries(this.postForm.value).map(x=>[x[0],parseFloat((x[1] as string))])})
     this.onUserInput.emit(this.postForm.value as UserData);
-
   }
 }
