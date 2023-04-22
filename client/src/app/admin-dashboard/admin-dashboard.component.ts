@@ -34,10 +34,6 @@ export class AdminDashboardComponent implements OnInit {
       adminRegistrationFee: new FormControl(250, this.validatorsNum),
     });
 
-    this.adminEuriborDate = JSON.parse(
-      String(localStorage.getItem('adminFormData'))
-    ).adminEuriborDate;
-
     this.adminService.getData().subscribe((data) => {
       this.adminForm.setValue({
         adminEuriborRate: data.adminEuriborRate,
@@ -55,9 +51,6 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   saveChanges() {
-    this.adminEuriborDate = new Date(Date.now()).toISOString().slice(0, 10);
-    this.adminForm.value.adminEuriborDate = this.adminEuriborDate;
-    localStorage.setItem('adminFormData', JSON.stringify(this.adminForm.value));
     this.adminService.postData(this.adminForm.value).subscribe();
   }
 
