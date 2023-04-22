@@ -1,14 +1,16 @@
-package com.server.loan.calculator.error;
+package com.server.loanCalculator.errors;
 
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Builder
 public class ErrorMessage {
+
     private int statusCode;
-    private Instant timestamp;
+    private Date timestamp;
     private String message;
+
 }
