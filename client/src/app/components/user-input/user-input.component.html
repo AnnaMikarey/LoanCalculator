@@ -37,8 +37,9 @@
                 <input type="text" formControlName="depositPercent" id="deposit-percent" style="width: 90px;"
                     [maxLength]="depositPercentMaxLength" (input)="setDepositPercent($event)" />
                 <span class="currency">%</span>
-                <button (click)="depositPercentPlus()">UP</button>
-                <button (click)="depositPercentMinus()">DOWN</button>
+                <!-- (click)="depositPercentPlus()"  (click)="depositPercentMinus()" -->
+                <button (mousedown)="depositPercentPlus()" (mouseup)="onSubmit()">UP</button>
+                <button (mousedown)="depositPercentMinus()" (mouseup)="onSubmit()">DOWN</button>
             </div>
             <ul *ngIf="!priceOfProperty.errors&&deposit.errors">
                 <li *ngIf="deposit.errors['min']">

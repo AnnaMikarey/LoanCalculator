@@ -115,23 +115,28 @@ export class UserInputComponent implements OnInit {
     this.postForm.controls[event.target.getAttribute('formControlName')].setValue(Math.abs(parseInt(event.target.value)) || 0);
   }
 
+  counter: any;
   depositPercentPlus() {
-    this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) + 1);
-    this.changeDeposit();
-    this.onSubmit();
+    this.counter = setInterval(() => {
+      this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) + 1);
+      this.changeDeposit();
+    }, 250);
+  }
+  depositPercentMinus() {
+    this.counter = setInterval(() => {
+      this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) - 1);
+      this.changeDeposit();
+    }, 250);
   }
 
-  depositPercentMinus() {
-    this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) - 1);
-    this.changeDeposit();
-    this.onSubmit();
-  }
 
   onSubmit(event?: any) {
+    clearInterval(this.counter)
 
     if (!this.postForm.valid) {
 
       if (!event) {
+
         if (this.postForm.controls["depositPercent"].errors['min']) {
           this.postForm.controls["depositPercent"].setValue(this.minInitialDeposit);
           this.postForm.controls["deposit"].setValue(this.minDeposit);
