@@ -1,0 +1,13 @@
+.modal-disclaimer {
+    text-align: center;  
+    display: flex;
+    
+  }
+  .modalTitle-disclaimer {
+      text-align: center;
+  }    
+  .close-modal-button {
+    position: absolute;
+    top: -52px;
+    right: -9px;
+  }
