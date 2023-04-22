@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AdminService } from '../services/admin.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -34,24 +35,17 @@ export class AdminDashboardComponent implements OnInit {
       adminRegistrationFee: new FormControl(250, this.validatorsNum),
     });
 
-    this.adminService.getData().subscribe((data) => {
-      this.adminForm.setValue({
-        adminEuriborRate: data.adminEuriborRate,
-        adminBankMargin: data.adminBankMargin,
-        adminMinPropertyPrice: data.adminMinPropertyPrice,
-        adminMaxPropertyPrice: data.adminMaxPropertyPrice,
-        adminDefaultPropertyPrice: data.adminDefaultPropertyPrice,
-        adminMinDepositPercent: data.adminMinDepositPercent,
-        adminContractFee: data.adminContractFee,
-        adminMonthlyBankFee: data.adminMonthlyBankFee,
-        adminRegistrationFee: data.adminRegistrationFee,
+    this.adminService
+      .getData()
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.adminForm.setValue(data);
+        this.adminEuriborDate = data.adminEuriborDate;
       });
-      this.adminEuriborDate = data.adminEuriborDate;
-    });
   }
 
   saveChanges() {
-    this.adminService.postData(this.adminForm.value).subscribe();
+    this.adminService.postData(this.adminForm.value).pipe(take(1)).subscribe();
   }
 
   discardChanges() {
