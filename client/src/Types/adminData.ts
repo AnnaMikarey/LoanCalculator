@@ -1,4 +1,4 @@
-export interface AdminlData {
+export interface AdminData {
   adminEuriborDate: string;
   adminEuriborRate: number;
   adminBankMargin: number;
