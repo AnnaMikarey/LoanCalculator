@@ -51,7 +51,9 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   saveChanges() {
+    this.adminForm.value['adminEuriborDate'] = this.adminEuriborDate;
     this.adminService.postData(this.adminForm.value).pipe(take(1)).subscribe();
+    console.log(this.adminForm.value);
   }
 
   discardChanges() {
