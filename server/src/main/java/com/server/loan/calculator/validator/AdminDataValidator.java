@@ -17,8 +17,8 @@ public class AdminDataValidator {
     public void validateAdminInput (AdminData adminData) {
         inputValidator.validate(adminData.getAdminEuriborRate());
         valueInRangeValidator.validate(adminData.getAdminEuriborRate(), BigDecimal.ONE, new BigDecimal("100"));
-        inputValidator.validate(adminData.getAdminBankInterestRate());
-        valueInRangeValidator.validate(adminData.getAdminBankInterestRate(), BigDecimal.ONE, new BigDecimal("100"));
+        inputValidator.validate(adminData.getAdminBankMargin());
+        valueInRangeValidator.validate(adminData.getAdminBankMargin(), BigDecimal.ONE, new BigDecimal("100"));
         inputValidator.validate(adminData.getAdminRegistrationFee());
         inputValidator.validate(adminData.getAdminMonthlyBankFee());
         inputValidator.validate(adminData.getAdminMinPropertyPrice());
