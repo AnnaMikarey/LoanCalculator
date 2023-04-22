@@ -9,11 +9,14 @@ import { AdminData } from '../../Types/adminData';
 export class AdminService {
   constructor(private http: HttpClient) {}
 
-  postData(formData: AdminData): Observable<any> {
-    return this.http.post<{}>('http://localhost:8080/admin/values', formData);
+  postData(formData: AdminData): Observable<AdminData> {
+    return this.http.post<AdminData>(
+      'http://localhost:8080/admin/values',
+      formData
+    );
   }
 
-  getData(): Observable<any> {
+  getData(): Observable<AdminData> {
     return this.http.get<AdminData>('http://localhost:8080/admin/values');
   }
 }
