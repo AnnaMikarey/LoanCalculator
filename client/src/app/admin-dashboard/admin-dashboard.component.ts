@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AdminService } from '../services/admin.service';
+import { EuriborService } from '../services/euribor.service';
 import { take } from 'rxjs';
 
 @Component({
@@ -9,11 +10,14 @@ import { take } from 'rxjs';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
-  constructor(private adminService: AdminService) {}
+  constructor(
+    private adminService: AdminService,
+    private euriborService: EuriborService
+  ) {}
 
   adminForm: FormGroup;
-
   adminEuriborDate!: string;
+  rates: any;
 
   validatorsNum = [Validators.required, Validators.pattern(/^\d+\.?\d*$/)];
   validatorsPercent = [
@@ -24,7 +28,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.adminForm = new FormGroup({
-      adminEuriborRate: new FormControl(3.6, this.validatorsPercent),
+      adminEuriborRate: new FormControl(this.rates, this.validatorsPercent),
       adminBankMargin: new FormControl(2.5, this.validatorsPercent),
       adminMinPropertyPrice: new FormControl(20000, this.validatorsNum),
       adminMaxPropertyPrice: new FormControl(800000, this.validatorsNum),
@@ -42,6 +46,8 @@ export class AdminDashboardComponent implements OnInit {
         this.adminForm.patchValue(data);
         this.adminEuriborDate = data.adminEuriborDate;
       });
+
+    this.getEuribor();
   }
 
   saveChanges() {
@@ -62,5 +68,16 @@ export class AdminDashboardComponent implements OnInit {
         adminMaxPropertyPrice: priceMin,
       });
     }
+  }
+
+  getEuribor() {
+    this.euriborService.getRates().subscribe((response) => {
+      this.rates = response['non_central_bank_rates'][4]['rate_pct'];
+      this.adminEuriborDate =
+        response['non_central_bank_rates'][4]['last_updated'];
+      this.adminForm.patchValue({
+        adminEuriborRate: this.rates,
+      });
+    });
   }
 }
