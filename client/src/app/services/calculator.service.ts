@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class CalculatorService {
   //todo api url
-  private apiUrl = 'http://localhost:5000/';
+  private apiUrl = 'http://localhost:3000/';
   constructor(private httpClient: HttpClient) { }
 
   //todo get data from the server
