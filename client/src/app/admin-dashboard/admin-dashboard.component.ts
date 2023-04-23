@@ -17,7 +17,6 @@ export class AdminDashboardComponent implements OnInit {
 
   adminForm: FormGroup;
   adminEuriborDate!: string;
-  rates: any;
 
   validatorsNum = [Validators.required, Validators.pattern(/^\d+\.?\d*$/)];
   validatorsPercent = [
@@ -46,12 +45,11 @@ export class AdminDashboardComponent implements OnInit {
       .pipe(take(1))
       .subscribe(({ adminData, euriborData }) => {
         this.adminForm.patchValue(adminData);
-        this.adminEuriborDate = adminData.adminEuriborDate;
-        this.rates = euriborData['non_central_bank_rates'][4]['rate_pct'];
         this.adminEuriborDate =
           euriborData['non_central_bank_rates'][4]['last_updated'];
         this.adminForm.patchValue({
-          adminEuriborRate: this.rates,
+          adminEuriborRate:
+            euriborData['non_central_bank_rates'][4]['rate_pct'],
         });
       });
   }
