@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.*;
 public class CalculatorController {
     private final CalculatorService calculatorService;
 
-    @PostMapping(value = "/values", consumes = {"application/json"})
+    @PostMapping(value = "/calculate", consumes = {"application/json"})
     public ResponseEntity<ResultsData> returnCalculatedResults (@RequestBody CalculatorData data) {
         return new ResponseEntity<>(calculatorService.returnCalculatedData(data), HttpStatus.OK);
     }
 
-    @GetMapping("/values")
+    @GetMapping("/get-initial-values")
     public ResponseEntity<Object[]> returnDefaultValues () {
         return new ResponseEntity<>(calculatorService.returnInitialDataArray(), HttpStatus.OK);
     }

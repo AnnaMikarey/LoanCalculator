@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
     private final AdminService adminService;
 
-    @PostMapping(value = "/values", consumes = {"application/json"})
+    @PostMapping(value = "/change-values", consumes = {"application/json"})
     public void saveToDatabase (@RequestBody AdminData data) {
         adminService.addToDatabase(data);
     }
 
-    @GetMapping("/values")
+    @GetMapping("/get-initial-values")
     public ResponseEntity<AdminData> returnInitialValues () {
         return new ResponseEntity<>(adminService.fetchFromDatabase(), HttpStatus.OK);
     }
