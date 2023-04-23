@@ -7,14 +7,12 @@ plugins {
 group = 'com.server'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
+targetCompatibility = '17'
 
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-}
-tasks.withType(JavaCompile) {
-	options.compilerArgs << "-Xlint:unchecked" << "-source" << "17" << "-target" << "17"
 }
 repositories {
 	mavenCentral()
