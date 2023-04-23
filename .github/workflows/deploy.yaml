@@ -18,6 +18,7 @@ jobs:
 
       - name: Build and package Angular app
         run: |
+          npm install -g @angular/cli
           cd client/
           npm install
           ng build --configuration production
