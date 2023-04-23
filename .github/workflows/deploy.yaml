@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y openjdk-17-jdk openjdk-11-jdk nodejs npm
+          sudo apt-get install -y openjdk-19-jdk openjdk-17-jdk openjdk-11-jdk nodejs npm
           sudo npm install -g @angular/cli
       - name: Build and package Angular app
         run: |
@@ -22,18 +22,9 @@ jobs:
           npm install
           ng build --configuration production
 
-      - uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 17
-          
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
-
-    - name: Build and package Spring Boot app
+      - name: Build and package Spring Boot app
         run: |
           cd server/
-          chmod +x ./gradlew
           ./gradlew clean build
 
       - name: Deploy Spring Boot app to EC2
