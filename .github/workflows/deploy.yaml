@@ -14,8 +14,13 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y openjdk-19-jdk openjdk-17-jdk openjdk-11-jdk nodejs npm
+          sudo apt-get install -y openjdk-17-jdk nodejs npm
           sudo npm install -g @angular/cli
+
+      - name: Set up JDK 17 environment variable
+        run: |
+          echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/" >> $GITHUB_ENV
+
       - name: Build and package Angular app
         run: |
           cd client/
