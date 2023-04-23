@@ -22,7 +22,15 @@ jobs:
           npm install
           ng build --configuration production
 
-      - name: Build and package Spring Boot app
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+
+    - name: Build and package Spring Boot app
         run: |
           cd server/
           chmod +x ./gradlew
