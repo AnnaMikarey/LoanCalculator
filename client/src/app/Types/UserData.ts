@@ -4,4 +4,5 @@ export interface UserData {
     mortgagePeriod: number,
     salary: number,
     financialObligation: number,
+    annuityLinear: string,
 }

@@ -22,7 +22,6 @@ export class UserOutputComponent implements OnChanges {
 
   //monthly payment (if monthly payment + financial obligations >40% of salary then error)
   @Input() monthlyPaymentError!: boolean;
-
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
     this.requestedLoanAmount = this.format(this.calculations?.requestedLoanAmount);

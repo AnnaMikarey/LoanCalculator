@@ -17,7 +17,8 @@
     "depositPercent": 15,
     "mortgagePeriod": 1,
     "salary": 0,
-    "financialObligation": 0
+    "financialObligation": 0,
+    "annuityLinear": "annuity"
   },
   "calculatedValues": {
     "requestedLoanAmount": 51000,

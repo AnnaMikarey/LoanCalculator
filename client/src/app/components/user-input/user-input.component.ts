@@ -16,11 +16,13 @@ export class UserInputComponent implements OnInit {
   @Input() maxPriceOfProperty!: number;
   @Input() defaultPriceOfProperty!: number;
   @Input() minInitialDeposit!: number;
+
   minMortgagePeriod: number = 1;
   maxMortgagePeriod: number = 30;
   maxDeposit: number;
   minDeposit: number;
   depositPercentMaxLength: number;
+  initialAnnuityLinear: string = "annuity"
   constructor() { }
   postForm: FormGroup;
 
@@ -34,6 +36,7 @@ export class UserInputComponent implements OnInit {
         mortgagePeriod: [this.minMortgagePeriod, [Validators.required, Validators.pattern(/[0-9]/), Validators.min(this.minMortgagePeriod), Validators.max(this.maxMortgagePeriod)]],
         salary: [0, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
         financialObligation: [0, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
+        annuityLinear: [this.initialAnnuityLinear, [],],
       },
       { updateOn: 'change' },
     );
@@ -63,6 +66,9 @@ export class UserInputComponent implements OnInit {
   get financialObligation() {
     return this.postForm.get('financialObligation') as FormControl<number>;
   }
+  get annuityLinear() {
+    return this.postForm.get('annuityLinear') as FormControl<string>;
+  }
 
   resetDepositMinMax() {
     this.maxDeposit = this.postForm.get('priceOfProperty').value;
@@ -70,23 +76,29 @@ export class UserInputComponent implements OnInit {
   }
 
   setPriceOfProperty(event: any) {
+    // if(event.target.getAttribute('class').includes("ng-untouched")){
+    // 
+    // }else 
     if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.slice(0, -1);
+      event.target.value = event.target.value.split``.filter(x => /[0-9]/.test(x)).join``
     }
     this.postForm.controls['priceOfProperty'].setValue(Math.abs(parseInt(event.target.value)) || 0);
   }
 
   setDeposit(event: any) {
     if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.slice(0, -1);
+      event.target.value = event.target.value.split``.filter(x => /[0-9]/.test(x)).join``
     }
     this.postForm.controls['deposit'].setValue(Math.abs(parseInt(event.target.value)) || 0);
     this.postForm.controls['depositPercent'].setValue(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('priceOfProperty').value);
   }
 
+  setAnnuityLinear(event: any) {
+    this.postForm.controls['annuityLinear'].setValue(this.postForm.get('annuityLinear').value == "annuity" ? "linear" : "annuity");
+  }
+
   setDepositPercent(event: any) {
     if (/[^0-9.]/.test(event.target.value) || (event.target.value).split``.filter(x => x == ".").length > 1) {
-      event.target.value = event.target.value.slice(0, -1);
       event.target.value = event.target.value.split``.filter(x => /[0-9.]/.test(x)).join``;
     }
     this.depositPercentMaxLength = (event.target.value).split``.filter(x => x == ".").length == 1 ? 5 : 3;
@@ -110,7 +122,7 @@ export class UserInputComponent implements OnInit {
 
   checkIfNotNumber(event: any) {
     if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.slice(0, -1);
+      event.target.value = event.target.value.split``.filter(x => /[0-9]/.test(x)).join``
     }
     this.postForm.controls[event.target.getAttribute('formControlName')].setValue(Math.abs(parseInt(event.target.value)) || 0);
   }
@@ -118,17 +130,20 @@ export class UserInputComponent implements OnInit {
   counter: any;
   depositPercentPlus() {
     this.counter = setInterval(() => {
-      this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) + 1);
-      this.changeDeposit();
-    }, 250);
+      if (parseInt(this.postForm.get('depositPercent').value) < 100) {
+        this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) + 1);
+        this.changeDeposit();
+      }
+    }, 50);
   }
   depositPercentMinus() {
     this.counter = setInterval(() => {
-      this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) - 1);
-      this.changeDeposit();
-    }, 250);
+      if (parseInt(this.postForm.get('depositPercent').value) > this.minInitialDeposit) {
+        this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) - 1);
+        this.changeDeposit();
+      }
+    }, 50);
   }
-
 
   onSubmit(event?: any) {
     clearInterval(this.counter)
