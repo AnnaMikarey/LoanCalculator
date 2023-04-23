@@ -17,6 +17,15 @@ export class UserInputComponent implements OnInit {
   @Input() defaultPriceOfProperty!: number;
   @Input() minInitialDeposit!: number;
 
+  // maxPropertyPrice: number
+  // minPropertyPrice: number
+  // defaultPropertyPrice: number
+  // minDepositPercent: number
+  // defaultInitialDeposit: number
+  // defaultMortgagePeriod: number
+  // defaultSalary: number
+  // defaultFinancialObligation: number
+
   minMortgagePeriod: number = 1;
   maxMortgagePeriod: number = 30;
   maxDeposit: number;
@@ -40,8 +49,8 @@ export class UserInputComponent implements OnInit {
       },
       { updateOn: 'change' },
     );
-    this.postForm.get('priceOfProperty').valueChanges.subscribe(x => {
-      this.postForm.controls['deposit'].setValue((x || 0) * (this.postForm.get('depositPercent').value) / 100);
+    this.postForm.get('priceOfProperty').valueChanges.subscribe(value => {
+      this.postForm.controls['deposit'].setValue((value || 0) * (this.postForm.get('depositPercent').value) / 100);
       this.resetDepositMinMax();
     })
     this.resetDepositMinMax();
@@ -80,14 +89,14 @@ export class UserInputComponent implements OnInit {
     // 
     // }else 
     if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.split``.filter(x => /[0-9]/.test(x)).join``
+      event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
     }
     this.postForm.controls['priceOfProperty'].setValue(Math.abs(parseInt(event.target.value)) || 0);
   }
 
   setDeposit(event: any) {
     if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.split``.filter(x => /[0-9]/.test(x)).join``
+      event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
     }
     this.postForm.controls['deposit'].setValue(Math.abs(parseInt(event.target.value)) || 0);
     this.postForm.controls['depositPercent'].setValue(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('priceOfProperty').value);
@@ -98,10 +107,10 @@ export class UserInputComponent implements OnInit {
   }
 
   setDepositPercent(event: any) {
-    if (/[^0-9.]/.test(event.target.value) || (event.target.value).split``.filter(x => x == ".").length > 1) {
-      event.target.value = event.target.value.split``.filter(x => /[0-9.]/.test(x)).join``;
+    if (/[^0-9.]/.test(event.target.value) || (event.target.value).split``.filter(value => value == ".").length > 1) {
+      event.target.value = event.target.value.split``.filter(value => /[0-9.]/.test(value)).join``;
     }
-    this.depositPercentMaxLength = (event.target.value).split``.filter(x => x == ".").length == 1 ? 5 : 3;
+    this.depositPercentMaxLength = (event.target.value).split``.filter(value => value == ".").length == 1 ? 5 : 3;
     this.postForm.controls['depositPercent'].setValue(event.target.value || 0);
     this.changeDeposit();
   }
@@ -122,7 +131,7 @@ export class UserInputComponent implements OnInit {
 
   checkIfNotNumber(event: any) {
     if (/[^0-9]/.test(event.target.value)) {
-      event.target.value = event.target.value.split``.filter(x => /[0-9]/.test(x)).join``
+      event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
     }
     this.postForm.controls[event.target.getAttribute('formControlName')].setValue(Math.abs(parseInt(event.target.value)) || 0);
   }
@@ -159,6 +168,7 @@ export class UserInputComponent implements OnInit {
           this.postForm.controls["depositPercent"].setValue(100);
           this.postForm.controls["deposit"].setValue(this.maxDeposit);
         }
+
       } else {
 
         const alteredField = this.postForm.controls[event.target.getAttribute('formControlName')].errors;

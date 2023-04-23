@@ -46,5 +46,13 @@ export class CalculatorService {
     return this.httpClient.get<CalculatedValues>(this.apiUrl + 'calculatedValues');
   }
 
+  //need to be tested
+  // getInitialData():Observable<any[]>{
+  //   return this.httpClient.get<any[]>(this.apiUrl + 'client/get-initial-values');
+  // }
+
+  // postUserData(userData: UserData) {
+  //   return this.httpClient.put<UserData>(this.apiUrl + 'client/calculate', userData, httpOptions);
+  // }
 
 }

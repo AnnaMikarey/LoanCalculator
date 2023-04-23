@@ -73,25 +73,15 @@
             <input type="range" id="mortgage-period-slider" formControlName="mortgagePeriod" min="{{minMortgagePeriod}}"
                 max="{{maxMortgagePeriod}}" (input)="checkIfNotNumber($event)" maxlength="10" />
         </div>
-
         <div>
             <label for="annuity-linear">MORTGAGE TYPE</label>
             <br />
             <div class="flex">
                 <span>Annuity</span>
-                <input (click)="setAnnuityLinear($event)" type="checkbox" id="annuity-linear"
-                   />
+                <input (click)="setAnnuityLinear($event)" type="checkbox" id="annuity-linear" />
                 <span>Linear</span>
-                
             </div>
-            <datalist>
-                <option label="{{minMortgagePeriod}}"></option>
-                <option label="{{maxMortgagePeriod}}"></option>
-            </datalist>
-            <input type="range" id="mortgage-period-slider" formControlName="mortgagePeriod" min="{{minMortgagePeriod}}"
-                max="{{maxMortgagePeriod}}" (input)="checkIfNotNumber($event)" maxlength="10" />
         </div>
-
         <div>
             <label for="salary">SALARY</label>
             <br />

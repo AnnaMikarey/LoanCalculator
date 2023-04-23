@@ -6,3 +6,11 @@ export interface UserData {
     financialObligation: number,
     annuityLinear: string,
 }
+
+// {
+//     propertyPrice: number,
+//     initialDeposit: number,
+//     salary: number,
+//     financialObligation: number,
+//     mortgagePeriod: number
+// }

@@ -15,60 +15,112 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
   // loading$: Observable<boolean>;
   loading: boolean = false;
   //data for linear and annuity
+  linearOrAnnuity: string //= 'annuity';
   constructor(private userUiService: UserUiService) { }
 
   ngOnInit(): void {
     this.subscription = this.userUiService
-    .onToggle()
-    .subscribe(value =>
-      this.loading = value)
+      .onToggle()
+      .subscribe(value =>
+        this.loading = value)
+
+    this.userUiService
+      .onAnnuityLinearChange()
+      .subscribe(value =>
+        this.linearOrAnnuity = value)
+
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.linearOrAnnuity == "linear") {
+      const xAxisData = [];
+      const data1 = [];
+      const data2 = [];
 
-    this.options = {
-      tooltip: {
-        trigger: 'item'
-      },
-      legend: {
-        top: '0%',
-        left: 'center'
-      },
-      series: [
-        {
-          type: 'pie',
-          radius: ['90%', '80%'],
-          avoidLabelOverlap: false,
-          label: {
+      for (let i = 0; i < 100; i++) {
+        xAxisData.push('category' + i);
+        data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
+        data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
+      }
+      this.options = {
+        legend: {
+          data: ['bar', 'bar2'],
+          align: 'left',
+        },
+        tooltip: {},
+        xAxis: {
+          data: xAxisData,
+          silent: false,
+          splitLine: {
             show: false,
-            position: 'center'
           },
-          data: [
-            { "value": this.chartData?.requestedLoanAmount, "name": "requestedLoanAmount" },
-            { "value": this.chartData?.requestedLoanAmount, "name": "interest" },//only mock
-            { "value": this.chartData?.euroborAndRate, "name": "euroborAndRate" },
-            { "value": this.chartData?.bankFee, "name": "bankFee" },
-            { "value": this.chartData?.mortgageRegistration, "name": "mortgageRegistration" },
-          ],
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: 40,
-              fontWeight: 'bold'
-            },
-            labelLine: {
-              show: false
-            },
-            itemStyle: {
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'bar',
+            type: 'bar',
+            data: data1,
+            animationDelay: (idx) => idx * 10,
+          },
+          {
+            name: 'bar2',
+            type: 'bar',
+            data: data2,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+        ],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: (idx) => idx * 5,
+      };
+    } else {
 
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
+
+      this.options = {
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          top: '0%',
+          left: 'center'
+        },
+        series: [
+          {
+            type: 'pie',
+            radius: ['90%', '80%'],
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'center'
+            },
+            data: [//only mock
+              { "value": this.chartData?.requestedLoanAmount, "name": "requestedLoanAmount" },
+              { "value": this.chartData?.requestedLoanAmount, "name": "interest" },
+              { "value": this.chartData?.euroborAndRate, "name": "euroborAndRate" },
+              { "value": this.chartData?.bankFee, "name": "bankFee" },
+              { "value": this.chartData?.mortgageRegistration, "name": "mortgageRegistration" },
+            ],
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 40,
+                fontWeight: 'bold'
+              },
+              labelLine: {
+                show: false
+              },
+              itemStyle: {
+
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
             }
           }
-        }
-      ]
-    };
+        ]
+      };
+    }
   }
 
 

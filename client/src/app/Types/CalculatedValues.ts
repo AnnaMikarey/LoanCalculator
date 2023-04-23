@@ -8,3 +8,10 @@ export interface CalculatedValues {
     monthlyPayment: number,
     annualInterestRateTotal: number,
 }
+
+// {
+//     requestedLoanAmount: number,
+//     maxAvailableLoanAmount: number,
+//     monthlyPaymentAmount: number,
+//maybe? linearData?: number[]
+// }

@@ -13,22 +13,22 @@
   },
   "userInputs": {
     "priceOfProperty": 60000,
-    "deposit": 9000,
-    "depositPercent": 15,
-    "mortgagePeriod": 1,
+    "deposit": 44400,
+    "depositPercent": 74,
+    "mortgagePeriod": 23,
     "salary": 0,
     "financialObligation": 0,
     "annuityLinear": "annuity"
   },
   "calculatedValues": {
-    "requestedLoanAmount": 51000,
+    "requestedLoanAmount": 15600,
     "contractFee": 100,
-    "bankFee": 16,
+    "bankFee": 368,
     "mortgageRegistration": 9,
     "euroborAndRate": 5.48,
     "maxLoanAvailable": 0,
-    "monthlyPayment": 4377.207900202178,
-    "annualInterestRateTotal": 5.4836
+    "monthlyPayment": 99.5466025636711,
+    "annualInterestRateTotal": 5.48015652173913
   },
   "adminLogIn": {
     "username": "admin",

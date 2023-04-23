@@ -26,12 +26,15 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
   ngOnInit(): void {
 
     this.subscription = this.calculatorService.getData().subscribe((d) => { this.data = d; });
+    //need to be tested
+    //this.subscription = this.calculatorService.getInitialData().subscribe((d) => { this.data = d[0];  this.calculations = d[1];});
   }
   // ngOnChanges(): void {
 
   // }
 
   postUserData(userData: UserData) {
+
     this.userUiService.toggleLoading();
     console.log("submiting")
     //mock calculation
@@ -41,6 +44,7 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
       console.error('Error posting input data: ', error);
       return EMPTY;
     })).subscribe((userData) => {
+      this.userUiService.changeAnnuityLinear(userData.annuityLinear)
       console.log("Posting userData" + Object.entries(userData))
       this.calculatorService.postCalculations({
         requestedLoanAmount: userData.priceOfProperty - userData.deposit,
@@ -58,7 +62,6 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
   }
 
   getCalculations() {
-
     this.calculatorService.getCalculations().subscribe((calculatedValues) => { console.log("get calculations", this.calculations = calculatedValues); this.checkError(); });
   }
 
