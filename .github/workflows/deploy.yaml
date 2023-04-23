@@ -30,6 +30,7 @@ jobs:
       - name: Build and package Spring Boot app
         run: |
           cd server/
+          chmod +x ./gradlew
           ./gradlew clean build
 
       - name: Deploy Spring Boot app to EC2
