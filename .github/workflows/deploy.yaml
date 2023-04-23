@@ -1,0 +1,50 @@
+name: Deploy to EC2
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk nodejs npm
+
+      - name: Build and package Angular app
+        run: |
+          cd client/
+          npm install
+          ng build --configuration production
+
+      - name: Build and package Spring Boot app
+        run: |
+          cd server/
+          ./gradlew clean build
+
+      - name: Deploy Spring Boot app to EC2
+        uses: easingthemes/ssh-deploy@v2
+        with:
+          server: ${{ secrets.SERVER }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          local_path: ./server/build/libs/loanCalculator-0.0.1-SNAPSHOT.jar
+          remote_path: /server/loanCalculator-0.0.1-SNAPSHOT.jar
+
+      - name: Deploy Angular app to EC2
+        uses: easingthemes/ssh-deploy@v2
+        with:
+          server: ${{ secrets.SERVER }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          local_path: ./client/dist/loan-calculator
+          remote_path: /client/www/html/loan-calculator
