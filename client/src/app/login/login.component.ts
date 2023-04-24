@@ -12,8 +12,8 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   login(): void {
-    const hardcodedUsername: string = 'admin';
-    const hardcodedPassword: string = 'password';
+    const hardcodedUsername: string = 'admin987';
+    const hardcodedPassword: string = 'password985';
 
     if (this.username === hardcodedUsername && this.password === hardcodedPassword) {
       this.router.navigate(['/admin']);

@@ -5,8 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { DisclaimerComponent } from './disclaimer/disclaimer.component';
-import {AppModule} from "./app.module";
 
 
 const appRoutes: Routes = [
