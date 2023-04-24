@@ -1,18 +1,22 @@
-<!-- <app-graph-and-chart [chartData]="calculations"></app-graph-and-chart> -->
+<app-graph-and-chart [chartData]="calculations"
+    [contractFee]="contractFee"
+ [registrationFee]="registrationFee"
+ [monthlyBankFee]="monthlyBankFee"
+ ></app-graph-and-chart>
 <div>
     <p>REQUESTED LOAN AMOUNT: {{requestedLoanAmount}} EUR</p>
     <p>MAX. LOAN AVAILABLE: {{maxLoanAvailable}} EUR</p>
     <p>MONTHLY PAYMENT*: {{monthlyPayment}} EUR</p>
-     <!-- <span *ngIf="monthlyPaymentError" style="color:orange; margin-top: 0;">Monthly payment + financial obligations > 40%
-        of salary</span>
+    <!-- <span *ngIf="monthlyPaymentError" style="color:orange; margin-top: 0;">Monthly payment + financial obligations > 40%
+        of salary</span> -->
     <br />
     <br />
     <p>RATE+EUROIBOR[{{euriborRate}} %] : {{euriborRate+bankInterestRate}} %</p>
     <p>ANNUAL INTEREST RATE TOTAL: {{annualInterestRate}} %</p>
     <p>CONTRACT FEE: {{contractFee}} EUR</p>
     <p>BANK FEE: {{monthlyBankFee}} EUR</p>
-    <p>MORTGAGE REGISTRATION FEE: {{registrationFee}} EUR</p>  -->
-   
+    <p>MORTGAGE REGISTRATION FEE: {{registrationFee}} EUR</p> 
+    <div style="color:red">{{ time | async}}</div>
  </div>
  
  

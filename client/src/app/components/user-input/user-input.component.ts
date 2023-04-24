@@ -97,7 +97,7 @@ export class UserInputComponent implements OnInit {
    if (/[^0-9]/.test(event.target.value)) {
      event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
    }
-   this.postForm.controls['propertyPrice'].setValue(Math.abs(parseInt(event.target.value)) || 0);
+   this.postForm.controls['propertyPrice'].setValue(Math.abs(parseInt(event.target.value)) || "");
  }
 
 
@@ -145,7 +145,7 @@ export class UserInputComponent implements OnInit {
    if (/[^0-9]/.test(event.target.value)) {
      event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
    }
-   this.postForm.controls[event.target.getAttribute('formControlName')].setValue(Math.abs(parseInt(event.target.value)) || 0);
+   this.postForm.controls[event.target.getAttribute('formControlName')].setValue(Math.abs(parseInt(event.target.value)) || "");
  }
 
 
@@ -182,7 +182,7 @@ export class UserInputComponent implements OnInit {
          this.postForm.controls["depositPercent"].setValue(this.minDepositPercent);
          this.postForm.controls["initialDeposit"].setValue(this.minDeposit);
        } else {
-         this.postForm.controls["depositPercent"].setValue(100);
+         this.postForm.controls["depositPercent"].setValue(99);
          this.postForm.controls["initialDeposit"].setValue(this.maxDeposit);
        }
 

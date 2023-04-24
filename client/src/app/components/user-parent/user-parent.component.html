@@ -6,29 +6,17 @@
         [defaultInitialDeposit]="data.defaultInitialDeposit" [defaultMortgagePeriod]="data.defaultMortgagePeriod"
         [defaultSalary]="data.defaultSalary" [defaultFinancialObligation]="data.defaultFinancialObligation"
         (onUserInput)="postUserData($event)"></app-user-input>
-    <div style="color:red">{{ time | async}}</div>
+    
     <app-user-output class="box b" [monthlyPaymentError]="monthlyPaymentError" [euriborRate]="euriborRate"
+    [euriborDate]="euriborDate"
+  [bankInterestRate]="bankInterestRate"
+  [annualInterestRate]="annualInterestRate"
+  [contractFee]="contractFee"
+  [registrationFee]="registrationFee"
+  [monthlyBankFee]="monthlyBankFee"
+  
         [calculations]="calculations"></app-user-output>
  
- 
-    <!-- need to be tested -->
-    <!-- <app-user-input class="box a" [minPropertyPrice]="data.minPropertyPrice"
-        [maxPropertyPrice]="data.maxPropertyPrice" [defaultPropertyPrice]="data.defaultPropertyPrice"
-        [minDepositPercent]="data.minDepositPercent"
-        [defaultInitialDeposit]="data.defaultInitialDeposit" [defaultMortgagePeriod]="data.defaultMortgagePeriod"
-        [defaultSalary]="data.defaultSalary" [defaultFinancialObligation]="data.defaultFinancialObligation"
-        (onUserInput)="postUserData($event)"></app-user-input> -->
- 
- 
- 
- 
-    <!-- <app-user-output class="box b" [monthlyPaymentError]="monthlyPaymentError"
-        [calculations]="calculations"
-        [euriborRate]="data.euriborRate" [euriborDate]="data.euriborDate"
-        [bankInterestRate]="data.bankInterestRate" [annualInterestRate]="data.annualInterestRate"
-        [contractFee]="data.contractFee" [registrationFee]="data.registrationFee"
-        [monthlyBankFee]="data.monthlyBankFee"
-        ></app-user-output> -->
  </div>
  
  
