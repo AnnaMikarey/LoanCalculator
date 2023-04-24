@@ -1,16 +1,16 @@
 <div class="container card m-5">
   <h2>Calculator Values</h2>
-  <h4>Last updated on {{ adminEuriborDate }}</h4>
   <form [formGroup]="adminForm" (ngSubmit)="saveChanges()" class="row g-3 mt-5">
     <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
           <label for="adminEuriborRate" class="form-label">Euribor</label>
           <input
-            type="number"
-            class="form-control"
-            formControlName="adminEuriborRate"
+          type="number"
+          class="form-control"
+          formControlName="adminEuriborRate"
           />
+          <span class="euribor-date">Last updated on {{ adminEuriborDate }}</span>
           <div
             *ngIf="
               adminForm.get('adminEuriborRate').invalid &&
