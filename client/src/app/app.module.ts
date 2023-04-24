@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent],
   imports: [BrowserModule,
-    AppRoutingModule.forRoot(routes),
+    AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
