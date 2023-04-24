@@ -88,7 +88,7 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
     });
 
     //needs testing
-   // this.calculatorService.postUserDataGetsCalc(userData).subscribe((calculatedValues)=>this.calculations = calculatedValues)
+   // this.calculatorService.postUserDataGetsCalc(userData).subscribe((calculatedValues)=>this.calculations = calculatedValues; console.error("postUserDataGetsCalc",this.calculations))
 
   }
 
