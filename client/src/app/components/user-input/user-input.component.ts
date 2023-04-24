@@ -126,7 +126,7 @@ export class UserInputComponent implements OnInit {
       event.target.value = event.target.value.split``.filter(value => /[0-9.]/.test(value)).join``;
     }
     this.depositPercentMaxLength = (event.target.value).split``.filter(value => value == ".").length == 1 ? 5 : 3;
-    this.postForm.controls['depositPercent'].setValue(event.target.value || 0);
+    this.postForm.controls['depositPercent'].setValue(parseFloat(event.target.value) || 0);
     this.changeDeposit();
   }
 
@@ -180,7 +180,7 @@ export class UserInputComponent implements OnInit {
           this.postForm.controls["depositPercent"].setValue(this.minDepositPercent);
           this.postForm.controls["initialDeposit"].setValue(this.minDeposit);
         } else {
-          this.postForm.controls["depositPercent"].setValue(100);
+          this.postForm.controls["depositPercent"].setValue(99);
           this.postForm.controls["initialDeposit"].setValue(this.maxDeposit);
         }
 
@@ -191,14 +191,14 @@ export class UserInputComponent implements OnInit {
         if (alteredField['max']) {
 
           if (event.target.getAttribute('formControlName') == "depositPercent" || event.target.getAttribute('formControlName') == "deposit") {
-            this.postForm.controls["depositPercent"].setValue(100);
+            this.postForm.controls["depositPercent"].setValue(99);
           } else {
             this.postForm.controls[event.target.getAttribute('formControlName')].setValue(alteredField['max'].max);
           }
           this.resetDepositMinMax();
 
           if (event.target.getAttribute('formControlName') == "initialDeposit") {
-            this.postForm.controls["depositPercent"].setValue(100);
+            this.postForm.controls["depositPercent"].setValue(99);
           }
 
         } else {
