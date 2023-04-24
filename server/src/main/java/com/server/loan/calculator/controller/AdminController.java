@@ -15,8 +15,9 @@ public class AdminController {
     private final AdminService adminService;
 
     @PostMapping(value = "/change-values", consumes = {"application/json"})
-    public void saveToDatabase (@RequestBody AdminData data) {
+    public HttpStatus saveToDatabase (@RequestBody AdminData data) {
         adminService.addToDatabase(data);
+        return HttpStatus.ACCEPTED;
     }
 
     @GetMapping("/get-initial-values")
