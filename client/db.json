@@ -13,25 +13,63 @@
   },
   "userInputs": {
     "priceOfProperty": 60000,
-    "deposit": 44400,
-    "depositPercent": 74,
-    "mortgagePeriod": 23,
+    "deposit": 9000,
+    "depositPercent": 15,
+    "mortgagePeriod": 1,
     "salary": 0,
     "financialObligation": 0,
     "annuityLinear": "annuity"
   },
   "calculatedValues": {
-    "requestedLoanAmount": 15600,
+    "requestedLoanAmount": 51000,
     "contractFee": 100,
-    "bankFee": 368,
+    "bankFee": 16,
     "mortgageRegistration": 9,
     "euroborAndRate": 5.48,
     "maxLoanAvailable": 0,
-    "monthlyPayment": 99.5466025636711,
-    "annualInterestRateTotal": 5.48015652173913
+    "monthlyPayment": 4377.207900202178,
+    "annualInterestRateTotal": 5.4836
   },
   "adminLogIn": {
     "username": "admin",
     "password": "password123"
+  },
+  "get-initial-values": [
+    {
+      "euriborRate": 3.31,
+      "euriborDate": "2023-04-20",
+      "bankInterestRate": 1.99,
+      "annualInterestRate": 5.3,
+      "contractFee": 500,
+      "registrationFee": 10,
+      "monthlyBankFee": 50,
+      "maxPropertyPrice": 800000,
+      "minPropertyPrice": 20000,
+      "defaultPropertyPrice": 35000,
+      "minDepositPercent": 15,
+      "defaultInitialDeposit": 5250,
+      "defaultMortgagePeriod": 10,
+      "defaultSalary": 2500,
+      "defaultFinancialObligation": 0
+    },
+    {
+      "requestedLoanAmount": 29750,
+      "maxAvailableLoanAmount": 92990.44369289056,
+      "monthlyPaymentAmount": 319.9253901307661
+    }
+  ],
+  "calculate": {
+    "priceOfProperty": 35000,
+    "deposit": 5250,
+    "depositPercent": 15,
+    "mortgagePeriod": 12,
+    "salary": 2500,
+    "financialObligation": 0,
+    "annuityLinear": "annuity"
+  },
+  "calculated": {
+    "requestedLoanAmount": 35000,
+    "maxAvailableLoanAmount": 65093.3105850234,
+    "monthlyPaymentAmount": 376.3828119185484
   }
 }

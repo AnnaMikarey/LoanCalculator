@@ -5,32 +5,32 @@
             <br />
             <div class="flex">
                 <input type="text" formControlName="priceOfProperty" id="price-of-property"
-                    (input)="setPriceOfProperty($event)" maxlength={{(maxPriceOfProperty.toString()).length+1}} />
+                    (input)="setPriceOfProperty($event)" maxlength={{(maxPropertyPrice.toString()).length+1}} />
                 <span class="currency">EUR</span>
                 <ul *ngIf="priceOfProperty.errors">
                     <li *ngIf="priceOfProperty.errors['required']">Price of property is required</li>
                     <li *ngIf="priceOfProperty.errors['min']">
-                        Price of property must be at least {{minPriceOfProperty}} EUR
+                        Price of property must be at least {{minPropertyPrice}} EUR
                     </li>
                     <li *ngIf="priceOfProperty.errors['max']">
-                        Price of property must be less than {{maxPriceOfProperty}} EUR
+                        Price of property must be less than {{maxPropertyPrice}} EUR
                     </li>
                 </ul>
             </div>
             <datalist>
-                <option label="{{minPriceOfProperty}}"></option>
-                <option label="{{maxPriceOfProperty}}"></option>
+                <option label="{{minPropertyPrice}}"></option>
+                <option label="{{maxPropertyPrice}}"></option>
             </datalist>
             <!--  -->
             <input type="range" id="price-of-property-slider" formControlName="priceOfProperty"
-                min="{{minPriceOfProperty}}" max="{{maxPriceOfProperty}}" (input)="setPriceOfProperty($event)" />
+                min="{{minPropertyPrice}}" max="{{maxPropertyPrice}}" (input)="setPriceOfProperty($event)" />
         </div>
         <div>
             <label for="deposit">INITIAL DEPOSIT</label>
             <br />
             <div class="flex">
                 <input type="text" formControlName="deposit" id="deposit" style="width: 120px;"
-                    maxlength={{(maxPriceOfProperty.toString()).length+1}} (input)="setDeposit($event)" />
+                    maxlength={{(maxPropertyPrice.toString()).length+1}} (input)="setDeposit($event)" />
                 <span class="currency">EUR</span>
             </div>
             <div class="flex">
@@ -42,7 +42,7 @@
             </div>
             <ul *ngIf="!priceOfProperty.errors&&deposit.errors">
                 <li *ngIf="deposit.errors['min']">
-                    Deposit must be at least {{minInitialDeposit}}% ({{deposit.errors['min'].min}})
+                    Deposit must be at least {{minDepositPercent}}% ({{deposit.errors['min'].min}})
                 </li>
                 <li *ngIf="deposit.errors['max']">
                     Deposit must be less than {{deposit.errors['max'].max}}

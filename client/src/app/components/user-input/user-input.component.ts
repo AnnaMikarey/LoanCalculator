@@ -12,10 +12,20 @@ const fb = new FormBuilder().nonNullable;
 export class UserInputComponent implements OnInit {
 
   @Output() onUserInput: EventEmitter<UserData> = new EventEmitter();
-  @Input() minPriceOfProperty!: number;
-  @Input() maxPriceOfProperty!: number;
-  @Input() defaultPriceOfProperty!: number;
-  @Input() minInitialDeposit!: number;
+  // @Input() minPriceOfProperty!: number;
+  // @Input() maxPriceOfProperty!: number;
+  // @Input() defaultPriceOfProperty!: number;
+  // @Input() minInitialDeposit!: number;
+
+  @Input() maxPropertyPrice!: number;
+  @Input() minPropertyPrice!: number;
+  @Input() defaultPropertyPrice!: number;
+  @Input() minDepositPercent!: number;
+
+  @Input() defaultInitialDeposit!: number;
+  @Input() defaultMortgagePeriod!: number;
+  @Input() defaultSalary!: number;
+  @Input() defaultFinancialObligation!: number;
 
   // maxPropertyPrice: number
   // minPropertyPrice: number
@@ -39,12 +49,12 @@ export class UserInputComponent implements OnInit {
     this.depositPercentMaxLength = 3
     this.postForm = fb.group(
       {
-        priceOfProperty: [this.defaultPriceOfProperty, [Validators.min(this.minPriceOfProperty), Validators.max(this.maxPriceOfProperty), Validators.pattern(/[0-9]/), Validators.required]],
-        deposit: [(this.defaultPriceOfProperty * this.minInitialDeposit / 100), [Validators.pattern(/[0-9]/), Validators.required, (control: AbstractControl) => Validators.max(this.maxDeposit)(control), (control: AbstractControl) => Validators.min(this.minDeposit)(control)]],
-        depositPercent: [this.minInitialDeposit, [Validators.required, Validators.min(this.minInitialDeposit), Validators.max(100)]],
-        mortgagePeriod: [this.minMortgagePeriod, [Validators.required, Validators.pattern(/[0-9]/), Validators.min(this.minMortgagePeriod), Validators.max(this.maxMortgagePeriod)]],
-        salary: [0, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
-        financialObligation: [0, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
+        priceOfProperty: [this.defaultPropertyPrice, [Validators.min(this.minPropertyPrice), Validators.max(this.maxPropertyPrice), Validators.pattern(/[0-9]/), Validators.required]],
+        deposit: [(this.defaultPropertyPrice * this.minDepositPercent / 100), [Validators.pattern(/[0-9]/), Validators.required, (control: AbstractControl) => Validators.max(this.maxDeposit)(control), (control: AbstractControl) => Validators.min(this.minDeposit)(control)]],
+        depositPercent: [this.minDepositPercent, [Validators.required, Validators.min(this.minDepositPercent), Validators.max(100)]],
+        mortgagePeriod: [this.defaultMortgagePeriod, [Validators.required, Validators.pattern(/[0-9]/), Validators.min(this.minMortgagePeriod), Validators.max(this.maxMortgagePeriod)]],
+        salary: [this.defaultSalary, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
+        financialObligation: [this.defaultFinancialObligation, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
         annuityLinear: [this.initialAnnuityLinear, [],],
       },
       { updateOn: 'change' },
@@ -54,7 +64,7 @@ export class UserInputComponent implements OnInit {
       this.resetDepositMinMax();
     })
     this.resetDepositMinMax();
-    this.onSubmit();
+    //this.onSubmit();
   }
 
   get priceOfProperty() {
@@ -81,7 +91,7 @@ export class UserInputComponent implements OnInit {
 
   resetDepositMinMax() {
     this.maxDeposit = this.postForm.get('priceOfProperty').value;
-    this.minDeposit = this.postForm.get('priceOfProperty').value * this.minInitialDeposit / 100;
+    this.minDeposit = this.postForm.get('priceOfProperty').value * this.minDepositPercent / 100;
   }
 
   setPriceOfProperty(event: any) {
@@ -147,7 +157,7 @@ export class UserInputComponent implements OnInit {
   }
   depositPercentMinus() {
     this.counter = setInterval(() => {
-      if (parseInt(this.postForm.get('depositPercent').value) > this.minInitialDeposit) {
+      if (parseInt(this.postForm.get('depositPercent').value) > this.minDepositPercent) {
         this.postForm.controls["depositPercent"].setValue(parseInt(this.postForm.get('depositPercent').value) - 1);
         this.changeDeposit();
       }
@@ -162,7 +172,7 @@ export class UserInputComponent implements OnInit {
       if (!event) {
 
         if (this.postForm.controls["depositPercent"].errors['min']) {
-          this.postForm.controls["depositPercent"].setValue(this.minInitialDeposit);
+          this.postForm.controls["depositPercent"].setValue(this.minDepositPercent);
           this.postForm.controls["deposit"].setValue(this.minDeposit);
         } else {
           this.postForm.controls["depositPercent"].setValue(100);
@@ -189,11 +199,11 @@ export class UserInputComponent implements OnInit {
         } else {
 
           if (event.target.getAttribute('formControlName') == "priceOfProperty") {
-            this.postForm.controls["priceOfProperty"].setValue(this.minPriceOfProperty);
+            this.postForm.controls["priceOfProperty"].setValue(this.minPropertyPrice);
           } else if (event.target.getAttribute('formControlName') == "depositPercent") {
-            this.postForm.controls["depositPercent"].setValue(this.minInitialDeposit);
+            this.postForm.controls["depositPercent"].setValue(this.minDepositPercent);
           } else if (event.target.getAttribute('formControlName') == "deposit") {
-            this.postForm.controls["depositPercent"].setValue(this.minInitialDeposit);
+            this.postForm.controls["depositPercent"].setValue(this.minDepositPercent);
             this.postForm.controls["deposit"].setValue(this.minDeposit);
           } else if (event.target.getAttribute('formControlName') == "mortgagePeriod") {
             this.postForm.controls["mortgagePeriod"].setValue(this.minMortgagePeriod);

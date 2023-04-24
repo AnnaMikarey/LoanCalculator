@@ -1,9 +1,10 @@
-<app-graph-and-chart [chartData]="calculations"></app-graph-and-chart>
+<!-- <app-graph-and-chart [chartData]="calculations"></app-graph-and-chart> -->
 <div>
     <p>REQUESTED LOAN AMOUNT: {{requestedLoanAmount}} EUR</p>
     <p>MAX. LOAN AVAILABLE: {{maxLoanAvailable}} EUR</p>
     <p>MONTHLY PAYMENT*: {{monthlyPayment}} EUR</p>
-    <span *ngIf="monthlyPaymentError" style="color:orange; margin-top: 0;">Monthly payment + financial obligations > 40%
+    <p>TEST: {{start}} EUR</p>
+    <!-- <span *ngIf="monthlyPaymentError" style="color:orange; margin-top: 0;">Monthly payment + financial obligations > 40%
         of salary</span>
     <br />
     <br />
@@ -11,5 +12,6 @@
     <p>EUROIBOR+RATE IN BRACKETS: {{euroiborRate}} %</p>
     <p>CONTRACT FEE: {{contractFee}} EUR</p>
     <p>BANK FEE: {{bankFee}} EUR</p>
-    <p>MORTGAGE REGISTRATION FEE: {{mortgageRegistrationFee}} EUR</p>
+    <p>MORTGAGE REGISTRATION FEE: {{mortgageRegistrationFee}} EUR</p> -->
+    <p>EUROIBOR+RATE IN BRACKETS: {{euriborRate}} %</p>
 </div>

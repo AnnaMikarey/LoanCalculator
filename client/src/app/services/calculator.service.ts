@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InitialData } from '../Types/InitialData';
 import { UserData } from '../Types/UserData';
@@ -13,6 +13,7 @@ const httpOptions = {
 export class CalculatorService {
   //todo api url
   private apiUrl = 'http://localhost:3000/';
+  //private apiUrl = 'http://localhost:3000/client/';
   constructor(private httpClient: HttpClient) { }
 
   //todo get data from the server
@@ -47,12 +48,20 @@ export class CalculatorService {
   }
 
   //need to be tested
-  // getInitialData():Observable<any[]>{
-  //   return this.httpClient.get<any[]>(this.apiUrl + 'client/get-initial-values');
+  getInitialData(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.apiUrl + 'get-initial-values');
+  }
+  //https://stackoverflow.com/questions/54110377/angular-receive-and-return-observablet-response-in-http-post
+  postUserDataGetsCalc(userData: UserData) {
+    return this.httpClient.post<UserData>(this.apiUrl + 'calculate', userData, httpOptions);
+  }
+  //needs testing
+  //   postUserDataGetsCalc(userData: UserData): Observable<CalculatedValues>{
+  //     return this.httpClient.post<CalculatedValues>(this.apiUrl + 'calculate', userData, httpOptions)
   // }
 
-  // postUserData(userData: UserData) {
-  //   return this.httpClient.put<UserData>(this.apiUrl + 'client/calculate', userData, httpOptions);
-  // }
+  getCalculated(): Observable<CalculatedValues> {
+    return this.httpClient.get<CalculatedValues>(this.apiUrl + 'calculated');
+  }
 
 }

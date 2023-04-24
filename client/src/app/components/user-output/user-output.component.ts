@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 export class UserOutputComponent implements OnChanges {
   //data fetch is mocked
   @Input() calculations!: CalculatedValues;
+//test
+  start:number=1
 
   requestedLoanAmount!: number;
   maxLoanAvailable!: number;
@@ -20,18 +22,20 @@ export class UserOutputComponent implements OnChanges {
   bankFee!: number;
   mortgageRegistrationFee!: number;
 
+  @Input() euriborRate:number;
+
   //monthly payment (if monthly payment + financial obligations >40% of salary then error)
   @Input() monthlyPaymentError!: boolean;
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
     this.requestedLoanAmount = this.format(this.calculations?.requestedLoanAmount);
-    this.maxLoanAvailable = this.format(this.calculations?.maxLoanAvailable);
-    this.monthlyPayment = this.format(this.calculations?.monthlyPayment);
-    this.annualInterestRateTotal = this.format(this.calculations?.annualInterestRateTotal);
-    this.euroiborRate = this.format(this.calculations?.euroborAndRate);
-    this.contractFee = this.format(this.calculations?.contractFee);
-    this.bankFee = this.format(this.calculations?.bankFee);
-    this.mortgageRegistrationFee = this.format(this.calculations?.mortgageRegistration);
+    this.maxLoanAvailable = this.format(this.calculations?.maxAvailableLoanAmount);
+    this.monthlyPayment = this.format(this.calculations?.monthlyPaymentAmount);
+    // this.annualInterestRateTotal = this.format(this.calculations?.annualInterestRateTotal);
+    // this.euroiborRate = this.format(this.calculations?.euroborAndRate);
+    // this.contractFee = this.format(this.calculations?.contractFee);
+    // this.bankFee = this.format(this.calculations?.bankFee);
+    // this.mortgageRegistrationFee = this.format(this.calculations?.mortgageRegistration);
 
     //for testing; make array of values and apply formatting via map
     // this.requestedLoanAmount = this.format(this.calculations?.requestedLoanAmount);
