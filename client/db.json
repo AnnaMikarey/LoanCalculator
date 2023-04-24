@@ -59,13 +59,11 @@
     }
   ],
   "calculate": {
-    "priceOfProperty": 35000,
-    "deposit": 5250,
-    "depositPercent": 15,
-    "mortgagePeriod": 12,
+    "propertyPrice": 296106,
+    "initialDeposit": 56260,
+    "mortgagePeriod": 10,
     "salary": 2500,
-    "financialObligation": 0,
-    "annuityLinear": "annuity"
+    "financialObligation": 0
   },
   "calculated": {
     "requestedLoanAmount": 35000,

@@ -75,20 +75,21 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
     
     // this.salary = userData.salary
     // this.obligation = userData.financialObligation
-    this.calculatorService.postUserDataGetsCalc(userData).pipe(catchError((error) => {
-      console.error('Error posting input data: ', error);
-      return EMPTY;
-    })).subscribe((userData) => {
-      //this.userUiService.changeAnnuityLinear(userData.annuityLinear)
-      console.log("Posting userData " + Object.entries(userData))
-      this.userUiService.toggleLoading();
+    // this.calculatorService.postUserDataGetsCalc(userData).pipe(catchError((error) => {
+    //   console.error('Error posting input data: ', error);
+    //   return EMPTY;
+    // })).subscribe((userData) => {
+    //   //this.userUiService.changeAnnuityLinear(userData.annuityLinear)
+    //   console.log("Posting userData " + Object.entries(userData))
+    //   this.userUiService.toggleLoading();
 
-      this.calculatorService.getCalculated().subscribe((calculatedValues)=>this.calculations = calculatedValues)
+      //this.calculatorService.getCalculated().subscribe((calculatedValues)=>this.calculations = calculatedValues)
+   //this.calculatorService.postUserDataGetsCalc(userData).subscribe((calculatedValues)=>this.calculations = calculatedValues; console.error("postUserDataGetsCalc",this.calculations))
 
-    });
+    //});
 
     //needs testing
-   // this.calculatorService.postUserDataGetsCalc(userData).subscribe((calculatedValues)=>this.calculations = calculatedValues; console.error("postUserDataGetsCalc",this.calculations))
+   this.calculatorService.postUserDataGetsCalc(userData).subscribe((calculatedValues)=>{this.calculations = calculatedValues; console.error("postUserDataGetsCalc",this.calculations)})
 
   }
 
