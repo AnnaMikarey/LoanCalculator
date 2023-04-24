@@ -11,12 +11,14 @@ export class AdminService {
 
   postData(formData: AdminData): Observable<AdminData> {
     return this.http.post<AdminData>(
-      'http://localhost:8080/admin/values',
+      'http://localhost:8080/admin/change-values',
       formData
     );
   }
 
   getData(): Observable<AdminData> {
-    return this.http.get<AdminData>('http://localhost:8080/admin/values');
+    return this.http.get<AdminData>(
+      'http://localhost:8080/admin/get-initial-values'
+    );
   }
 }
