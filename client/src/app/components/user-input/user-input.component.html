@@ -1,12 +1,12 @@
-<div>
+<div class="cardcontainer">
     <form [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
-        <div>
-            <label for="price-of-property">PRICE OF PROPERTY</label>
+        <div class="mini-container">
+            <label for="price-of-property">PRICE OF PROPERTY (EUR)</label>
             <br />
-            <div class="flex">
-                <input type="text" formControlName="propertyPrice" id="price-of-property"
+           
+                <input class="flex" type="text" formControlName="propertyPrice" id="price-of-property"
                     (input)="setPriceOfProperty($event)" maxlength={{(maxPropertyPrice.toString()).length+1}} />
-                <span class="currency">EUR</span>
+
                 <ul *ngIf="propertyPrice.errors">
                     <li *ngIf="propertyPrice.errors['required']">Price of property is required</li>
                     <li *ngIf="propertyPrice.errors['min']">
@@ -16,29 +16,38 @@
                         Price of property must be less than {{maxPropertyPrice}} EUR
                     </li>
                 </ul>
+            
+           
+                <div class="dataL">
+                    <div>{{minPropertyPrice}} EUR</div>
+                    <div>{{maxPropertyPrice}} EUR</div>
+                </div>
+                <!--  --> <div class="slider">
+                <input type="range" id="price-of-property-slider" formControlName="propertyPrice"
+                    min="{{minPropertyPrice}}" max="{{maxPropertyPrice}}" (input)="setPriceOfProperty($event)" />
             </div>
-            <datalist>
-                <option label="{{minPropertyPrice}}"></option>
-                <option label="{{maxPropertyPrice}}"></option>
-            </datalist>
-            <!--  -->
-            <input type="range" id="price-of-property-slider" formControlName="propertyPrice"
-                min="{{minPropertyPrice}}" max="{{maxPropertyPrice}}" (input)="setPriceOfProperty($event)" />
+        
         </div>
-        <div>
-            <label for="deposit">INITIAL DEPOSIT</label>
-            <br />
-            <div class="flex">
-                <input type="text" formControlName="initialDeposit" id="deposit" style="width: 120px;"
-                    maxlength={{(maxPropertyPrice.toString()).length+1}} (input)="setDeposit($event)" />
-                <span class="currency">EUR</span>
+
+        <div class="mini-container">
+            <div class="dataL">
+                <label for="deposit">INITIAL DEPOSIT (EUR)</label>
+                <label for="depositPercent">%</label>
             </div>
-            <div class="flex">
-                <input type="text" formControlName="depositPercent" id="deposit-percent" style="width: 90px;"
+            <div class="depositAndPercent">
+            <div class="initial-deposit">
+                <input type="text" formControlName="initialDeposit" id="deposit" 
+                    maxlength={{(maxPropertyPrice.toString()).length+1}} (input)="setDeposit($event)" />
+
+            </div>
+            <div class="percent">
+
+               <span class="updown"><button class="updownbutton" (mousedown)="depositPercentPlus()" (mouseup)="onSubmit()"></button>
+                <button class="updownbutton" (mousedown)="depositPercentMinus()" (mouseup)="onSubmit()"></button>
+            </span>
+                <input type="text" formControlName="depositPercent" id="deposit-percent" 
                     [maxLength]="depositPercentMaxLength" (input)="setDepositPercent($event)" />
-                <span class="currency">%</span>
-                <button (mousedown)="depositPercentPlus()" (mouseup)="onSubmit()">UP</button>
-                <button (mousedown)="depositPercentMinus()" (mouseup)="onSubmit()">DOWN</button>
+                </div>
             </div>
             <ul *ngIf="!propertyPrice.errors&&initialDeposit.errors">
                 <li *ngIf="initialDeposit.errors['min']">
@@ -49,13 +58,14 @@
                 </li>
             </ul>
         </div>
-        <div>
-            <label for="mortgage-period">MORTGAGE PERIOD</label>
+        <div class="mini-container">
+            <label for="mortgage-period">MORTGAGE PERIOD (YEARS)</label>
             <br />
             <div class="flex">
+                
                 <input type="text" formControlName="mortgagePeriod" id="mortgage-period"
                     (input)="checkIfNotNumber($event)" maxlength="3" />
-                <span class="currency">YEARS</span>
+
                 <ul *ngIf="mortgagePeriod.errors">
                     <li *ngIf="mortgagePeriod.errors['required']">
                         Mortgage period is required</li>
@@ -66,29 +76,31 @@
                         Mortgage period must be lower or equal to {{maxMortgagePeriod}}</li>
                 </ul>
             </div>
-            <datalist>
-                <option label="{{minMortgagePeriod}}"></option>
-                <option label="{{maxMortgagePeriod}}"></option>
-            </datalist>
+            
+            <div class="dataL">
+                <div>{{minMortgagePeriod}} YEAR</div>
+                <div>{{maxMortgagePeriod}} YEARS</div>
+            </div>
+            <div class="slider">
             <input type="range" id="mortgage-period-slider" formControlName="mortgagePeriod" min="{{minMortgagePeriod}}"
                 max="{{maxMortgagePeriod}}" (input)="checkIfNotNumber($event)" maxlength="10" />
         </div>
-        <div>
+    </div>
+        <div class="mini-container">
             <label for="annuity-linear">MORTGAGE TYPE</label>
             <br />
-            <div class="flex">
-                <span>Annuity</span>
+            <div class=" linear-annuity">
+                <div>ANNUITY</div>
                 <input (click)="setAnnuityLinear($event)" type="checkbox" id="annuity-linear" />
-                <span>Linear</span>
+                <div>LINEAR</div>
             </div>
         </div>
-        <div>
-            <label for="salary">SALARY</label>
+        <div class="mini-container">
+            <label for="salary">SALARY (EUR)</label>
             <br />
             <div class="flex">
                 <input type="text" formControlName="salary" id="salary" maxlength="10"
                     (input)="checkIfNotNumber($event)" />
-                <span class="currency">EUR</span>
                 <ul *ngIf="salary.errors">
                     <li *ngIf="salary.errors['required']">
                         Salary is required</li>
@@ -98,13 +110,12 @@
                 </ul>
             </div>
         </div>
-        <div>
-            <label for="financial-obligation">FINANCIAL OBLIGATION</label>
+        <div class="mini-container">
+            <label for="financial-obligation">FINANCIAL OBLIGATION (EUR)</label>
             <br />
             <div class="flex">
                 <input type="text" formControlName="financialObligation" id="financial-obligation"
                     (input)="checkIfNotNumber($event)" maxlength="10" />
-                <span class="currency">EUR</span>
                 <ul *ngIf="financialObligation.errors">
                     <li *ngIf="financialObligation.errors['required']">
                         Financial obligations is required</li>
@@ -115,8 +126,4 @@
             </div>
         </div>
     </form>
- </div>
- 
- 
- 
- 
+</div>

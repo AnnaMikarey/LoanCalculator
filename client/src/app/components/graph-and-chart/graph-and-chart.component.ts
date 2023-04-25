@@ -86,30 +86,30 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
         tooltip: {
           trigger: 'item'
         },
-        legend: {
-          top: '0%',
-          left: 'center'
-        },
+        // legend: {
+        //   top: '0%',
+        //   left: 'center'
+        // },
         series: [
           {
             type: 'pie',
-            radius: ['90%', '80%'],
-            avoidLabelOverlap: false,
+            radius: ['100%', '90%'],
+            avoidLabelOverlap: true,
             label: {
               show: false,
               position: 'center'
             },
-            data: [//only mock
-              { "value": this.chartData?.requestedLoanAmount, "name": "requestedLoanAmount" },
-              { "value": this.chartData?.monthlyPayment, "name": "monthlyPayment" },
-              { "value": this.monthlyBankFee, "name": "monthlyBankFee" },
-              { "value": this.registrationFee, "name": "registrationFee" },
-              { "value": this.contractFee, "name": "contractFee" },
+            data: [
+              { "value": this.chartData?.requestedLoanAmount, "name": "Requested loan amount" ,itemStyle:{color:"#DBE4EE"} },
+              // { "value": this.chartData?.monthlyPayment, "name": "Monthly payment" },
+              { "value": this.monthlyBankFee, "name": "Monthly bank fee" ,itemStyle:{color:"#F17300"}},
+              { "value": this.registrationFee, "name": "Registration fee",itemStyle:{color:"#3E7CB1"} },
+              { "value": this.contractFee, "name": "Contract fee",itemStyle:{color:"#81A4CD"} },
 
             ],
             emphasis: {
               label: {
-                show: true,
+                show: false,
                 fontSize: 40,
                 fontWeight: 'bold'
               },
@@ -119,7 +119,7 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
               itemStyle: {
 
 
-                shadowBlur: 10,
+                shadowBlur: 0,
                 shadowOffsetX: 0,
                 shadowColor: 'rgba(0, 0, 0, 0.5)'
               }

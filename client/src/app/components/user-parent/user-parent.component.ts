@@ -19,8 +19,8 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
   obligation!: number;
 
 
-  error: boolean;
-  errorM: string;
+  serverError: boolean;
+  serverErrorMessage: string;
 
 
   euriborRate: number
@@ -65,9 +65,9 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
 
     this.calculatorService.postUserDataGetsCalc(userData).subscribe((calculatedValues) => {
       this.calculations = calculatedValues;this.userUiService.toggleLoading(false);
-      console.error("postUserDataGetsCalc", this.calculations);  this.error = false
+      console.error("postUserDataGetsCalc", this.calculations);  this.serverError = false
     },
-      (error) => { console.log("error", error); this.error = true; this.errorM = error.error.message })
+      (error) => { console.log("error", error); this.serverError = true; this.serverErrorMessage = error.error.message })
       
   }
 

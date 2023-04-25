@@ -1,6 +1,7 @@
+<!-- <div class="centered centered-parent"></div> -->
 <div class="container" *ngIf="data">
     <!-- (onUserInput)="postUserData($event)" -->
-    <p *ngIf="error">ERROR: {{errorM}}</p>
+    <!-- <p *ngIf="error">ERROR: {{errorM}}</p> -->
     <app-user-input class="box a" [minPropertyPrice]="data.minPropertyPrice" [maxPropertyPrice]="data.maxPropertyPrice"
         [defaultPropertyPrice]="data.defaultPropertyPrice" [minDepositPercent]="data.minDepositPercent"
         [defaultInitialDeposit]="data.defaultInitialDeposit" [defaultMortgagePeriod]="data.defaultMortgagePeriod"
@@ -18,5 +19,5 @@
         [calculations]="calculations"></app-user-output>
  
  </div>
- 
+ <!-- </div> -->
  

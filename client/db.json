@@ -59,9 +59,9 @@
     }
   ],
   "calculate": {
-    "propertyPrice": 296106,
-    "initialDeposit": 56260,
-    "mortgagePeriod": 10,
+    "propertyPrice": 800000,
+    "initialDeposit": 120000,
+    "mortgagePeriod": 30,
     "salary": 2500,
     "financialObligation": 0
   },
