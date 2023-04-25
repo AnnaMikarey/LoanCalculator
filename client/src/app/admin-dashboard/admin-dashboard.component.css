@@ -1,44 +1,69 @@
 * {
   font-family: "JetBrains Mono";
+  box-sizing: border-box;
 }
 
 .container {
-  height: 100vh;
+  display: flex;
+  width: 1526px;
+  height: 670px;
+  margin: auto;
+  justify-content: center;
+  background-color: #054a91;
+  border-radius: 10px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  margin-top: 200px;
 }
+
 .field-container {
-  height: 100px;
+  height: 130px;
   display: flex;
   flex-direction: column;
 }
 
 .row {
   margin: 0 auto;
-  gap: 40px;
   display: flex;
   flex-direction: row;
+  gap: 100px;
+}
+.upper {
+  margin-bottom: 40px;
 }
 
+.column {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 50px 30px 30px 50px;
+  margin-top: 10px;
+}
+.big-column {
+  margin-top: 54px;
+}
+label {
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.3rem;
+  width: 300px;
+  margin-bottom: 10px;
+}
 input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
 
-.mb-3 {
-  height: 60px;
-}
-
 .error-msg {
   color: red;
-  font-size: 12px;
+  font-size: 13px;
+  width: 270px;
 }
 
 .euribor-date {
-  font-size: 12px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.5rem;
 }
 
 input::-webkit-outer-spin-button,
@@ -48,5 +73,36 @@ input::-webkit-inner-spin-button {
 }
 
 input {
+  width: 270px;
   appearance: textfield;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+button {
+  display: flex;
+  gap: 5px;
+  width: 325px;
+  height: 50px;
+  background-color: #fff;
+  color: #054a91;
+  border-radius: 10px;
+  font-size: 19px;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+button:disabled {
+  background-color: rgb(255, 0, 0, 0.3);
+  cursor: auto;
+}
+object {
+  width: 30px;
+  height: 32px;
+}
+svg {
+  stroke: #054a91;
 }

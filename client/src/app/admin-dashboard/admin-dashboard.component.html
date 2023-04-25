@@ -1,197 +1,218 @@
 <div class="container">
   <form [formGroup]="adminForm" (ngSubmit)="saveChanges()" class="form">
-    <div class="row">
-      <div class="columns">
-        <div class="field-container">
-          <label for="adminEuriborRate" class="form-label">Euribor</label>
-          <input
-            type="number"
-            class="form-control"
-            formControlName="adminEuriborRate"
-          />
-          <span class="euribor-date"
-            >Last updated on {{ adminEuriborDate }}</span
-          >
-          <div
-            *ngIf="
-              adminForm.get('adminEuriborRate').invalid &&
-              adminForm.get('adminEuriborRate').touched
-            "
-          >
-            <span class="error-msg"> Error: Could not fetch the value </span>
+    <div class="row upper">
+      <div class="big-column">
+        <label for="column">RATES</label>
+        <div class="column">
+          <div class="field-container">
+            <label for="adminEuriborRate" class="form-label">EURIBOR %</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="adminEuriborRate"
+            />
+            <span class="euribor-date"
+              >Last updated on {{ adminEuriborDate }}</span
+            >
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminEuriborRate').invalid &&
+                adminForm.get('adminEuriborRate').touched
+              "
+            >
+              <span> Error: Could not fetch the value </span>
+            </div>
           </div>
-        </div>
 
-        <div class="field-container">
-          <label for="adminBankMargin" class="form-label">Bank Margin</label>
-          <input
-            type="number"
-            class="form-control"
-            formControlName="adminBankMargin"
-          />
-          <div
-            *ngIf="
-              adminForm.get('adminBankMargin').invalid &&
-              adminForm.get('adminBankMargin').touched
-            "
-          >
-            <span class="error-msg">
-              Error: value must be more or equal to 0 and less or equal to 100
-            </span>
+          <div class="field-container">
+            <label for="adminBankMargin" class="form-label"
+              >BANK MARGIN %</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              formControlName="adminBankMargin"
+            />
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminBankMargin').invalid &&
+                adminForm.get('adminBankMargin').touched
+              "
+            >
+              <span>
+                Error: value must be more or equal to 0 and less or equal to 100
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="field-container">
-          <label for="adminMinDepositPercent" class="form-label"
-            >Min Deposit</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            formControlName="adminMinDepositPercent"
-          />
-          <div
-            *ngIf="
-              adminForm.get('adminMinDepositPercent').invalid &&
-              adminForm.get('adminMinDepositPercent').touched
-            "
-          >
-            <span class="error-msg">
-              Error: value must be more or equal to 0 and less or equal to 100
-            </span>
+          <div class="field-container">
+            <br />
+
+            <label for="adminMinDepositPercent" class="form-label"
+              >MIN INITIAL DEPOSIT %
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="adminMinDepositPercent"
+            />
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminMinDepositPercent').invalid &&
+                adminForm.get('adminMinDepositPercent').touched
+              "
+            >
+              <span>
+                Error: value must be more or equal to 0 and less or equal to 100
+              </span>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="columns">
-        <div class="field-container">
-          <label for="adminMinPropertyPrice" class="form-label"
-            >Price Min</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            formControlName="adminMinPropertyPrice"
-            (input)="handleMinMaxPrices()"
-          />
-          <div
-            *ngIf="
-              adminForm.get('adminMinPropertyPrice').invalid &&
-              adminForm.get('adminMinPropertyPrice').touched
-            "
-          >
-            <span class="error-msg"> Error: Invalid value </span>
+      <div class="big-column">
+        <label for="column">PRICE</label>
+        <div class="column">
+          <div class="field-container">
+            <label for="adminMinPropertyPrice" class="form-label"
+              >MIN PRICE OF PROPERTY (EUR)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              formControlName="adminMinPropertyPrice"
+              (input)="handleMinMaxPrices()"
+            />
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminMinPropertyPrice').invalid &&
+                adminForm.get('adminMinPropertyPrice').touched
+              "
+            >
+              <span> Error: Invalid value </span>
+            </div>
           </div>
-        </div>
-        <div class="field-container">
-          <label for="adminMaxPropertyPrice" class="form-label"
-            >Price Max</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            formControlName="adminMaxPropertyPrice"
-            (input)="handleMinMaxPrices()"
-          />
-          <div
-            *ngIf="
-              adminForm.get('adminMaxPropertyPrice').invalid &&
-              adminForm.get('adminMaxPropertyPrice').touched
-            "
-          >
-            <span class="error-msg"> Error: Invalid value </span>
+          <div class="field-container">
+            <label for="adminMaxPropertyPrice" class="form-label"
+              >MAX PRICE OF PROPERTY (EUR)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              formControlName="adminMaxPropertyPrice"
+              (input)="handleMinMaxPrices()"
+            />
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminMaxPropertyPrice').invalid &&
+                adminForm.get('adminMaxPropertyPrice').touched
+              "
+            >
+              <span> Error: Invalid value </span>
+            </div>
           </div>
-        </div>
-        <div class="field-container">
-          <label for="adminDefaultPropertyPrice" class="form-label"
-            >Price Default</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            formControlName="adminDefaultPropertyPrice"
-          />
-          <div
-            *ngIf="
-              adminForm.get('adminDefaultPropertyPrice').invalid &&
-              adminForm.get('adminDefaultPropertyPrice').touched || 
-              adminForm.get('adminDefaultPropertyPrice').errors?.['priceDefaultInvalid']
-            "
-          >
-            <span class="error-msg"> Error: Invalid value </span>
+          <div class="field-container">
+            <label for="adminDefaultPropertyPrice" class="form-label"
+              >DEFAULT PRICE OF PROPERTY (EUR)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              formControlName="adminDefaultPropertyPrice"
+            />
+            <div
+              class="error-msg"
+              *ngIf="
+          adminForm.get('adminDefaultPropertyPrice').invalid &&
+          adminForm.get('adminDefaultPropertyPrice').touched || 
+          adminForm.get('adminDefaultPropertyPrice').errors?.['priceDefaultInvalid']
+          "
+            >
+              <span> Error: Invalid value </span>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="columns">
-        <div class="field-container">
-          <label for="adminContractFee" class="form-label">Contract Fee</label>
-          <input
-            type="number"
-            class="form-control"
-            formControlName="adminContractFee"
-          />
-          <div
-            *ngIf="
-              adminForm.get('adminContractFee').invalid &&
-              adminForm.get('adminContractFee').touched
-            "
-          >
-            <span class="error-msg"> Error: Invalid value </span>
+      <div class="big-column">
+        <label for="column">FEES</label>
+        <div class="column">
+          <div class="field-container">
+            <label for="adminContractFee" class="form-label"
+              >CONTRACT FEE (EUR)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              formControlName="adminContractFee"
+            />
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminContractFee').invalid &&
+                adminForm.get('adminContractFee').touched
+              "
+            >
+              <span> Error: Invalid value </span>
+            </div>
           </div>
-        </div>
-        <div class="field-container">
-          <label for="adminMonthlyBankFee" class="form-label">Bank Fee</label>
-          <input
-            type="number"
-            class="form-control"
-            formControlName="adminMonthlyBankFee"
-          />
-          <div
-            *ngIf="
-              adminForm.get('adminMonthlyBankFee').invalid &&
-              adminForm.get('adminMonthlyBankFee').touched
-            "
-          >
-            <span class="error-msg"> Error: Invalid value </span>
+          <div class="field-container">
+            <label for="adminMonthlyBankFee" class="form-label"
+              >BANK FEE (MONTHLY, EUR)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              formControlName="adminMonthlyBankFee"
+            />
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminMonthlyBankFee').invalid &&
+                adminForm.get('adminMonthlyBankFee').touched
+              "
+            >
+              <span> Error: Invalid value </span>
+            </div>
           </div>
-        </div>
-        <div class="field-container">
-          <label for="adminRegistrationFee" class="form-label"
-            >Mortgage Fee</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            formControlName="adminRegistrationFee"
-          />
-          <div
-            *ngIf="
-              adminForm.get('adminRegistrationFee').invalid &&
-              adminForm.get('adminRegistrationFee').touched
-            "
-          >
-            <span class="error-msg"> Error: Invalid value </span>
+          <div class="field-container">
+            <label for="adminRegistrationFee" class="form-label"
+              >MORTGAGE REGISTRATION FEE (EUR)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              formControlName="adminRegistrationFee"
+            />
+            <div
+              *ngIf="
+                adminForm.get('adminRegistrationFee').invalid &&
+                adminForm.get('adminRegistrationFee').touched
+              "
+            >
+              <span class="error-msg"> Error: Invalid value </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col text-center">
-        <button
-          class="btn btn-primary mx-2"
-          type="submit"
-          [disabled]="adminForm.invalid"
-        >
-          Save Changes
-        </button>
-        <button
-          class="btn btn-secondary mx-2"
-          type="button"
-          (click)="discardChanges()"
-        >
-          Discard Changes
-        </button>
-      </div>
+      <button class="btn-save" type="submit" [disabled]="adminForm.invalid">
+        <object
+          type="image/svg+xml"
+          data="/assets/save-svgrepo-com.svg"
+        ></object>
+        <span>Save Changes</span>
+      </button>
+      <button class="btn-discard" type="button" (click)="discardChanges()">
+        <object
+          type="image/svg+xml"
+          data="/assets/revert-svgrepo-com.svg"
+        ></object>
+        <span>Discard Changes</span>
+      </button>
     </div>
   </form>
 </div>
