@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        run: sudo apt-get update
-  
-      - name: Install and Setup Java
         uses: actions/checkout@v3
+        run: sudo apt-get update
+
+      - name: Install and Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
@@ -33,11 +33,11 @@ jobs:
           cd client/
           npm ci
           ng build --configuration production
-          
+
       - name: Set up JDK 17 environment variable
         run: |
           echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/" >> $GITHUB_ENV
-          
+
       - name: Deploy Spring Boot app to EC2
         uses: easingthemes/ssh-deploy@v2
         with:
