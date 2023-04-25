@@ -12,7 +12,7 @@ export class UserUiService {
   private subjectLinearOrAnnuity = new Subject<string>();
   constructor() { }
 
-  toggleLoading(state:boolean): void {
+  toggleLoading(state: boolean): void {
     this.loading = state;
     this.subject.next(this.loading);
   }

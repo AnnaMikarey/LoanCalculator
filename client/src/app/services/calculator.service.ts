@@ -12,21 +12,16 @@ const httpOptions = {
 })
 export class CalculatorService {
 
-  //private apiUrl = 'http://16.16.120.205:8080/client/';
-  private apiUrl = 'http://localhost:3000/';
+  private apiUrl = 'http://16.16.120.205:8080/client/';
+  //private apiUrl = 'http://localhost:3000/';
   constructor(private httpClient: HttpClient) { }
-
 
   getInitialData(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.apiUrl + 'get-initial-values');
   }
 
-
   postUserDataGetsCalc(userData: UserData): Observable<CalculatedValues> {
     console.error(userData)
     return this.httpClient.post<CalculatedValues>(this.apiUrl + 'calculate', userData, httpOptions)
   }
-
-
-
 }

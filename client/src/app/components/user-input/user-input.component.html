@@ -1,32 +1,32 @@
 <div class="cardcontainer">
+    <div style="color:red" *ngIf="(serverErrorMessage)">{{serverErrorMessage}}</div>
     <form [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
         <div class="mini-container">
             <label for="price-of-property">PRICE OF PROPERTY (EUR)</label>
             <br />
-           
-                <input class="flex" type="text" formControlName="propertyPrice" id="price-of-property"
-                    (input)="setPriceOfProperty($event)" maxlength={{(maxPropertyPrice.toString()).length+1}} />
+            <input class="flex" type="text" formControlName="propertyPrice" id="price-of-property"
+                (input)="setPriceOfProperty($event)" maxlength={{(maxPropertyPrice.toString()).length+1}} />
+            <ul *ngIf="propertyPrice.errors">
+                <li *ngIf="propertyPrice.errors['required']">Price of property is required</li>
+                <li *ngIf="propertyPrice.errors['min']">
+                    Price of property must be at least {{minPropertyPrice}} EUR
+                </li>
+                <li *ngIf="propertyPrice.errors['max']">
+                    Price of property must be less than {{maxPropertyPrice}} EUR
+                </li>
+            </ul>
 
-                <ul *ngIf="propertyPrice.errors">
-                    <li *ngIf="propertyPrice.errors['required']">Price of property is required</li>
-                    <li *ngIf="propertyPrice.errors['min']">
-                        Price of property must be at least {{minPropertyPrice}} EUR
-                    </li>
-                    <li *ngIf="propertyPrice.errors['max']">
-                        Price of property must be less than {{maxPropertyPrice}} EUR
-                    </li>
-                </ul>
-            
-           
-                <div class="dataL">
-                    <div>{{minPropertyPrice}} EUR</div>
-                    <div>{{maxPropertyPrice}} EUR</div>
-                </div>
-                <!--  --> <div class="slider">
+
+            <div class="dataL">
+                <div>{{minPropertyPrice}} EUR</div>
+                <div>{{maxPropertyPrice}} EUR</div>
+            </div>
+            <!--  -->
+            <div class="slider">
                 <input type="range" id="price-of-property-slider" formControlName="propertyPrice"
                     min="{{minPropertyPrice}}" max="{{maxPropertyPrice}}" (input)="setPriceOfProperty($event)" />
             </div>
-        
+
         </div>
 
         <div class="mini-container">
@@ -35,18 +35,20 @@
                 <label for="depositPercent">%</label>
             </div>
             <div class="depositAndPercent">
-            <div class="initial-deposit">
-                <input type="text" formControlName="initialDeposit" id="deposit" 
-                    maxlength={{(maxPropertyPrice.toString()).length+1}} (input)="setDeposit($event)" />
+                <div class="initial-deposit">
+                    <input type="text" formControlName="initialDeposit" id="deposit"
+                        maxlength={{(maxPropertyPrice.toString()).length+1}} (input)="setDeposit($event)" />
 
-            </div>
-            <div class="percent">
+                </div>
+                <div class="percent">
 
-               <span class="updown"><button class="updownbutton" (mousedown)="depositPercentPlus()" (mouseup)="onSubmit()"></button>
-                <button class="updownbutton" (mousedown)="depositPercentMinus()" (mouseup)="onSubmit()"></button>
-            </span>
-                <input type="text" formControlName="depositPercent" id="deposit-percent" 
-                    [maxLength]="depositPercentMaxLength" (input)="setDepositPercent($event)" />
+                    <span class="updown"><button class="updownbutton" (mousedown)="depositPercentPlus()"
+                            (mouseup)="onSubmit()"></button>
+                        <button class="updownbutton" (mousedown)="depositPercentMinus()"
+                            (mouseup)="onSubmit()"></button>
+                    </span>
+                    <input type="text" formControlName="depositPercent" id="deposit-percent"
+                        [maxLength]="depositPercentMaxLength" (input)="setDepositPercent($event)" />
                 </div>
             </div>
             <ul *ngIf="!propertyPrice.errors&&initialDeposit.errors">
@@ -62,7 +64,7 @@
             <label for="mortgage-period">MORTGAGE PERIOD (YEARS)</label>
             <br />
             <div class="flex">
-                
+
                 <input type="text" formControlName="mortgagePeriod" id="mortgage-period"
                     (input)="checkIfNotNumber($event)" maxlength="3" />
 
@@ -76,17 +78,19 @@
                         Mortgage period must be lower or equal to {{maxMortgagePeriod}}</li>
                 </ul>
             </div>
-            
+
             <div class="dataL">
                 <div>{{minMortgagePeriod}} YEAR</div>
                 <div>{{maxMortgagePeriod}} YEARS</div>
             </div>
             <div class="slider">
-            <input type="range" id="mortgage-period-slider" formControlName="mortgagePeriod" min="{{minMortgagePeriod}}"
-                max="{{maxMortgagePeriod}}" (input)="checkIfNotNumber($event)" maxlength="10" />
+                <input type="range" id="mortgage-period-slider" formControlName="mortgagePeriod"
+                    min="{{minMortgagePeriod}}" max="{{maxMortgagePeriod}}" (input)="checkIfNotNumber($event)"
+                    maxlength="10" />
+            </div>
         </div>
-    </div>
-        <div class="mini-container">
+        <!-- turned off linear-annuity-->
+        <div style="display:none" class="mini-container">
             <label for="annuity-linear">MORTGAGE TYPE</label>
             <br />
             <div class=" linear-annuity">

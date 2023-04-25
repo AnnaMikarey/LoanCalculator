@@ -28,6 +28,8 @@ export class UserInputComponent implements OnInit {
  @Input() defaultSalary!: number;
  @Input() defaultFinancialObligation!: number;
 
+ @Input() serverErrorMessage: string;
+
 
  minMortgagePeriod: number = 1;
  maxMortgagePeriod: number = 30;
