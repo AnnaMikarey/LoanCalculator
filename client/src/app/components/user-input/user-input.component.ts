@@ -56,7 +56,7 @@ export class UserInputComponent implements OnInit {
      { updateOn: 'change' },
    );
    this.postForm.get('propertyPrice').valueChanges.subscribe(value => {
-     this.postForm.controls['initialDeposit'].setValue((value || 0) * (this.postForm.get('depositPercent').value) / 100);
+     this.postForm.controls['initialDeposit'].setValue(Math.ceil((value || 0) * (this.postForm.get('depositPercent').value) / 100));
      this.resetDepositMinMax();
    })
    this.resetDepositMinMax();
@@ -88,7 +88,7 @@ export class UserInputComponent implements OnInit {
 
  resetDepositMinMax() {
    this.maxDeposit = this.postForm.get('propertyPrice').value;
-   this.minDeposit = this.postForm.get('propertyPrice').value * this.minDepositPercent / 100;
+   this.minDeposit = Math.ceil(this.postForm.get('propertyPrice').value * this.minDepositPercent / 100);
  }
 
 
@@ -100,6 +100,7 @@ export class UserInputComponent implements OnInit {
      event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
    }
    this.postForm.controls['propertyPrice'].setValue(Math.abs(parseInt(event.target.value)) || "");
+   
  }
 
 
@@ -107,7 +108,7 @@ export class UserInputComponent implements OnInit {
    if (/[^0-9]/.test(event.target.value)) {
      event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
    }
-   this.postForm.controls['initialDeposit'].setValue(Math.abs(parseInt(event.target.value)) || 0);
+   this.postForm.controls['initialDeposit'].setValue(Math.ceil(Math.abs(parseInt(event.target.value))) || 0);
    this.postForm.controls['depositPercent'].setValue(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('propertyPrice').value);
  }
 
@@ -128,7 +129,7 @@ export class UserInputComponent implements OnInit {
 
 
  changeDeposit() {
-   this.postForm.controls['initialDeposit'].setValue(Math.round((this.postForm.get('propertyPrice').value) * (this.postForm.get('depositPercent').value) / 100));
+   this.postForm.controls['initialDeposit'].setValue(Math.ceil((this.postForm.get('propertyPrice').value) * (this.postForm.get('depositPercent').value) / 100));
  }
 
 
@@ -230,6 +231,7 @@ export class UserInputComponent implements OnInit {
 
 
      }
+     
      this.changeDeposit();
    }
    //todo change this
@@ -245,6 +247,5 @@ export class UserInputComponent implements OnInit {
    //this.onUserInput.emit(this.postForm.value as UserData);
  }
 }
-
 
 
