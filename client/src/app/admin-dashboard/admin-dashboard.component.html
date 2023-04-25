@@ -1,16 +1,17 @@
-<div class="container card m-5">
-  <h2>Calculator Values</h2>
-  <form [formGroup]="adminForm" (ngSubmit)="saveChanges()" class="row g-3 mt-5">
+<div class="container">
+  <form [formGroup]="adminForm" (ngSubmit)="saveChanges()" class="form">
     <div class="row">
-      <div class="col-md-4">
-        <div class="mb-3">
+      <div class="columns">
+        <div class="field-container">
           <label for="adminEuriborRate" class="form-label">Euribor</label>
           <input
-          type="number"
-          class="form-control"
-          formControlName="adminEuriborRate"
+            type="number"
+            class="form-control"
+            formControlName="adminEuriborRate"
           />
-          <span class="euribor-date">Last updated on {{ adminEuriborDate }}</span>
+          <span class="euribor-date"
+            >Last updated on {{ adminEuriborDate }}</span
+          >
           <div
             *ngIf="
               adminForm.get('adminEuriborRate').invalid &&
@@ -20,7 +21,8 @@
             <span class="error-msg"> Error: Could not fetch the value </span>
           </div>
         </div>
-        <div class="mb-3">
+
+        <div class="field-container">
           <label for="adminBankMargin" class="form-label">Bank Margin</label>
           <input
             type="number"
@@ -38,7 +40,7 @@
             </span>
           </div>
         </div>
-        <div class="mb-3">
+        <div class="field-container">
           <label for="adminMinDepositPercent" class="form-label"
             >Min Deposit</label
           >
@@ -60,8 +62,8 @@
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="mb-3">
+      <div class="columns">
+        <div class="field-container">
           <label for="adminMinPropertyPrice" class="form-label"
             >Price Min</label
           >
@@ -80,7 +82,7 @@
             <span class="error-msg"> Error: Invalid value </span>
           </div>
         </div>
-        <div class="mb-3">
+        <div class="field-container">
           <label for="adminMaxPropertyPrice" class="form-label"
             >Price Max</label
           >
@@ -99,7 +101,7 @@
             <span class="error-msg"> Error: Invalid value </span>
           </div>
         </div>
-        <div class="mb-3">
+        <div class="field-container">
           <label for="adminDefaultPropertyPrice" class="form-label"
             >Price Default</label
           >
@@ -120,8 +122,8 @@
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="mb-3">
+      <div class="columns">
+        <div class="field-container">
           <label for="adminContractFee" class="form-label">Contract Fee</label>
           <input
             type="number"
@@ -137,7 +139,7 @@
             <span class="error-msg"> Error: Invalid value </span>
           </div>
         </div>
-        <div class="mb-3">
+        <div class="field-container">
           <label for="adminMonthlyBankFee" class="form-label">Bank Fee</label>
           <input
             type="number"
@@ -153,7 +155,7 @@
             <span class="error-msg"> Error: Invalid value </span>
           </div>
         </div>
-        <div class="mb-3">
+        <div class="field-container">
           <label for="adminRegistrationFee" class="form-label"
             >Mortgage Fee</label
           >

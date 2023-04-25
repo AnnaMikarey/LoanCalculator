@@ -1,9 +1,27 @@
-.card {
-  padding: 15px;
+* {
+  font-family: "JetBrains Mono";
 }
-.form-control:focus {
-  border: 2px solid teal;
-  box-shadow: none;
+
+.container {
+  height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 200px;
+}
+.field-container {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  margin: 0 auto;
+  gap: 40px;
+  display: flex;
+  flex-direction: row;
 }
 
 input.ng-invalid.ng-touched {
@@ -11,7 +29,7 @@ input.ng-invalid.ng-touched {
 }
 
 .mb-3 {
-  height: 100px;
+  height: 60px;
 }
 
 .error-msg {
