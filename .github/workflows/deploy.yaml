@@ -17,13 +17,13 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-    steps:
-      - name: Install and Setup Node
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 19
-          cache: 'npm'
+    # steps:
+    #   - name: Install and Setup Node
+    #   - uses: actions/checkout@v3
+    #   - uses: actions/setup-node@v3
+    #     with:
+    #       node-version: 19
+    #       cache: 'npm'
 
     steps:
       - name: Install dependencies
