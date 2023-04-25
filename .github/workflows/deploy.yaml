@@ -9,8 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        uses: actions/checkout@v3
         run: sudo apt-get update
+
+      - name: Checkout to github
+        uses: actions/checkout@v3
 
       - name: Install and Setup Java
         uses: actions/setup-java@v3
