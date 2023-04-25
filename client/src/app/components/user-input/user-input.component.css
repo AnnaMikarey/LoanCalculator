@@ -3,6 +3,7 @@
   /* margin: 5px; */
   
 }
+
 input {
   border: none;
   border-radius: 5px;
@@ -19,13 +20,10 @@ input {
 
 }
 
-
-
 .mini-container{
   /* margin-bottom: 20px; */
   margin-bottom: 30px;
 }
-
 
 
 .dataL {

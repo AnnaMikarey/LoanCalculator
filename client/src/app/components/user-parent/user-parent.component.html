@@ -6,19 +6,12 @@
         [defaultPropertyPrice]="data.defaultPropertyPrice" [minDepositPercent]="data.minDepositPercent"
         [defaultInitialDeposit]="data.defaultInitialDeposit" [defaultMortgagePeriod]="data.defaultMortgagePeriod"
         [defaultSalary]="data.defaultSalary" [defaultFinancialObligation]="data.defaultFinancialObligation"
-        (onUserInput)="postUserData($event)"
-        [serverErrorMessage]="serverErrorMessage"></app-user-input>
-    
+        (onUserInput)="postUserData($event)" [serverErrorMessage]="serverErrorMessage"></app-user-input>
+
     <app-user-output class="box b" [monthlyPaymentError]="monthlyPaymentError" [euriborRate]="euriborRate"
-    [euriborDate]="euriborDate"
-  [bankInterestRate]="bankInterestRate"
-  [annualInterestRate]="annualInterestRate"
-  [contractFee]="contractFee"
-  [registrationFee]="registrationFee"
-  [monthlyBankFee]="monthlyBankFee"
-  
+        [euriborDate]="euriborDate" [bankInterestRate]="bankInterestRate" [annualInterestRate]="annualInterestRate"
+        [contractFee]="contractFee" [registrationFee]="registrationFee" [monthlyBankFee]="monthlyBankFee"
         [calculations]="calculations"></app-user-output>
- 
- </div>
- <!-- </div> -->
- 
+
+</div>
+<!-- </div> -->

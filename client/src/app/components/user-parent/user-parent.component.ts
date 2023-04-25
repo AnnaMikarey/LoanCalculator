@@ -6,7 +6,6 @@ import { UserData } from '../../Types/UserData';
 import { CalculatedValues } from '../../Types/CalculatedValues';
 import { UserUiService } from 'src/app/services/user-ui.service';
 
-
 @Component({
   selector: 'app-user-parent',
   templateUrl: './user-parent.component.html',
@@ -18,10 +17,8 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
   calculations!: CalculatedValues;
   obligation!: number;
 
-
   serverError: boolean;
   serverErrorMessage: string;
-
 
   euriborRate: number
   euriborDate: string
@@ -31,18 +28,10 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
   registrationFee: number
   monthlyBankFee: number
 
-
   salary!: number;
   monthlyPaymentError!: boolean;
   //@Output() onCalculationGet: EventEmitter<Data> = new EventEmitter()
-  constructor(private calculatorService: CalculatorService, private userUiService: UserUiService) {
-
-
-  }
-
-
- 
-
+  constructor(private calculatorService: CalculatorService, private userUiService: UserUiService) {}
 
   ngOnInit(): void {
     this.subscription = this.calculatorService.getInitialData().subscribe((d) => {
@@ -55,28 +44,20 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
       this.registrationFee = d[0].registrationFee
       this.monthlyBankFee = d[0].monthlyBankFee
     });
-
-
   }
 
   postUserData(userData: UserData) {
-
     this.userUiService.toggleLoading(true);
-
     this.calculatorService.postUserDataGetsCalc(userData).subscribe((calculatedValues) => {
       this.calculations = calculatedValues;this.userUiService.toggleLoading(false);
       console.error("postUserDataGetsCalc", this.calculations);  this.serverError = false;this.serverErrorMessage =''
     },
       (error) => { console.log("error", error); this.serverError = true; this.serverErrorMessage = error.error.message })
-      
   }
-
-
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 
   checkError() {
     //"error?"
@@ -84,6 +65,3 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
     //this.monthlyPaymentError = this.calculations.monthlyPayment + this.obligation > this.salary * 40 / 100;
   }
 }
-
-
-

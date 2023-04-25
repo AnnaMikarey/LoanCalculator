@@ -28,4 +28,5 @@ export class UserUiService {
   onAnnuityLinearChange(): Observable<string> {
     return this.subjectLinearOrAnnuity.asObservable();
   }
+
 }

@@ -37,7 +37,7 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-
+//todo provide real data
     if (this.linearOrAnnuity == "linear") {
       const xAxisData = [];
       const data1 = [];
@@ -100,11 +100,11 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
               position: 'center'
             },
             data: [
-              { "value": this.chartData?.requestedLoanAmount, "name": "Requested loan amount" ,itemStyle:{color:"#DBE4EE"} },
+              { "value": this.chartData?.requestedLoanAmount, "name": "Requested loan amount", itemStyle: { color: "#DBE4EE" } },
               // { "value": this.chartData?.monthlyPayment, "name": "Monthly payment" },
-              { "value": this.monthlyBankFee, "name": "Monthly bank fee" ,itemStyle:{color:"#F17300"}},
-              { "value": this.registrationFee, "name": "Registration fee",itemStyle:{color:"#3E7CB1"} },
-              { "value": this.contractFee, "name": "Contract fee",itemStyle:{color:"#81A4CD"} },
+              { "value": this.monthlyBankFee, "name": "Monthly bank fee", itemStyle: { color: "#F17300" } },
+              { "value": this.registrationFee, "name": "Registration fee", itemStyle: { color: "#3E7CB1" } },
+              { "value": this.contractFee, "name": "Contract fee", itemStyle: { color: "#81A4CD" } },
 
             ],
             emphasis: {
