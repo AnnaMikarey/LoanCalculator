@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -10,23 +9,24 @@ import { ModalComponent } from './modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AdminDashboardComponent,
-    DisclaimerComponent,
-    ModalComponent,
-  ],
-  imports: [
-    BrowserModule,
+  declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent],
+  imports: [BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatDialogModule,
-    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [
+    DisclaimerComponent,
+    AdminDashboardComponent
+  ]
 })
 export class AppModule {}
