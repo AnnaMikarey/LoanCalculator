@@ -9,8 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        run: |
-          sudo apt-get update
+        run: sudo apt-get update
     
     steps:
       - name: Install and Setup Java
