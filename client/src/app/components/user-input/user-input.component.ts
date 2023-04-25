@@ -49,7 +49,7 @@ export class UserInputComponent implements OnInit {
        initialDeposit: [(this.defaultPropertyPrice * this.minDepositPercent / 100), [Validators.pattern(/[0-9]/), Validators.required, (control: AbstractControl) => Validators.max(this.maxDeposit)(control), (control: AbstractControl) => Validators.min(this.minDeposit)(control)]],
        depositPercent: [this.minDepositPercent, [Validators.required, Validators.min(this.minDepositPercent), Validators.max(99)]],
        mortgagePeriod: [this.defaultMortgagePeriod, [Validators.required, Validators.pattern(/[0-9]/), Validators.min(this.minMortgagePeriod), Validators.max(this.maxMortgagePeriod)]],
-       salary: [this.defaultSalary, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
+       salary: [this.defaultSalary, [Validators.pattern(/[0-9]/), Validators.min(1), Validators.required],],
        financialObligation: [this.defaultFinancialObligation, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
        annuityLinear: [this.initialAnnuityLinear, [],],
      },
@@ -108,7 +108,7 @@ export class UserInputComponent implements OnInit {
    if (/[^0-9]/.test(event.target.value)) {
      event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
    }
-   this.postForm.controls['initialDeposit'].setValue(Math.ceil(Math.abs(parseInt(event.target.value))) || 0);
+   this.postForm.controls['initialDeposit'].setValue(Math.ceil(Math.abs(parseInt(event.target.value))) || "");
    this.postForm.controls['depositPercent'].setValue(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('propertyPrice').value);
  }
 
@@ -123,7 +123,7 @@ export class UserInputComponent implements OnInit {
      event.target.value = event.target.value.split``.filter(value => /[0-9.]/.test(value)).join``;
    }
    this.depositPercentMaxLength = (event.target.value).split``.filter(value => value == ".").length == 1 ? 5 : 3;
-   this.postForm.controls['depositPercent'].setValue(parseFloat(event.target.value) || 0);
+   this.postForm.controls['depositPercent'].setValue(parseFloat(event.target.value) || "");
    this.changeDeposit();
  }
 
@@ -224,7 +224,9 @@ export class UserInputComponent implements OnInit {
            this.postForm.controls["initialDeposit"].setValue(this.minDeposit);
          } else if (event.target.getAttribute('formControlName') == "mortgagePeriod") {
            this.postForm.controls["mortgagePeriod"].setValue(this.minMortgagePeriod);
-         } else {
+         } else if (event.target.getAttribute('formControlName') == "salary") {
+          this.postForm.controls["salary"].setValue(1);
+        } else {
            this.postForm.controls[event.target.getAttribute('formControlName')].setValue(0);
          }
        }

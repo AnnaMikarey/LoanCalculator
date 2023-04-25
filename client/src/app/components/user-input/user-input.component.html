@@ -15,8 +15,6 @@
                     Price of property must be less than {{maxPropertyPrice}} EUR
                 </li>
             </ul>
-
-
             <div class="dataL">
                 <div>{{minPropertyPrice}} EUR</div>
                 <div>{{maxPropertyPrice}} EUR</div>
@@ -26,9 +24,7 @@
                 <input type="range" id="price-of-property-slider" formControlName="propertyPrice"
                     min="{{minPropertyPrice}}" max="{{maxPropertyPrice}}" (input)="setPriceOfProperty($event)" />
             </div>
-
         </div>
-
         <div class="mini-container">
             <div class="dataL">
                 <label for="deposit">INITIAL DEPOSIT (EUR)</label>
@@ -38,7 +34,6 @@
                 <div class="initial-deposit">
                     <input type="text" formControlName="initialDeposit" id="deposit"
                         maxlength={{(maxPropertyPrice.toString()).length+1}} (input)="setDeposit($event)" />
-
                 </div>
                 <div class="percent">
 
@@ -64,21 +59,18 @@
             <label for="mortgage-period">MORTGAGE PERIOD (YEARS)</label>
             <br />
             <div class="flex">
-
                 <input type="text" formControlName="mortgagePeriod" id="mortgage-period"
                     (input)="checkIfNotNumber($event)" maxlength="3" />
-
-                <ul *ngIf="mortgagePeriod.errors">
-                    <li *ngIf="mortgagePeriod.errors['required']">
-                        Mortgage period is required</li>
-                    <li *ngIf="mortgagePeriod.errors['min']">
-                        Mortgage period must be higher or equal to {{minMortgagePeriod}}
-                    </li>
-                    <li *ngIf="mortgagePeriod.errors['max']">
-                        Mortgage period must be lower or equal to {{maxMortgagePeriod}}</li>
-                </ul>
             </div>
-
+            <ul *ngIf="mortgagePeriod.errors">
+                <li *ngIf="mortgagePeriod.errors['required']">
+                    Mortgage period is required</li>
+                <li *ngIf="mortgagePeriod.errors['min']">
+                    Mortgage period must be higher or equal to {{minMortgagePeriod}}
+                </li>
+                <li *ngIf="mortgagePeriod.errors['max']">
+                    Mortgage period must be lower or equal to {{maxMortgagePeriod}}</li>
+            </ul>
             <div class="dataL">
                 <div>{{minMortgagePeriod}} YEAR</div>
                 <div>{{maxMortgagePeriod}} YEARS</div>
@@ -105,14 +97,14 @@
             <div class="flex">
                 <input type="text" formControlName="salary" id="salary" maxlength="10"
                     (input)="checkIfNotNumber($event)" />
-                <ul *ngIf="salary.errors">
-                    <li *ngIf="salary.errors['required']">
-                        Salary is required</li>
-                    <li *ngIf="salary.errors['min']">
-                        Salary must be higher or equal to 0
-                    </li>
-                </ul>
             </div>
+            <ul *ngIf="salary.errors">
+                <li *ngIf="salary.errors['required']">
+                    Salary is required</li>
+                <li *ngIf="salary.errors['min']">
+                    Salary must be higher or equal to 0
+                </li>
+            </ul>
         </div>
         <div class="mini-container">
             <label for="financial-obligation">FINANCIAL OBLIGATION (EUR)</label>
@@ -120,14 +112,14 @@
             <div class="flex">
                 <input type="text" formControlName="financialObligation" id="financial-obligation"
                     (input)="checkIfNotNumber($event)" maxlength="10" />
-                <ul *ngIf="financialObligation.errors">
-                    <li *ngIf="financialObligation.errors['required']">
-                        Financial obligations is required</li>
-                    <li *ngIf="financialObligation.errors['min']">
-                        Financial obligations must be higher or equal to 0
-                    </li>
-                </ul>
             </div>
+            <ul *ngIf="financialObligation.errors">
+                <li *ngIf="financialObligation.errors['required']">
+                    Financial obligations is required</li>
+                <li *ngIf="financialObligation.errors['min']">
+                    Financial obligations must be higher or equal to 0
+                </li>
+            </ul>
         </div>
     </form>
 </div>
