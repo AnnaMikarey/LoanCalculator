@@ -1,25 +1,35 @@
 package com.server.loan.calculator.service;
 
+import com.server.loan.calculator.exception.DataNotFoundException;
 import com.server.loan.calculator.model.AdminData;
-import com.server.loan.calculator.validator.AdminDataValidator;
+import com.server.loan.calculator.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
 public class AdminService {
+    private final AdminRepository adminRepository;
 
-    private final AdminDataValidator adminDataValidator;
-
-    public void addToDatabase (AdminData adminData) {
-        adminDataValidator.validateAdminInput(adminData);
+    public void addToDatabase (AdminData newAdminData) {
+        AdminData databaseData = adminRepository.findById(1)
+                .orElseThrow(() -> new DataNotFoundException("Data not found in database"));
+        databaseData.setAdminEuriborDate(newAdminData.getAdminEuriborDate());
+        databaseData.setAdminEuriborRate(newAdminData.getAdminEuriborRate());
+        databaseData.setAdminBankMargin(newAdminData.getAdminBankMargin());
+        databaseData.setAdminContractFee(newAdminData.getAdminContractFee());
+        databaseData.setAdminRegistrationFee(newAdminData.getAdminRegistrationFee());
+        databaseData.setAdminMonthlyBankFee(newAdminData.getAdminMonthlyBankFee());
+        databaseData.setAdminMinPropertyPrice(newAdminData.getAdminMinPropertyPrice());
+        databaseData.setAdminMaxPropertyPrice(newAdminData.getAdminMaxPropertyPrice());
+        databaseData.setAdminDefaultPropertyPrice(newAdminData.getAdminDefaultPropertyPrice());
+        databaseData.setAdminMinDepositPercent(newAdminData.getAdminMinDepositPercent());
+        adminRepository.save(databaseData);
     }
 
     public AdminData fetchFromDatabase () {
-        return new AdminData("2023-04-17", new BigDecimal("3.31"), new BigDecimal("1.99"), new BigDecimal("500"),
-                new BigDecimal("10"), new BigDecimal("50"), new BigDecimal("20000"), new BigDecimal("500000"),
-                new BigDecimal("35000"), new BigDecimal("15"));
+        return adminRepository.findById(1)
+                .orElseThrow(() -> new DataNotFoundException("Data not found in database"));
     }
 }
+
