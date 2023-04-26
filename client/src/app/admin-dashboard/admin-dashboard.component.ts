@@ -39,11 +39,7 @@ export class AdminDashboardComponent implements OnInit {
     Validators.pattern(/^\d+\.?\d*$/),
     checkIfLessThanZero,
   ];
-  validatorsPercent = [
-    ...this.validatorsNum,
-    Validators.max(100),
-    checkIfLessThanZero,
-  ];
+  validatorsPercent = [...this.validatorsNum, Validators.max(100)];
 
   ngOnInit() {
     this.adminForm = new FormGroup({
