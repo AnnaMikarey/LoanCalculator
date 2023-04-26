@@ -12,6 +12,7 @@ const appRoutes: Routes = [
   { path: '', component: UserParentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminLayoutComponent },
+  { path: '**', component: UserParentComponent },
 ];
 
 @NgModule({
