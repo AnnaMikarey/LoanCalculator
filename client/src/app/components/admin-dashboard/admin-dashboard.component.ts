@@ -9,7 +9,6 @@ import {
 import { AdminService } from '../../services/admin.service';
 import { EuriborService } from '../../services/euribor.service';
 import { forkJoin, take } from 'rxjs';
-// import { CurrencyPipe } from '@angular/common';
 
 export function checkIfLessThanZero(
   control: AbstractControl

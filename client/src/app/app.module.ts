@@ -11,7 +11,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CurrencyPipe } from '@angular/common';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 
@@ -32,7 +31,7 @@ import { AdminHeaderComponent } from './components/admin-header/admin-header.com
     MatButtonModule,
     MatDialogModule,
   ],
-  providers: [CurrencyPipe],
+  providers: [],
   bootstrap: [AppComponent],
   exports: [DisclaimerComponent, AdminDashboardComponent],
 })
