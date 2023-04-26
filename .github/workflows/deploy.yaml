@@ -44,7 +44,8 @@ jobs:
           TARGET: ./server/loanCalculator-0.0.1-SNAPSHOT.jar
           SCRIPT_AFTER: |
             cd ./server
-            nohup java -jar loanCalculator-0.0.1-SNAPSHOT.jar &
+            sudo killall java
+            nohup java -jar loanCalculator-0.0.1-SNAPSHOT.jar > nohup.out 2> nohup.err < /dev/null &
 
       - name: Deploy Angular app to EC2
         uses: easingthemes/ssh-deploy@main
@@ -54,7 +55,16 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           SOURCE: ./client/dist/loan-calculator
           TARGET: ./client/loan-calculator
-          SCRIPT_AFTER: |
+
+
+      - name: Run PM2 for angular app
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ./client/loan-calculator
+          SCRIPT_BEFORE: |
             cd ./client/loan-calculator
-            pm2 stop
-            pm2 serve loan-calculator/ 4200 --spa
+            pm2 delete all
+            pm2 serve loan-calculator/ 8081 --watch -i max
