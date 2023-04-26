@@ -55,6 +55,7 @@ jobs:
           SOURCE: ./client/dist/loan-calculator
           TARGET: ./client/loan-calculator
 
+
       - name: Run PM2 for angular app
         uses: easingthemes/ssh-deploy@main
         with:
@@ -65,3 +66,4 @@ jobs:
           SCRIPT_BEFORE: |
             cd ./client/loan-calculator
             pm2 start loan-calculator/ --watch -i max
+

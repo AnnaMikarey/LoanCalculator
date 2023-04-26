@@ -1,0 +1,17 @@
+<!-- <div class="centered centered-parent"></div> -->
+<div class="container" *ngIf="data">
+    <!-- (onUserInput)="postUserData($event)" -->
+    <!-- <p style="color:red" *ngIf="serverError">ERROR: {{serverErrorMessage}}</p> -->
+    <app-user-input class="box a" [minPropertyPrice]="data.minPropertyPrice" [maxPropertyPrice]="data.maxPropertyPrice"
+        [defaultPropertyPrice]="data.defaultPropertyPrice" [minDepositPercent]="data.minDepositPercent"
+        [defaultInitialDeposit]="data.defaultInitialDeposit" [defaultMortgagePeriod]="data.defaultMortgagePeriod"
+        [defaultSalary]="data.defaultSalary" [defaultFinancialObligation]="data.defaultFinancialObligation"
+        (onUserInput)="postUserData($event)" [serverErrorMessage]="serverErrorMessage"></app-user-input>
+
+    <app-user-output class="box b" [monthlyPaymentError]="monthlyPaymentError" [euriborRate]="euriborRate"
+        [euriborDate]="euriborDate" [bankInterestRate]="bankInterestRate" [annualInterestRate]="annualInterestRate"
+        [contractFee]="contractFee" [registrationFee]="registrationFee" [monthlyBankFee]="monthlyBankFee"
+        [calculations]="calculations"></app-user-output>
+
+</div>
+<!-- </div> -->
