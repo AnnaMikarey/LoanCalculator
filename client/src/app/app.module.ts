@@ -20,7 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent, AppComponent, UserParentComponent, UserInputComponent, UserOutputComponent, GraphAndChartComponent],
+  declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent, UserParentComponent, UserInputComponent, UserOutputComponent, GraphAndChartComponent],
   imports: [BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -28,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatButtonModule,
     MatDialogModule,
-    , NgxEchartsModule.forRoot({
+     NgxEchartsModule.forRoot({
     /**
      * This will import all modules from echarts.
      * If you only need custom modules,
