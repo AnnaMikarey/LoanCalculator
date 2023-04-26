@@ -119,9 +119,13 @@
               >DEFAULT PRICE OF PROPERTY (EUR)</label
             >
             <input
-              type="number"
+              type="text"
               class="form-control"
               formControlName="adminDefaultPropertyPrice"
+              [value]="
+                adminForm.get('adminDefaultPropertyPrice').value
+                  | number : '1.2-2'
+              "
             />
             <div
               class="error-msg"

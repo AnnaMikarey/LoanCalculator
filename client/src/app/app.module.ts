@@ -11,10 +11,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CurrencyPipe } from '@angular/common';
+import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 
 @NgModule({
-  declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent],
-  imports: [BrowserModule,
+  declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent, AdminLayoutComponent],
+  imports: [
+    BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -22,11 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [CurrencyPipe],
   bootstrap: [AppComponent],
-  exports: [
-    DisclaimerComponent,
-    AdminDashboardComponent
-  ]
+  exports: [DisclaimerComponent, AdminDashboardComponent],
 })
 export class AppModule {}

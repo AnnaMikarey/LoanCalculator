@@ -9,6 +9,7 @@ import {
 import { AdminService } from '../services/admin.service';
 import { EuriborService } from '../services/euribor.service';
 import { forkJoin, take } from 'rxjs';
+// import { CurrencyPipe } from '@angular/common';
 
 export function checkIfLessThanZero(
   control: AbstractControl
@@ -28,7 +29,7 @@ export function checkIfLessThanZero(
 export class AdminDashboardComponent implements OnInit {
   constructor(
     private adminService: AdminService,
-    private euriborService: EuriborService
+    private euriborService: EuriborService // private currencyPipe: CurrencyPipe
   ) {}
 
   adminForm: FormGroup;
@@ -73,6 +74,7 @@ export class AdminDashboardComponent implements OnInit {
   saveChanges() {
     this.adminForm.value['adminEuriborDate'] = this.adminEuriborDate;
     this.adminService.postData(this.adminForm.value).pipe(take(1)).subscribe();
+    console.log(this.adminForm.value);
   }
 
   discardChanges() {
