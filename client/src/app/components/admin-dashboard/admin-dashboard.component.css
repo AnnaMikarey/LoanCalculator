@@ -108,3 +108,15 @@ object {
   display: flex;
   justify-content: flex-start;
 }
+
+.modified-field {
+  border: 5px solid #ffbf00;
+}
+
+.saveButton-ok {
+  background-color: #c7f9cc;
+}
+
+.button-discard {
+  background-color: #fdffb6;
+}
