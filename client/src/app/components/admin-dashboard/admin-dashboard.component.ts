@@ -28,7 +28,7 @@ export function checkIfLessThanZero(
 export class AdminDashboardComponent implements OnInit {
   constructor(
     private adminService: AdminService,
-    private euriborService: EuriborService // private currencyPipe: CurrencyPipe
+    private euriborService: EuriborService
   ) {}
 
   adminForm: FormGroup;
