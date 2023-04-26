@@ -18,12 +18,10 @@ export class UserInputComponent implements OnInit {
   @Input() minPropertyPrice!: number;
   @Input() defaultPropertyPrice!: number;
   @Input() minDepositPercent!: number;
-
   @Input() defaultInitialDeposit!: number;
   @Input() defaultMortgagePeriod!: number;
   @Input() defaultSalary!: number;
   @Input() defaultFinancialObligation!: number;
-
   @Input() serverErrorMessage: string;
 
   minMortgagePeriod: number = 1;
@@ -105,7 +103,7 @@ export class UserInputComponent implements OnInit {
     this.postForm.controls['annuityLinear'].setValue(this.postForm.get('annuityLinear').value == "annuity" ? "linear" : "annuity");
   }
 
-  setDepositPercent(event: any) {console.error(event.target.value)
+  setDepositPercent(event: any) {
     if (/[^0-9.]/.test(event.target.value) || (event.target.value).split``.filter(value => value == ".").length > 1) {
       event.target.value = event.target.value.split``.filter(value => /[0-9.]/.test(value)).join``;
     }
@@ -118,7 +116,6 @@ export class UserInputComponent implements OnInit {
     this.postForm.controls['initialDeposit'].setValue(Math.ceil((this.postForm.get('propertyPrice').value) * (this.postForm.get('depositPercent').value) / 100));
   }
 
-  //not needed for now
   // onFocus(event: any) {
   //   event.target.value = parseFloat(event.target.value.split` `.join``)
   // }
@@ -157,7 +154,6 @@ export class UserInputComponent implements OnInit {
     clearInterval(this.counter)
 
     if (!this.postForm.valid) {
-
       if (!event) {
 
         if (this.postForm.controls["depositPercent"].errors['min']) {
@@ -171,7 +167,6 @@ export class UserInputComponent implements OnInit {
       } else {
 
         const alteredField = this.postForm.controls[event.target.getAttribute('formControlName')].errors;
-
         if (alteredField['max']) {
 
           if (event.target.getAttribute('formControlName') == "depositPercent" || event.target.getAttribute('formControlName') == "deposit") {
@@ -180,7 +175,6 @@ export class UserInputComponent implements OnInit {
             this.postForm.controls[event.target.getAttribute('formControlName')].setValue(alteredField['max'].max);
           }
           this.resetDepositMinMax();
-
           if (event.target.getAttribute('formControlName') == "initialDeposit") {
             this.postForm.controls["depositPercent"].setValue(99);
           }
@@ -202,7 +196,6 @@ export class UserInputComponent implements OnInit {
             this.postForm.controls[event.target.getAttribute('formControlName')].setValue(0);
           }
         }
-
       }
 
       this.changeDeposit();
@@ -220,5 +213,3 @@ export class UserInputComponent implements OnInit {
     //this.onUserInput.emit(this.postForm.value as UserData);
   }
 }
-
-

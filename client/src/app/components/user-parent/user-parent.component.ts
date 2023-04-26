@@ -16,10 +16,8 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
   data!: InitialData;
   calculations!: CalculatedValues;
   obligation!: number;
-
   serverError: boolean;
   serverErrorMessage: string;
-
   euriborRate: number
   euriborDate: string
   bankInterestRate: number
@@ -27,11 +25,10 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
   contractFee: number
   registrationFee: number
   monthlyBankFee: number
-
   salary!: number;
   monthlyPaymentError!: boolean;
   //@Output() onCalculationGet: EventEmitter<Data> = new EventEmitter()
-  constructor(private calculatorService: CalculatorService, private userUiService: UserUiService) {}
+  constructor(private calculatorService: CalculatorService, private userUiService: UserUiService) { }
 
   ngOnInit(): void {
     this.subscription = this.calculatorService.getInitialData().subscribe((d) => {
@@ -49,19 +46,24 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
   postUserData(userData: UserData) {
     this.userUiService.toggleLoading(true);
     this.calculatorService.postUserDataGetsCalc(userData).subscribe((calculatedValues) => {
-      this.calculations = calculatedValues;this.userUiService.toggleLoading(false);
-        this.serverError = false;this.serverErrorMessage =''
+      this.calculations = calculatedValues;
+      this.userUiService.toggleLoading(false);
+      this.serverError = false;
+      this.serverErrorMessage = ''
     },
-      (error) => { this.serverError = true; this.serverErrorMessage = error.error.message })
+      (error) => {
+        this.serverError = true;
+        this.serverErrorMessage = error.error.message
+      })
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  checkError() {
-    //"error?"
-    //console.log("checkerorr"+this.calculations.monthlyPayment+this.obligation,this.salary*40/100)
-    //this.monthlyPaymentError = this.calculations.monthlyPayment + this.obligation > this.salary * 40 / 100;
-  }
+  //checkError() {
+  //"error?"
+  //console.log("checkerorr"+this.calculations.monthlyPayment+this.obligation,this.salary*40/100)
+  //this.monthlyPaymentError = this.calculations.monthlyPayment + this.obligation > this.salary * 40 / 100;
+  //}
 }

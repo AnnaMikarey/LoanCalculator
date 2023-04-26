@@ -19,6 +19,10 @@ input.ng-invalid.ng-touched {
   font-size: 12px;
 }
 
+.euribor-date {
+  font-size: 12px;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

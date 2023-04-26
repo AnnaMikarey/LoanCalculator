@@ -1,5 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
+import { AdminService } from '../services/admin.service';
+import { EuriborService } from '../services/euribor.service';
+import { forkJoin, take } from 'rxjs';
+
+export function checkIfLessThanZero(
+  control: AbstractControl
+): ValidationErrors | null {
+  const value = control.value;
+  if (value !== null && value <= 0) {
+    return { lessThanZeroError: true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,39 +26,54 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
-  adminForm: FormGroup;
+  constructor(
+    private adminService: AdminService,
+    private euriborService: EuriborService
+  ) {}
 
+  adminForm: FormGroup;
   adminEuriborDate!: string;
 
-  validatorsNum = [Validators.required, Validators.pattern(/^\d+\.?\d*$/)];
-  validatorsPercent = [
-    ...this.validatorsNum,
-    Validators.min(0),
-    Validators.max(100),
+  validatorsNum = [
+    Validators.required,
+    Validators.pattern(/^\d+\.?\d*$/),
+    checkIfLessThanZero,
   ];
+
+  validatorsPercent = [...this.validatorsNum, Validators.max(100)];
 
   ngOnInit() {
     this.adminForm = new FormGroup({
-      adminEuriborRate: new FormControl(3.6, this.validatorsPercent),
-      adminBankMargin: new FormControl(2.5, this.validatorsPercent),
-      adminMinPropertyPrice: new FormControl(20000, this.validatorsNum),
-      adminMaxPropertyPrice: new FormControl(800000, this.validatorsNum),
-      adminDefaultPropertyPrice: new FormControl(250000, this.validatorsNum),
-      adminMinDepositPercent: new FormControl(20, this.validatorsPercent),
-      adminContractFee: new FormControl(350, this.validatorsNum),
-      adminMonthlyBankFee: new FormControl(25, this.validatorsNum),
-      adminRegistrationFee: new FormControl(250, this.validatorsNum),
+      adminEuriborRate: new FormControl(null, this.validatorsPercent),
+      adminBankMargin: new FormControl(null, this.validatorsPercent),
+      adminMinPropertyPrice: new FormControl(null, this.validatorsNum),
+      adminMaxPropertyPrice: new FormControl(null, this.validatorsNum),
+      adminDefaultPropertyPrice: new FormControl(null, this.validatorsNum),
+      adminMinDepositPercent: new FormControl(null, this.validatorsPercent),
+      adminContractFee: new FormControl(null, this.validatorsNum),
+      adminMonthlyBankFee: new FormControl(null, this.validatorsNum),
+      adminRegistrationFee: new FormControl(null, this.validatorsNum),
     });
 
-    this.adminEuriborDate = JSON.parse(
-      String(localStorage.getItem('adminFormData'))
-    ).adminEuriborDate;
+    forkJoin({
+      adminData: this.adminService.getData(),
+      euriborData: this.euriborService.getRates(),
+    })
+      .pipe(take(1))
+      .subscribe(({ adminData, euriborData }) => {
+        this.adminForm.patchValue(adminData);
+        this.adminEuriborDate =
+          euriborData['non_central_bank_rates'][4]['last_updated'];
+        this.adminForm.patchValue({
+          adminEuriborRate:
+            euriborData['non_central_bank_rates'][4]['rate_pct'],
+        });
+      });
   }
 
   saveChanges() {
-    this.adminEuriborDate = new Date(Date.now()).toISOString().slice(0, 10);
-    this.adminForm.value.adminEuriborDate = this.adminEuriborDate;
-    localStorage.setItem('adminFormData', JSON.stringify(this.adminForm.value));
+    this.adminForm.value['adminEuriborDate'] = this.adminEuriborDate;
+    this.adminService.postData(this.adminForm.value).pipe(take(1)).subscribe();
   }
 
   discardChanges() {
@@ -52,8 +86,8 @@ export class AdminDashboardComponent implements OnInit {
 
     if (priceMin > priceMax) {
       this.adminForm.patchValue({
-        priceMin: priceMax,
-        priceMax: priceMin,
+        adminMinPropertyPrice: priceMax,
+        adminMaxPropertyPrice: priceMin,
       });
     }
   }

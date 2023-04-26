@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { CalculatedValues } from '../../Types/CalculatedValues';
 import { Observable, Observer } from 'rxjs';
 
-
 @Component({
   selector: 'app-user-output',
   templateUrl: './user-output.component.html',
@@ -49,14 +48,14 @@ export class UserOutputComponent implements OnChanges {
     let days = ~~(hours / 24)
     hours = hours - days * 24
 
-    return `time left: ${days} days ${hours}:${minutes}:${secs}`
+    return `time left: ${days} days ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`
 
   }
 
   time = new Observable<string>((observer: Observer<string>) => {
     setInterval(() => observer.next(this.fun(new Date("2024-07-12").getTime() - new Date().getTime())), 1000);//new Date(2024,6,12)
   });
+  // ngOnDestroy() {
+  //   this.time;
+  // }
 }
-
-
-
