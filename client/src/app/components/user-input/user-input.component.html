@@ -1,5 +1,4 @@
 <div class="cardcontainer">
-    <!-- this doesnt work as intended -->
     <ul *ngIf="(serverErrorMessage)"><li>{{serverErrorMessage}}</li></ul>  
     <form style="margin-top: 20px;" [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
         <div class="mini-container">
