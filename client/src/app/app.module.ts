@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { UserParentComponent } from './components/user-parent/user-parent.component';
@@ -18,31 +18,36 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
+import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 
 @NgModule({
-  declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent, UserParentComponent, UserInputComponent, UserOutputComponent, GraphAndChartComponent],
-  imports: [BrowserModule,
+  declarations: [
+    AdminDashboardComponent,
+    DisclaimerComponent,
+    ModalComponent,
+    AdminLayoutComponent,
+    AdminHeaderComponent,
+    UserParentComponent,
+    UserInputComponent,
+    UserOutputComponent,
+    GraphAndChartComponent,
+  ],
+  imports: [
+    BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatDialogModule,
-     NgxEchartsModule.forRoot({
-    /**
-     * This will import all modules from echarts.
-     * If you only need custom modules,
-     * please refer to [Custom Build] section.
-     */
-    echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
-  })],
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
+  ],
 
   providers: [],
   bootstrap: [AppComponent],
-  exports: [
-    DisclaimerComponent,
-    AdminDashboardComponent
-  ]
+  exports: [DisclaimerComponent, AdminDashboardComponent],
 })
-
 export class AppModule {}

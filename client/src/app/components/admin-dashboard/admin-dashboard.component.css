@@ -1,0 +1,110 @@
+* {
+  font-family: "JetBrains Mono";
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  max-width: 1526px;
+  min-width: 1400px;
+  height: 670px;
+  margin: auto;
+  justify-content: center;
+  background-color: #054a91;
+  border-radius: 10px;
+}
+
+.field-container {
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  margin: 0 auto;
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+}
+.upper {
+  margin-bottom: 40px;
+}
+
+.column {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 50px 30px 30px 50px;
+  margin-top: 10px;
+}
+.big-column {
+  margin-top: 54px;
+}
+label {
+  font-size: 18px;
+  color: #f5f5f5;
+  line-height: 1.3rem;
+  width: 300px;
+  margin-bottom: 10px;
+}
+input.ng-invalid.ng-touched {
+  border: 1px solid #e71d36;
+}
+
+.error-msg {
+  color: #e71d36;
+  font-size: 13px;
+  width: 270px;
+}
+
+.euribor-date {
+  font-size: 14px;
+  color: #f5f5f5;
+  line-height: 1.5rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input {
+  width: 270px;
+  appearance: textfield;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+button {
+  display: flex;
+  gap: 5px;
+  width: 325px;
+  height: 50px;
+  background-color: #f5f5f5;
+  color: #054a91;
+  border-radius: 10px;
+  font-size: 19px;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #81a4cd;
+}
+button:disabled {
+  background-color: #e71d36;
+  cursor: auto;
+}
+object {
+  width: 35px;
+  height: 35px;
+  font-weight: bolder;
+}
+.svg-container {
+  width: 60px;
+  display: flex;
+  justify-content: flex-start;
+}

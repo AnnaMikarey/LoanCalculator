@@ -6,8 +6,8 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
-import { AdminService } from '../services/admin.service';
-import { EuriborService } from '../services/euribor.service';
+import { AdminService } from '../../services/admin.service';
+import { EuriborService } from '../../services/euribor.service';
 import { forkJoin, take } from 'rxjs';
 
 export function checkIfLessThanZero(
@@ -39,7 +39,6 @@ export class AdminDashboardComponent implements OnInit {
     Validators.pattern(/^\d+\.?\d*$/),
     checkIfLessThanZero,
   ];
-
   validatorsPercent = [...this.validatorsNum, Validators.max(100)];
 
   ngOnInit() {
