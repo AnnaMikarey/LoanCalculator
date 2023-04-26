@@ -6,6 +6,7 @@
 .container {
   display: flex;
   max-width: 1526px;
+  min-width: 1400px;
   height: 670px;
   margin: auto;
   justify-content: center;

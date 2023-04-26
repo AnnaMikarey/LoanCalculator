@@ -6,8 +6,8 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
-import { AdminService } from '../services/admin.service';
-import { EuriborService } from '../services/euribor.service';
+import { AdminService } from '../../services/admin.service';
+import { EuriborService } from '../../services/euribor.service';
 import { forkJoin, take } from 'rxjs';
 // import { CurrencyPipe } from '@angular/common';
 

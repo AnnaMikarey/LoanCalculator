@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 import { ModalComponent } from './modal/modal.component';
@@ -13,9 +13,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CurrencyPipe } from '@angular/common';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
+import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 
 @NgModule({
-  declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent, AdminLayoutComponent],
+  declarations: [
+    AdminDashboardComponent,
+    DisclaimerComponent,
+    ModalComponent,
+    AdminLayoutComponent,
+    AdminHeaderComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
