@@ -44,6 +44,7 @@ jobs:
           TARGET: ./server/loanCalculator-0.0.1-SNAPSHOT.jar
           SCRIPT_AFTER: |
             cd ./server
+            sudo killall java
             nohup java -jar loanCalculator-0.0.1-SNAPSHOT.jar &
 
       - name: Deploy Angular app to EC2
@@ -65,5 +66,5 @@ jobs:
           TARGET: ./client/loan-calculator
           SCRIPT_BEFORE: |
             cd ./client/loan-calculator
-            pm2 start loan-calculator/ --watch -i max
-
+            pm2 delete all
+            pm2 serve loan-calculator/ 8081 --watch -i max
