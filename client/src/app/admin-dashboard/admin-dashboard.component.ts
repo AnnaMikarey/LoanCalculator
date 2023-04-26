@@ -1,8 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { AdminService } from '../services/admin.service';
 import { EuriborService } from '../services/euribor.service';
 import { forkJoin, take } from 'rxjs';
+
+export function checkIfLessThanZero(
+  control: AbstractControl
+): ValidationErrors | null {
+  const value = control.value;
+  if (value !== null && value <= 0) {
+    return { lessThanZeroError: true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,12 +34,12 @@ export class AdminDashboardComponent implements OnInit {
   adminForm: FormGroup;
   adminEuriborDate!: string;
 
-  validatorsNum = [Validators.required, Validators.pattern(/^\d+\.?\d*$/)];
-  validatorsPercent = [
-    ...this.validatorsNum,
-    Validators.min(0),
-    Validators.max(100),
+  validatorsNum = [
+    Validators.required,
+    Validators.pattern(/^\d+\.?\d*$/),
+    checkIfLessThanZero,
   ];
+  validatorsPercent = [...this.validatorsNum, Validators.max(100)];
 
   ngOnInit() {
     this.adminForm = new FormGroup({

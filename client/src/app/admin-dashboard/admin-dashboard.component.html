@@ -6,11 +6,13 @@
         <div class="mb-3">
           <label for="adminEuriborRate" class="form-label">Euribor</label>
           <input
-          type="number"
-          class="form-control"
-          formControlName="adminEuriborRate"
+            type="number"
+            class="form-control"
+            formControlName="adminEuriborRate"
           />
-          <span class="euribor-date">Last updated on {{ adminEuriborDate }}</span>
+          <span class="euribor-date"
+            >Last updated on {{ adminEuriborDate }}</span
+          >
           <div
             *ngIf="
               adminForm.get('adminEuriborRate').invalid &&
@@ -34,7 +36,7 @@
             "
           >
             <span class="error-msg">
-              Error: value must be more or equal to 0 and less or equal to 100
+              Error: value must be greater than 0 and less or equal to 100
             </span>
           </div>
         </div>
@@ -54,7 +56,7 @@
             "
           >
             <span class="error-msg">
-              Error: value must be more or equal to 0 and less or equal to 100
+              Error: value must be greater than 0 and less or equal to 100
             </span>
           </div>
         </div>
