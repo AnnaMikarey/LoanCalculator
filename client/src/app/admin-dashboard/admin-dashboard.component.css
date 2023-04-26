@@ -45,24 +45,24 @@
 }
 label {
   font-size: 18px;
-  color: #fff;
+  color: #f5f5f5;
   line-height: 1.3rem;
   width: 300px;
   margin-bottom: 10px;
 }
 input.ng-invalid.ng-touched {
-  border: 1px solid red;
+  border: 1px solid #e71d36;
 }
 
 .error-msg {
-  color: red;
+  color: #e71d36;
   font-size: 13px;
   width: 270px;
 }
 
 .euribor-date {
   font-size: 14px;
-  color: #fff;
+  color: #f5f5f5;
   line-height: 1.5rem;
 }
 
@@ -86,7 +86,7 @@ button {
   gap: 5px;
   width: 325px;
   height: 50px;
-  background-color: #fff;
+  background-color: #f5f5f5;
   color: #054a91;
   border-radius: 10px;
   font-size: 19px;
@@ -95,14 +95,20 @@ button {
   justify-content: center;
   cursor: pointer;
 }
+button:hover {
+  background-color: #81a4cd;
+}
 button:disabled {
-  background-color: rgb(255, 0, 0, 0.3);
+  background-color: #e71d36;
   cursor: auto;
 }
 object {
-  width: 30px;
-  height: 32px;
+  width: 35px;
+  height: 35px;
+  font-weight: bolder;
 }
-svg {
-  stroke: #054a91;
+.svg-container {
+  width: 60px;
+  display: flex;
+  justify-content: flex-start;
 }

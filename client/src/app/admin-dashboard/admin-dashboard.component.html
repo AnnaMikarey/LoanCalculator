@@ -200,17 +200,21 @@
     </div>
     <div class="row">
       <button class="btn-save" type="submit" [disabled]="adminForm.invalid">
-        <object
-          type="image/svg+xml"
-          data="/assets/save-svgrepo-com.svg"
-        ></object>
+        <div class="svg-container">
+          <object
+            type="image/svg+xml"
+            data="/assets/save-svgrepo-com.svg"
+          ></object>
+        </div>
         <span>Save Changes</span>
       </button>
       <button class="btn-discard" type="button" (click)="discardChanges()">
-        <object
-          type="image/svg+xml"
-          data="/assets/revert-svgrepo-com.svg"
-        ></object>
+        <div class="svg-container">
+          <object
+            type="image/svg+xml"
+            data="/assets/revert-svgrepo-com.svg"
+          ></object>
+        </div>
         <span>Discard Changes</span>
       </button>
     </div>
