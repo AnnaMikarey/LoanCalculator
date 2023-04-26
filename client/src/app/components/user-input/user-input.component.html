@@ -1,7 +1,7 @@
 <div class="cardcontainer">
     <!-- this doesnt work as intended -->
-    <div style="color:red; position: relative; font-size: small; top:0px" *ngIf="(serverErrorMessage)">{{serverErrorMessage}}</div>
-    <form [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
+    <ul *ngIf="(serverErrorMessage)"><li>{{serverErrorMessage}}</li></ul>  
+    <form style="margin-top: 20px;" [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
         <div class="mini-container">
             <label for="price-of-property">PRICE OF PROPERTY (EUR)</label>
             <br />
