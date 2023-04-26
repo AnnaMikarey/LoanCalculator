@@ -1,6 +1,6 @@
 <div class="cardcontainer">
     <ul *ngIf="(serverErrorMessage)"><li>{{serverErrorMessage}}</li></ul>  
-    <form style="margin-top: 20px;" [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
+    <form style="margin-top: 30px;" [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
         <div class="mini-container">
             <label for="price-of-property">PRICE OF PROPERTY (EUR)</label>
             <br />

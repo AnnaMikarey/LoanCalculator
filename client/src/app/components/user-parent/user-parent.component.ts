@@ -53,7 +53,7 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
     },
       (error) => {
         this.serverError = true;
-        this.serverErrorMessage = error.error.message
+        this.serverErrorMessage = error.error["400 BAD_REQUEST"]
       })
   }
 

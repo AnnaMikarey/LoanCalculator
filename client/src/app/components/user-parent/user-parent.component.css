@@ -1,108 +1,63 @@
 .container {
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    border:red 1px solid; */
-    /* flex-wrap: wrap; */
-    /* border:red 1px solid; */
-    height: 100vh;
-    display: flex;
-    align-items: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  }
+}
 
-  
-  /* @media(max-width: 739px) {
-    .a {
-      
-      order: 1;
-    }
-  }
-  @media(min-width: 755px) {
-    .a {
-      
-      order: 0;
-    }
-  } */
-/* maybe 70-80 header and footer */
-  /* .centered-parent{
-    
-    height: 100vh;
-    display: flex;
-    align-items: center;
+.box {
+  background: #054A91;
+  margin: 10px;
+  border-radius: 5px;
+  color: #F5F5F5;
+}
+
+.a {
+  width: 430px;
+  height: 740px;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
- 
-} */
-
-
-.box{
-    background: #054A91;
-    margin: 10px;
-     
-   border-radius: 5px;
-    
-   /* padding: 25px;
-     display: flex;
-    align-items: center;
-  justify-content: center; */
-  color:#F5F5F5;
- 
-  
-}
-.a{
-    width: 430px;
-    height: 740px;
-    /* padding-top: 55px;
-    
-    padding-bottom: 90px; */
-    padding-left: 15px;
-    padding-right: 15px;
-    display: flex;
- flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* border:green 1px solid; */
-    flex:initial;
+  align-items: center;
+  flex: initial;
 }
 
-.b{
-   width: 750px;
-    height: 740px;
-    /* flex: 1 2 auto; */
+.b {
+  width: 750px;
+  height: 740px;
 }
-/* @media screen and (max-width: 600px) {
-  .b {
-    width: 390px;
-  }
-} */
 
 @media screen and (max-width: 700px) {
-  .b, .a{
-      width: 390px;
-     
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    width: 390px;
   }
-.container{
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  height:auto;
-  width: 390px;
-}
-*{
-  background: #054A91;
 
-  
-}
+  .b,
+  .a {
+    width: 390px;
 
-  .a{
-    order:1;
+  }
+
+  * {
+    background: #054A91;
+  }
+
+  .a {
+    order: 1;
     margin-top: 0px;
-    /* height:600px; */
-   
+    height: 600px;
+
   }
-  .b{
+
+  .b {
     margin-bottom: 0px;
-    height:670px;
+    height: 650px;
   }
 }
