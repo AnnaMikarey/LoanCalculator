@@ -6,9 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
+import { UserParentComponent } from './components/user-parent/user-parent.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', component: UserParentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminLayoutComponent },
 ];

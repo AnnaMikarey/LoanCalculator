@@ -28,6 +28,10 @@ import { AdminHeaderComponent } from './components/admin-header/admin-header.com
     ModalComponent,
     AdminLayoutComponent,
     AdminHeaderComponent,
+    UserParentComponent,
+    UserInputComponent,
+    UserOutputComponent,
+    GraphAndChartComponent,
   ],
   imports: [
     BrowserModule,

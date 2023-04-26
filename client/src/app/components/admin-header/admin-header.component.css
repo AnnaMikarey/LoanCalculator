@@ -2,7 +2,7 @@
   height: 72px;
   background-color: #054a91;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 }
 
