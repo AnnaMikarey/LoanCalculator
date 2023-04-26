@@ -66,3 +66,17 @@
     color:#000;
     
 }
+@media screen and (max-width: 800px) {
+    .output-container-two{
+        width: 350px;
+    }
+
+    .big-output-container{
+        
+        
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+  }
+

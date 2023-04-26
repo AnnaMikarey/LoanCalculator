@@ -50,9 +50,9 @@ export class UserParentComponent implements OnInit, OnDestroy {//, OnChanges {
     this.userUiService.toggleLoading(true);
     this.calculatorService.postUserDataGetsCalc(userData).subscribe((calculatedValues) => {
       this.calculations = calculatedValues;this.userUiService.toggleLoading(false);
-      console.error("postUserDataGetsCalc", this.calculations);  this.serverError = false;this.serverErrorMessage =''
+        this.serverError = false;this.serverErrorMessage =''
     },
-      (error) => { console.log("error", error); this.serverError = true; this.serverErrorMessage = error.error.message })
+      (error) => { this.serverError = true; this.serverErrorMessage = error.error.message })
   }
 
   ngOnDestroy() {

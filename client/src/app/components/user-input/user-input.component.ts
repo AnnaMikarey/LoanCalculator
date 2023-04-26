@@ -3,9 +3,7 @@ import { AbstractControl, DefaultValueAccessor, FormBuilder, FormControl, FormGr
 import { UserData } from '../../Types/UserData';
 import { Observable } from 'rxjs';
 
-
 const fb = new FormBuilder().nonNullable;
-
 
 @Component({
   selector: 'app-user-input',
@@ -14,7 +12,6 @@ const fb = new FormBuilder().nonNullable;
 })
 export class UserInputComponent implements OnInit {
 
-
   @Output() onUserInput: EventEmitter<UserData> = new EventEmitter();
 
   @Input() maxPropertyPrice!: number;
@@ -22,14 +19,12 @@ export class UserInputComponent implements OnInit {
   @Input() defaultPropertyPrice!: number;
   @Input() minDepositPercent!: number;
 
-
   @Input() defaultInitialDeposit!: number;
   @Input() defaultMortgagePeriod!: number;
   @Input() defaultSalary!: number;
   @Input() defaultFinancialObligation!: number;
 
   @Input() serverErrorMessage: string;
-
 
   minMortgagePeriod: number = 1;
   maxMortgagePeriod: number = 30;
@@ -39,7 +34,6 @@ export class UserInputComponent implements OnInit {
   initialAnnuityLinear: string = "annuity"
   constructor() { }
   postForm: FormGroup;
-
 
   ngOnInit(): void {
     this.depositPercentMaxLength = 3
@@ -61,7 +55,6 @@ export class UserInputComponent implements OnInit {
     })
     this.resetDepositMinMax();
   }
-
 
   get propertyPrice() {
     return this.postForm.get('propertyPrice') as FormControl<number>;
@@ -85,12 +78,10 @@ export class UserInputComponent implements OnInit {
     return this.postForm.get('annuityLinear') as FormControl<string>;
   }
 
-
   resetDepositMinMax() {
     this.maxDeposit = this.postForm.get('propertyPrice').value;
     this.minDeposit = Math.ceil(this.postForm.get('propertyPrice').value * this.minDepositPercent / 100);
   }
-
 
   setPriceOfProperty(event: any) {
     // if(event.target.getAttribute('class').includes("ng-untouched")){
@@ -100,9 +91,7 @@ export class UserInputComponent implements OnInit {
       event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
     }
     this.postForm.controls['propertyPrice'].setValue(Math.abs(parseInt(event.target.value)) || "");
-
   }
-
 
   setDeposit(event: any) {
     if (/[^0-9]/.test(event.target.value)) {
@@ -112,13 +101,11 @@ export class UserInputComponent implements OnInit {
     this.postForm.controls['depositPercent'].setValue(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('propertyPrice').value);
   }
 
-
   setAnnuityLinear(event: any) {
     this.postForm.controls['annuityLinear'].setValue(this.postForm.get('annuityLinear').value == "annuity" ? "linear" : "annuity");
   }
 
-
-  setDepositPercent(event: any) {
+  setDepositPercent(event: any) {console.error(event.target.value)
     if (/[^0-9.]/.test(event.target.value) || (event.target.value).split``.filter(value => value == ".").length > 1) {
       event.target.value = event.target.value.split``.filter(value => /[0-9.]/.test(value)).join``;
     }
@@ -127,11 +114,9 @@ export class UserInputComponent implements OnInit {
     this.changeDeposit();
   }
 
-
   changeDeposit() {
     this.postForm.controls['initialDeposit'].setValue(Math.ceil((this.postForm.get('propertyPrice').value) * (this.postForm.get('depositPercent').value) / 100));
   }
-
 
   //not needed for now
   // onFocus(event: any) {
@@ -143,14 +128,12 @@ export class UserInputComponent implements OnInit {
   //   event.target.value=parts.join(".");
   // }
 
-
   checkIfNotNumber(event: any) {
     if (/[^0-9]/.test(event.target.value)) {
       event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
     }
     this.postForm.controls[event.target.getAttribute('formControlName')].setValue(Math.abs(parseInt(event.target.value)) || "");
   }
-
 
   counter: any;
   depositPercentPlus() {
@@ -170,16 +153,12 @@ export class UserInputComponent implements OnInit {
     }, 80);
   }
 
-
   onSubmit(event?: any) {
     clearInterval(this.counter)
 
-
     if (!this.postForm.valid) {
 
-
       if (!event) {
-
 
         if (this.postForm.controls["depositPercent"].errors['min']) {
           this.postForm.controls["depositPercent"].setValue(this.minDepositPercent);
@@ -189,15 +168,11 @@ export class UserInputComponent implements OnInit {
           this.postForm.controls["initialDeposit"].setValue(this.maxDeposit);
         }
 
-
       } else {
-
 
         const alteredField = this.postForm.controls[event.target.getAttribute('formControlName')].errors;
 
-
         if (alteredField['max']) {
-
 
           if (event.target.getAttribute('formControlName') == "depositPercent" || event.target.getAttribute('formControlName') == "deposit") {
             this.postForm.controls["depositPercent"].setValue(99);
@@ -206,14 +181,11 @@ export class UserInputComponent implements OnInit {
           }
           this.resetDepositMinMax();
 
-
           if (event.target.getAttribute('formControlName') == "initialDeposit") {
             this.postForm.controls["depositPercent"].setValue(99);
           }
 
-
         } else {
-
 
           if (event.target.getAttribute('formControlName') == "propertyPrice") {
             this.postForm.controls["propertyPrice"].setValue(this.minPropertyPrice);
@@ -231,7 +203,6 @@ export class UserInputComponent implements OnInit {
           }
         }
 
-
       }
 
       this.changeDeposit();
@@ -245,7 +216,6 @@ export class UserInputComponent implements OnInit {
       "financialObligation": this.postForm.get('financialObligation').value,
     }
     this.onUserInput.emit(temp);
-
 
     //this.onUserInput.emit(this.postForm.value as UserData);
   }

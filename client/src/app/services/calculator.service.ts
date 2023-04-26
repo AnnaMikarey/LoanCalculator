@@ -21,7 +21,6 @@ export class CalculatorService {
   }
 
   postUserDataGetsCalc(userData: UserData): Observable<CalculatedValues> {
-    console.error(userData)
     return this.httpClient.post<CalculatedValues>(this.apiUrl + 'calculate', userData, httpOptions)
   }
 }
