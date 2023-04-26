@@ -38,12 +38,7 @@ import { AdminHeaderComponent } from './components/admin-header/admin-header.com
     MatButtonModule,
     MatDialogModule,
     NgxEchartsModule.forRoot({
-      /**
-       * This will import all modules from echarts.
-       * If you only need custom modules,
-       * please refer to [Custom Build] section.
-       */
-      echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+      echarts: () => import('echarts'),
     }),
   ],
 
