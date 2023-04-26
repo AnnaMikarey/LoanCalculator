@@ -1,11 +1,12 @@
 package com.server.loan.calculator.service;
 
-import com.server.loan.calculator.exception.ValueOutOfRangeException;
+import com.server.loan.calculator.exception.DataNotFoundException;
+import com.server.loan.calculator.exception.ValidationException;
 import com.server.loan.calculator.model.AdminData;
 import com.server.loan.calculator.model.CalculatorData;
 import com.server.loan.calculator.model.InitialData;
 import com.server.loan.calculator.model.ResultsData;
-import com.server.loan.calculator.validator.CalculatorDataValidator;
+import com.server.loan.calculator.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,7 @@ import java.math.RoundingMode;
 @Service
 @RequiredArgsConstructor
 public class CalculatorService {
-
-    private final CalculatorDataValidator calculatorDataValidator;
+    private final AdminRepository adminRepository;
 
     private BigDecimal calculateMonthlyInterestRateDecimals (AdminData adminData) {
         BigDecimal addedRates = adminData.getAdminEuriborRate()
@@ -43,15 +43,13 @@ public class CalculatorService {
     }
 
     private AdminData fetchValuesFromDatabase () {
-        return new AdminData("2023-04-20", new BigDecimal("3.31"), new BigDecimal("1.99"), new BigDecimal("500"),
-                new BigDecimal("10"), new BigDecimal("50"), new BigDecimal("20000"), new BigDecimal("500000"),
-                new BigDecimal("35000"), new BigDecimal("15"));
+        return adminRepository.findById(1)
+                .orElseThrow(() -> new DataNotFoundException("Data not found in database"));
     }
 
     public ResultsData returnCalculatedData (CalculatorData data) {
         AdminData databaseData = fetchValuesFromDatabase();
-        calculatorDataValidator.validateDatabaseValues(databaseData);
-        calculatorDataValidator.validateUserInput(data, databaseData);
+        customValidateUserInput(data, databaseData);
         BigDecimal requestedLoan = data.getPropertyPrice()
                 .subtract(data.getInitialDeposit());
         BigDecimal maxLoanAvailable = calculateMaxAvailableLoan(data, databaseData);
@@ -62,13 +60,12 @@ public class CalculatorService {
                     .monthlyPaymentAmount(calculateMonthlyPayment(data, databaseData, requestedLoan))
                     .build();
         } else {
-            throw new ValueOutOfRangeException("Requested mortgage amount too high for income");
+            throw new ValidationException("Requested mortgage amount too high for income");
         }
     }
 
     public Object[] returnInitialDataArray () {
         AdminData adminData = fetchValuesFromDatabase();
-        calculatorDataValidator.validateDatabaseValues(adminData);
         CalculatorData calculatorData = createDefaultCalculatorData(adminData);
         return new Object[]{createInitialData(adminData, calculatorData), returnCalculatedData(calculatorData)};
     }
@@ -78,9 +75,9 @@ public class CalculatorService {
         return CalculatorData.builder()
                 .propertyPrice(databaseData.getAdminDefaultPropertyPrice())
                 .initialDeposit(defaultInitialDeposit)
-                .salary(new BigDecimal("2500"))
+                .salary(new BigDecimal("2000"))
                 .financialObligation(new BigDecimal("0"))
-                .mortgagePeriod(10)
+                .mortgagePeriod(30)
                 .build();
     }
 
@@ -103,5 +100,20 @@ public class CalculatorService {
                 .defaultSalary(calculatorData.getSalary())
                 .defaultFinancialObligation(calculatorData.getFinancialObligation())
                 .build();
+    }
+
+    private void customValidateUserInput (CalculatorData calculatorData, AdminData adminData) {
+        if (calculatorData.getPropertyPrice()
+                .compareTo(adminData.getAdminMaxPropertyPrice()) > 0 || calculatorData.getPropertyPrice()
+                .compareTo(adminData.getAdminMinPropertyPrice()) < 0) {
+            throw new ValidationException("Entered property price not between " + String.format("%.2f", adminData.getAdminMinPropertyPrice()) + " and " + String.format("%.2f", adminData.getAdminMaxPropertyPrice()));
+        }
+        if (calculatorData.getInitialDeposit()
+                .compareTo(calculatorData.getPropertyPrice()) >= 0 || calculatorData.getInitialDeposit()
+                .compareTo(calculatorData.getPropertyPrice()
+                        .multiply(adminData.getAdminMinDepositPercent())
+                        .divide(new BigDecimal("100"), 32, RoundingMode.HALF_UP)) < 0) {
+            throw new ValidationException("Initial deposit amount less than " + String.format("%.2f", adminData.getAdminMinDepositPercent()) + "% of property price or 100% and above");
+        }
     }
 }
