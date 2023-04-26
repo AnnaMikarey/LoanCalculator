@@ -34,11 +34,8 @@ export class AdminDashboardComponent implements OnInit {
   adminForm: FormGroup;
   adminEuriborDate!: string;
 
-  validatorsNum = [
-    Validators.required,
-    Validators.pattern(/^\d+\.?\d*$/),
-    checkIfLessThanZero,
-  ];
+  validatorsNum = [Validators.required, Validators.pattern(/^\d+\.?\d*$/)];
+
   validatorsPercent = [...this.validatorsNum, Validators.max(100)];
 
   ngOnInit() {
