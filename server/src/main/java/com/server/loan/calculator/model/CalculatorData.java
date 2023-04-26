@@ -1,24 +1,29 @@
 package com.server.loan.calculator.model;
 
+import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
+@Builder
 public class CalculatorData {
-    private BigDecimal euriborRate = new BigDecimal("3.31");
-    private BigDecimal bankInterestRate = new BigDecimal("1.99");
-    private BigDecimal contractFee = new BigDecimal("500");
-    private BigDecimal monthlyBankFee = new BigDecimal("50");
-    private BigDecimal registrationFee = new BigDecimal("100");
-    private BigDecimal propertyPrice = new BigDecimal("50000");
-    private BigDecimal minPropertyPrice = new BigDecimal("20000");
-    private BigDecimal maxPropertyPrice = new BigDecimal("800000");
-    private BigDecimal defaultPropertyPrice = new BigDecimal("35000");
-    private BigDecimal initialDeposit = new BigDecimal("15000");
-    private BigDecimal minDepositPercent = new BigDecimal("15");
-    private BigDecimal salary = new BigDecimal("2000");
-    private BigDecimal financialObligations = new BigDecimal("100");
-    private int mortgagePeriodYears = 10;
-    private BigDecimal totalLoan = propertyPrice.subtract(initialDeposit);
+
+    @NotNull(message = "Property price field is mandatory")
+    @Positive(message = "Property price must be a positive number")
+    private BigDecimal propertyPrice;
+    @NotNull(message = "Initial deposit field is mandatory")
+    @Positive(message = "Initial deposit must be a positive number")
+    private BigDecimal initialDeposit;
+    @NotNull(message = "Salary field is mandatory")
+    @Positive(message = "Salary must be a positive number")
+    private BigDecimal salary;
+    @NotNull(message = "Financial Obligation field cannot be null")
+    @PositiveOrZero(message = "Financial Obligations must be a positive number or zero")
+    private BigDecimal financialObligation;
+    @NotNull(message = "Mortgage period field is mandatory")
+    @Min(value = 1, message = "Mortgage period must be between 1 and 30 years")
+    @Max(value = 30, message = "Mortgage period must be between 1 and 30 years")
+    private int mortgagePeriod;
 }
