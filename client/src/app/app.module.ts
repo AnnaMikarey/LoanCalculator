@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [AdminDashboardComponent, DisclaimerComponent, ModalComponent],
@@ -21,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatButtonModule,
     MatDialogModule,
-  ],
+    CommonModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
   exports: [

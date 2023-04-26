@@ -1,11 +1,17 @@
-<div>
+<div class="login-form" >
+<h3 class="login-title">Log in to server</h3>
+<div class = login-container>
+  <div class="log-form">
     <label for="username">Username:</label>
-    <input type="text" name="username" [(ngModel)]="username">
+    <input class="log-input" type="text" name="username" [(ngModel)]="username">
   </div>
   <div>
     <label for="password">Password:</label>
-    <input type="password" name="password" [(ngModel)]="password">
+    <input class="log-input" type="password" name="password" [(ngModel)]="password">
   </div>
   <div>
-    <button (click)="login()">Login</button>
+    <button class="log-input" (click)="login()">Login</button>
   </div>
+  <div class="error" *ngIF="isError">Incorrect username or password</div>
+</div>
+</div>
