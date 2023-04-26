@@ -34,7 +34,11 @@ export class AdminDashboardComponent implements OnInit {
   adminForm: FormGroup;
   adminEuriborDate!: string;
 
-  validatorsNum = [Validators.required, Validators.pattern(/^\d+\.?\d*$/)];
+  validatorsNum = [
+    Validators.required,
+    Validators.pattern(/^\d+\.?\d*$/),
+    checkIfLessThanZero,
+  ];
 
   validatorsPercent = [...this.validatorsNum, Validators.max(100)];
 
