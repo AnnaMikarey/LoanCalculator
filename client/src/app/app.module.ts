@@ -20,7 +20,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
-import { MatSliderModule } from '@angular/material/slider';
+
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [
     AdminDashboardComponent,
@@ -44,7 +46,8 @@ import { MatSliderModule } from '@angular/material/slider';
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
-    MatSliderModule
+
+    CommonModule,
   ],
 
   providers: [],
