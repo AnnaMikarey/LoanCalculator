@@ -85,9 +85,9 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
       this.options = {
         tooltip: {
           trigger: 'item',
-          position:"left",
-          textStyle:{
-            color:"#000",
+          position: "left",
+          textStyle: {
+            color: "#000",
           }
         },
         // legend: {

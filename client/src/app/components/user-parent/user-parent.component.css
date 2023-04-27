@@ -1,3 +1,20 @@
+.header {
+  background: #054A91;
+  height: 75px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.logo {
+  margin-left: 30px;
+  font-size: 36px;
+  color: #F5F5F5;
+}
+a{
+  color: #F5F5F5;
+  text-decoration: none;
+}
+
 .container {
   height: 100vh;
   display: flex;

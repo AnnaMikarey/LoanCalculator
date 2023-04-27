@@ -2,68 +2,77 @@
     <h2>REPRESENTATIVE EXAMPLE:</h2>
     <!-- 
  [monthlyBankFee]="monthlyBankFee" -->
-    <app-graph-and-chart [chartData]="calculations"
-    [contractFee]="contractFee"
- [registrationFee]="registrationFee"
- ></app-graph-and-chart>
- <div class="big-output-container">
+    <app-graph-and-chart [chartData]="calculations" [contractFee]="contractFee"
+        [registrationFee]="registrationFee"></app-graph-and-chart>
+    <div class="big-output-container">
+        <div class="output-container-one">
+            <div class="line">
+                <div class="left">
+                    <div class="graph-legend" id="one"></div>
+                    <div>REQUESTED LOAN AMOUNT:</div>
+                </div> <span class="output">{{requestedLoanAmount}} EUR</span>
+            </div>
+            <div class="line">
+                <div class="left">
+                    <div class="graph-legend" id="two"></div>
+                    <div>CONTRACT FEE:</div>
+                </div> <span class="output">{{contractFee}} EUR</span>
+            </div>
+            <div class="line">
+                <div class="left">
+                    <div class="graph-legend" id="three"></div>
+                    <div>BANK FEE:</div>
+                </div> <span class="output">{{totalBankFee}} EUR</span>
+            </div>
+            <div class="line">
+                <div class="left">
+                    <div class="graph-legend" id="five"></div>
+                    <div>TOTAL INTEREST AMOUNT:</div>
+                </div> <span class="output">{{totalInterestAmount}} EUR</span>
+            </div>
 
- <div class="output-container-one">
-    <div class="line">
-        <div class="left">
-    <div class="graph-legend" id="one"></div><div>REQUESTED LOAN AMOUNT:</div></div> <span class="output">{{requestedLoanAmount}} EUR</span>
-    </div>
-    <div class="line">
-        <div class="left">
-    <div class="graph-legend" id="two"></div><div>CONTRACT FEE:</div></div> <span class="output">{{contractFee}} EUR</span>
-    </div>
-    <div class="line">
-        <div class="left">
-    <div class="graph-legend" id="three"></div><div>BANK FEE:</div></div> <span class="output">{{totalBankFee}} EUR</span>
-    </div>
-    <div class="line">
-        <div class="left">
-    <div class="graph-legend" id="five"></div><div>TOTAL INTEREST AMOUNT:</div></div> <span class="output">{{totalInterestAmount}} EUR</span>
-    </div>
+            <div class="line">
+                <div class="left">
+                    <div class="graph-legend" id="four"></div>
+                    <div>REGISTRATION FEE:</div>
+                </div><span class="output">{{registrationFee}} EUR </span>
+            </div>
+        </div>
+        <div class="output-container-two">
+            <ul>
+                <div class="line">
+                    <div class="left">
+                        <li>
+                            <div>
+                                ANNUAL VARIABLE INTEREST RATE:
+                            </div>
+                            <div>
+                                ({{bankInterestRate}}% + 6‑MONTH EURIBOR)
+                            </div>
+                        </li>
+                    </div> <span class="output">{{euriborRate+bankInterestRate}} %</span>
+                </div>
 
-    <div class="line">
-        <div class="left">
-    <div class="graph-legend" id="four"></div><div>REGISTRATION FEE:</div></div><span class="output">{{registrationFee}} EUR </span> 
-    </div>
-</div>
-<div class="output-container-two">
-    <ul>
-
-    <div class="line">
-    <div class="left">
-    <li><div>
-    ANNUAL VARIABLE INTEREST RATE:    
-    </div>
-    <div>
-({{bankInterestRate}}% + 6‑MONTH EURIBOR)
-    </div>
-     </li></div> <span class="output">{{euriborRate+bankInterestRate}} %</span>
-    </div>
-    
-    <div class="line">
-    <div class="left">
-    <li>MAX. LOAN AVAILABLE:</li></div> <span class="output">{{maxLoanAvailable}} EUR</span></div>
-    
-    <div class="line">
-        <div class="left">
-    <li>MONTHLY PAYMENT:</li></div> <span class="output">{{monthlyPayment}} EUR</span></div>
-    <!-- <span *ngIf="monthlyPaymentError" style="color:orange; margin-top: 0;">Monthly payment + financial obligations > 40%
+                <div class="line">
+                    <div class="left">
+                        <li>MAX. LOAN AVAILABLE:</li>
+                    </div> <span class="output">{{maxLoanAvailable}} EUR</span>
+                </div>
+                <div class="line">
+                    <div class="left">
+                        <li>MONTHLY PAYMENT:</li>
+                    </div> <span class="output">{{monthlyPayment}} EUR</span>
+                </div>
+                <!-- <span *ngIf="monthlyPaymentError" style="color:orange; margin-top: 0;">Monthly payment + financial obligations > 40%
         of salary</span> -->
-        <div class="line">
-            <div class="left">  
-        <li>TOTAL PAYMENT AMOUNT:</li></div><span class="output"> {{totalAmountToBePaid}} EUR</span></div>
-    </ul>
+                <div class="line">
+                    <div class="left">
+                        <li>TOTAL PAYMENT AMOUNT:</li>
+                    </div><span class="output"> {{totalAmountToBePaid}} EUR</span>
+                </div>
+            </ul>
+        </div>
     </div>
- </div>   
     <!-- bad in mobile view -->
     <!-- <div style="color:red">{{ time | async}}</div> -->
- </div>
- 
- 
- 
- 
+</div>

@@ -18,7 +18,7 @@ input {
   font-size: 18;
   font-weight: bold;
   padding-left: 10px;
-  
+
 }
 
 .mini-container {
@@ -30,7 +30,7 @@ input {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  
+
 }
 
 .dataL>div {
@@ -55,7 +55,7 @@ input:focus {
 .flex {
   display: flex;
   width: 100%;
-  
+
 }
 
 .flex input {
@@ -130,6 +130,7 @@ ul {
   color: red;
   list-style-type: none;
   font-size: smaller;
+  max-width: 380px;
 }
 
 input[type=text].ng-invalid {
@@ -187,7 +188,11 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
 }
 
-#price-of-property, .depositAndPercent, #mortgage-period, #salary, #financial-obligation{
-margin-top: 5px;  
-margin-bottom:5px;
+#price-of-property,
+.depositAndPercent,
+#mortgage-period,
+#salary,
+#financial-obligation {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
