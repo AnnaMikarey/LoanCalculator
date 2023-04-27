@@ -2,7 +2,7 @@
   width: 400px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1290px) {
   .cardcontainer {
     width: 360px;
   }
@@ -18,6 +18,7 @@ input {
   font-size: 18;
   font-weight: bold;
   padding-left: 10px;
+
 }
 
 .mini-container {
@@ -29,6 +30,7 @@ input {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+
 }
 
 .dataL>div {
@@ -36,7 +38,7 @@ input {
 }
 
 input[type="range"] {
-  width: 100%;
+  width: 98%;
   margin: 0;
   padding: 0;
 }
@@ -53,7 +55,7 @@ input:focus {
 .flex {
   display: flex;
   width: 100%;
-  margin-bottom: 10px;
+
 }
 
 .flex input {
@@ -63,6 +65,7 @@ input:focus {
 .linear-annuity input {
   width: 25px;
 }
+
 
 .linear-annuity {
   display: flex;
@@ -127,8 +130,69 @@ ul {
   color: red;
   list-style-type: none;
   font-size: smaller;
+  max-width: 380px;
 }
 
 input[type=text].ng-invalid {
   outline: 1px solid red;
+}
+
+
+/* input range */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin-top: 5px;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 8px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: #054A91;
+  border-radius: 5px;
+  border: 2px solid #f5f5f5;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  border: 5px solid #f5f5f5;
+  height: 20px;
+  width: 20px;
+  border-radius: 25px;
+  background: #054A91;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -8px;
+}
+
+input[type=range]::-moz-range-track {
+  height: 10px;
+  cursor: pointer;
+  background-color: #054A91;
+  border-radius: 5px;
+  padding: 0px;
+  margin: 0px;
+  background: #F5F5F5;
+}
+
+input[type=range]::-moz-range-thumb {
+  border: 3px solid #f5f5f5;
+  height: 17px;
+  width: 17px;
+  border-radius: 25px;
+  background: #054A91;
+  cursor: pointer;
+}
+
+#price-of-property,
+.depositAndPercent,
+#mortgage-period,
+#salary,
+#financial-obligation {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

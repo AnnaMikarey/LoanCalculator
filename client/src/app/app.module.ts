@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
+
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -45,6 +46,7 @@ import { CommonModule } from '@angular/common';
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
+
     CommonModule,
   ],
 
@@ -52,4 +54,4 @@ import { CommonModule } from '@angular/common';
   bootstrap: [AppComponent],
   exports: [DisclaimerComponent, AdminDashboardComponent],
 })
-export class AppModule {}
+export class AppModule { }

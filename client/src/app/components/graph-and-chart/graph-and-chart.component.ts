@@ -37,7 +37,7 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-//todo provide real data
+    //todo provide real data
     if (this.linearOrAnnuity == "linear") {
       const xAxisData = [];
       const data1 = [];
@@ -84,7 +84,11 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
 
       this.options = {
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          position: "left",
+          textStyle: {
+            color: "#000",
+          }
         },
         // legend: {
         //   top: '0%',
@@ -93,18 +97,25 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
         series: [
           {
             type: 'pie',
+
+            startAngle: 359,
+            minAngle: 20,
+            animation: true, animationTypeUpdate: 'transition', animationDuration: 1500,
+
             radius: ['100%', '90%'],
             avoidLabelOverlap: true,
             label: {
               show: false,
-              position: 'center'
+              position: 'center',
             },
             data: [
               { "value": this.chartData?.requestedLoanAmount, "name": "Requested loan amount", itemStyle: { color: "#DBE4EE" } },
-              // { "value": this.chartData?.monthlyPayment, "name": "Monthly payment" },
-              { "value": this.monthlyBankFee, "name": "Monthly bank fee", itemStyle: { color: "#F17300" } },
-              { "value": this.registrationFee, "name": "Registration fee", itemStyle: { color: "#3E7CB1" } },
               { "value": this.contractFee, "name": "Contract fee", itemStyle: { color: "#81A4CD" } },
+
+              // { "value": this.chartData?.monthlyPayment, "name": "Monthly payment" },
+              { "value": this.chartData?.totalBankFee, "name": "Bank fee", itemStyle: { color: "#F17300" } },
+              { "value": this.chartData?.totalInterestAmount, "name": "Total interest amount", itemStyle: { color: "#1585E4" } },
+              { "value": this.registrationFee, "name": "Registration fee", itemStyle: { color: "#3E7CB1" } },
 
             ],
             emphasis: {
@@ -122,7 +133,8 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
                 shadowBlur: 0,
                 shadowOffsetX: 0,
                 shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
+              },
+
             }
           }
         ]

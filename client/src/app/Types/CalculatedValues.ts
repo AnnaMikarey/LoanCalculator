@@ -3,4 +3,7 @@ export interface CalculatedValues {
     maxAvailableLoanAmount: number,
     monthlyPaymentAmount: number,
     // linearData?: number[]
+    totalBankFee: number,
+    totalInterestAmount: number,
+    totalAmountToBePaid: number
 }

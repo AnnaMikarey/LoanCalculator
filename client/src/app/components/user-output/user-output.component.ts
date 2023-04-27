@@ -14,6 +14,9 @@ export class UserOutputComponent implements OnChanges {
   requestedLoanAmount!: number;
   maxLoanAvailable!: number;
   monthlyPayment!: number;
+  totalBankFee!: number;
+  totalInterestAmount!: number;
+  totalAmountToBePaid!: number;
 
   @Input() euriborRate: number;
   @Input() euriborDate: string;
@@ -29,6 +32,16 @@ export class UserOutputComponent implements OnChanges {
     this.requestedLoanAmount = this.format(this.calculations?.requestedLoanAmount);
     this.maxLoanAvailable = this.format(this.calculations?.maxAvailableLoanAmount);
     this.monthlyPayment = this.format(this.calculations?.monthlyPaymentAmount);
+    this.totalBankFee = this.format(this.calculations?.totalBankFee);
+    this.totalInterestAmount = this.format(this.calculations?.totalInterestAmount);
+    this.totalAmountToBePaid = this.format(this.calculations?.totalAmountToBePaid);
+
+    this.euriborRate = this.format(this.euriborRate)
+    this.bankInterestRate = this.format(this.bankInterestRate)
+    this.annualInterestRate = this.format(this.annualInterestRate)
+    this.contractFee = this.format(this.contractFee)
+    this.registrationFee = this.format(this.registrationFee)
+    this.monthlyBankFee = this.format(this.monthlyBankFee)
   }
 
   format(number: number) {
