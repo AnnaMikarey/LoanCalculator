@@ -7,6 +7,7 @@ import com.server.loan.calculator.model.InitialData;
 import com.server.loan.calculator.model.ResultsData;
 import com.server.loan.calculator.repository.AdminRepository;
 import com.server.loan.calculator.service.CalculatorService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -81,7 +82,7 @@ public class CalculatorServiceTest {
     }
 
     @Test
-    public void returnCalculatedData_throwsDataNotFound_whenDataIsInNotDatabaseAndCorrectUserInput () {
+    public void returnCalculatedData_throwsDataNotFound_whenDataNotInDatabaseAndCorrectUserInput () {
         final DataNotFoundException expected = new DataNotFoundException("Data not found in database");
         when(adminRepositoryMock.findById(1)).thenThrow(expected);
         assertThrows(DataNotFoundException.class, () -> calculatorService.returnCalculatedData(calculatorDataMock));
@@ -98,7 +99,7 @@ public class CalculatorServiceTest {
     }
 
     @Test
-    public void returnInitialDataArray_throwsDataNotFound_whenDataIsInNotDatabaseAndCorrectUserInput () {
+    public void returnInitialDataArray_throwsDataNotFound_whenDataNotInDatabaseAndCorrectUserInput () {
         final DataNotFoundException expected = new DataNotFoundException("Data not found in database");
         when(adminRepositoryMock.findById(1)).thenThrow(expected);
         assertThrows(DataNotFoundException.class, () -> calculatorService.returnInitialDataArray());
