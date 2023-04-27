@@ -94,7 +94,7 @@
               type="number"
               class="form-control"
               formControlName="adminMinPropertyPrice"
-              (input)="handleMinMaxPrices()"
+              (blur)="handleMinMaxPrices()"
               (click)="onFocus($event)"
               [ngClass]="{
                 'modified-field': adminForm.get('adminMinPropertyPrice').dirty
@@ -118,7 +118,7 @@
               type="number"
               class="form-control"
               formControlName="adminMaxPropertyPrice"
-              (input)="handleMinMaxPrices()"
+              (blur)="handleMinMaxPrices()"
               (click)="onFocus($event)"
               [ngClass]="{
                 'modified-field': adminForm.get('adminMaxPropertyPrice').dirty
