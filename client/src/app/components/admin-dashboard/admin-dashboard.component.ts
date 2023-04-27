@@ -33,6 +33,7 @@ export class AdminDashboardComponent implements OnInit {
 
   adminForm: FormGroup;
   adminEuriborDate!: string;
+  errorMessage: string;
 
   validatorsNum = [
     Validators.required,
@@ -72,10 +73,23 @@ export class AdminDashboardComponent implements OnInit {
 
   saveChanges() {
     this.adminForm.value['adminEuriborDate'] = this.adminEuriborDate;
-    this.adminService.postData(this.adminForm.value).pipe(take(1)).subscribe();
-    setTimeout(() => {
-      this.ngOnInit();
-    }, 100);
+    this.adminService
+      .postData(this.adminForm.value)
+      .pipe(take(1))
+      .subscribe(
+        () => {
+          this.ngOnInit();
+        },
+        (error) => {
+          if (error.status === 400 && error.error.adminDefaultPropertyPrice) {
+            this.errorMessage = error.error.adminDefaultPropertyPrice;
+            // Display the error message in the frontend
+          }
+        }
+      );
+    // setTimeout(() => {
+    //   this.ngOnInit();
+    // }, 100);
   }
 
   discardChanges() {
