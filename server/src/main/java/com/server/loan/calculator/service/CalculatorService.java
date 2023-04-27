@@ -120,12 +120,14 @@ public class CalculatorService {
 
     private void customValidateUserInput (CalculatorData calculatorData, AdminData adminData) {
         if (calculatorData.getPropertyPrice()
-                .compareTo(adminData.getAdminMaxPropertyPrice()) > 0 || calculatorData.getPropertyPrice()
+                .compareTo(adminData.getAdminMaxPropertyPrice()) > 0
+                || calculatorData.getPropertyPrice()
                 .compareTo(adminData.getAdminMinPropertyPrice()) < 0) {
             throw new ValidationException("Entered property price not between " + String.format("%.2f", adminData.getAdminMinPropertyPrice()) + " and " + String.format("%.2f", adminData.getAdminMaxPropertyPrice()));
         }
         if (calculatorData.getInitialDeposit()
-                .compareTo(calculatorData.getPropertyPrice()) >= 0 || calculatorData.getInitialDeposit()
+                .compareTo(calculatorData.getPropertyPrice()) >= 0
+                || calculatorData.getInitialDeposit()
                 .compareTo(calculatorData.getPropertyPrice()
                         .multiply(adminData.getAdminMinDepositPercent())
                         .divide(new BigDecimal("100"), 32, RoundingMode.HALF_UP)) < 0) {
