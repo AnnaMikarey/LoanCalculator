@@ -36,9 +36,11 @@ public class AdminService {
 
     private void customValidateAdminInput (AdminData adminData) {
         if (adminData.getAdminDefaultPropertyPrice()
-                .compareTo(adminData.getAdminMaxPropertyPrice()) > 0 || adminData.getAdminDefaultPropertyPrice()
+                .compareTo(adminData.getAdminMaxPropertyPrice()) > 0 ||
+                adminData.getAdminDefaultPropertyPrice()
                 .compareTo(adminData.getAdminMinPropertyPrice()) < 0) {
-            throw new ValidationException("Entered property price not between " + String.format("%.2f", adminData.getAdminMinPropertyPrice()) + " and " + String.format("%.2f", adminData.getAdminMaxPropertyPrice()));
+            throw new ValidationException("Entered property price not between " + String.format("%.2f", adminData.getAdminMinPropertyPrice()) + " and "
+                    + String.format("%.2f", adminData.getAdminMaxPropertyPrice()));
         }
     }
 }
