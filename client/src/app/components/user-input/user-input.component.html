@@ -39,7 +39,7 @@
                     maxlength={{(maxPropertyPrice.toString()).length+1}} (input)="setDeposit($event)" />
                 <div class="percent">
                     <span class="updown"><button style="background:transparent; border:none; color:transparent;"
-                            class="updownbutton" (mousedown)="depositPercentPlus()" (mouseup)="onSubmit()">
+                            class="updownbutton" (mousedown)="depositPercentPlus()" (mouseup)="onSubmit()" (touchend)="onSubmit()" (touchstart)="depositPercentPlus()" >
                             <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -51,7 +51,7 @@
                             </svg>
                         </button>
                         <button style="background:transparent; border:none; color:transparent;" class="updownbutton"
-                            (mousedown)="depositPercentMinus()" (mouseup)="onSubmit()">
+                        (touchend)="onSubmit()" (touchstart)="depositPercentMinus()" (mousedown)="depositPercentMinus()" (mouseup)="onSubmit()">
                             <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
