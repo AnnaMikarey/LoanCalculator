@@ -73,6 +73,9 @@ export class AdminDashboardComponent implements OnInit {
   saveChanges() {
     this.adminForm.value['adminEuriborDate'] = this.adminEuriborDate;
     this.adminService.postData(this.adminForm.value).pipe(take(1)).subscribe();
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 100);
   }
 
   discardChanges() {
@@ -89,5 +92,8 @@ export class AdminDashboardComponent implements OnInit {
         adminMaxPropertyPrice: priceMin,
       });
     }
+  }
+  onFocus(event: any) {
+    event.target.select();
   }
 }

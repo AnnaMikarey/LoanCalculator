@@ -11,4 +11,8 @@ public class ResultsData {
     private BigDecimal requestedLoanAmount;
     private BigDecimal maxAvailableLoanAmount;
     private BigDecimal monthlyPaymentAmount;
+    private BigDecimal totalBankFee;
+    private BigDecimal totalInterestAmount;
+    private BigDecimal totalAmountToBePaid;
+
 }
