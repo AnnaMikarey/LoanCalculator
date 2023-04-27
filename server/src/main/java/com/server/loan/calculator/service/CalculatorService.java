@@ -26,7 +26,6 @@ public class CalculatorService {
     }
 
     private BigDecimal calculateMaxAvailableLoan (CalculatorData data, AdminData adminData) {
-
         BigDecimal monthlyAvailableMoney = (data.getSalary()
                 .multiply(new BigDecimal("0.4"))).subtract(data.getFinancialObligation());
         BigDecimal powerDenominator = ((BigDecimal.ONE).add(calculateMonthlyInterestRateDecimals(adminData))).pow((12 * data.getMortgagePeriod()), MathContext.DECIMAL32);
@@ -42,6 +41,15 @@ public class CalculatorService {
 
     }
 
+    private BigDecimal calculateTotalPaidAmount (CalculatorData data, AdminData adminData) {
+        BigDecimal requestedLoan = data.getPropertyPrice()
+                .subtract(data.getInitialDeposit());
+        BigDecimal addedRates = (adminData.getAdminEuriborRate()
+                .add(adminData.getAdminBankMargin())).divide(new BigDecimal("100"), 32, RoundingMode.HALF_UP);
+        BigDecimal brackets = BigDecimal.ONE.add(addedRates.multiply(BigDecimal.valueOf(data.getMortgagePeriod())));
+        return requestedLoan.multiply(brackets);
+    }
+
     private AdminData fetchValuesFromDatabase () {
         return adminRepository.findById(1)
                 .orElseThrow(() -> new DataNotFoundException("Data not found in database"));
@@ -54,10 +62,18 @@ public class CalculatorService {
                 .subtract(data.getInitialDeposit());
         BigDecimal maxLoanAvailable = calculateMaxAvailableLoan(data, databaseData);
         if (requestedLoan.compareTo(maxLoanAvailable) <= 0) {
+            BigDecimal totalInterest = calculateTotalPaidAmount(data, databaseData).subtract(requestedLoan);
+            BigDecimal totalBankFeeToPay = databaseData.getAdminMonthlyBankFee()
+                    .multiply(BigDecimal.valueOf(data.getMortgagePeriod() * 12L));
+            BigDecimal totalAmountToPay = requestedLoan.add(totalInterest.add(totalBankFeeToPay.add(databaseData.getAdminContractFee()
+                    .add(databaseData.getAdminRegistrationFee()))));
             return ResultsData.builder()
                     .requestedLoanAmount(requestedLoan)
                     .maxAvailableLoanAmount(maxLoanAvailable)
                     .monthlyPaymentAmount(calculateMonthlyPayment(data, databaseData, requestedLoan))
+                    .totalBankFee(totalBankFeeToPay)
+                    .totalInterestAmount(totalInterest)
+                    .totalAmountToBePaid(totalAmountToPay)
                     .build();
         } else {
             throw new ValidationException("Requested mortgage amount too high for income");
