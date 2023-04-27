@@ -14,6 +14,7 @@
   .layout {
     height: 100%;
     background-color: #054a91;
+    width: 100vw;
   }
 
   .main {
