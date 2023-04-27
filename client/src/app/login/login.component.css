@@ -2,16 +2,13 @@
     font-family: 'JetBrains Mono', monospace;
 }
 
-.login-form-container{
+.login-form-container {
         flex-direction: column;
         justify-content: center;
         text-align: center;
         width: 434px;
-        margin-left: auto;
-        margin-right: auto;
-        position: absolute;
-        top: 35%;
-        left: 35%;
+        margin: 15% auto;
+        
     
 }
 .login-title {
@@ -36,22 +33,30 @@
         
     }
     .image-border {
+        margin-top: 78px;
         border: 2px solid #000000;
         border-radius: 217px;  
+        padding-left: 1px;
+        padding-right: 1px;
 
     }
-    .log-input{
+    .log-input-password, .log-input-username{
         background-color: #F5F5F5;
         border-radius: 10px;
         width: 400px;
         height: 50px;
+        padding: 5px;
     }
-    #log-password, #log-username {
-        font-family: 'JetBrains Mono';
+
+    .log-input-password{
+        margin-bottom: 42px;
+    }
+
+    .log-input-label {
+        padding-left: 20px;
         font-style: normal;
         font-weight: 700;
         text-transform: uppercase;
-        background-color: #054A91;
         color: #FFFFFF;
         text-align: left;
     }
@@ -66,15 +71,15 @@
         text-align: center;
         text-transform: uppercase;
     }
-.error{
+.error-log{
     font-weight: 700;
     font-size: 20px;
     line-height: 26px;
     text-transform: uppercase;
     color: #E71D36;}
+.error-log-border{
+    border: 1px solid #000000;
+}
 
-@media only screen and (max-width: 600px) {
-    body {
-      background-color: #054A91;
-    }
-  }
+
+  
