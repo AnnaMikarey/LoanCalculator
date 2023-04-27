@@ -2,7 +2,7 @@
   display: flex;
   width: 1420px;
   height: 670px;
-  margin: auto;
+  margin: 0 auto;
   justify-content: center;
   background-color: #054a91;
   border-radius: 10px;
@@ -94,7 +94,7 @@ button {
   color: #054a91;
   border-radius: 10px;
   font-size: 19px;
-  font-weight: 600;
+  font-weight: 700;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -136,7 +136,7 @@ object {
 
 @media screen and (max-width: 700px) {
   .logo {
-    margin-top: 30px;
+    margin-top: 40px;
     font-size: 32px;
     color: #f5f5f5;
   }
@@ -151,7 +151,7 @@ object {
     align-items: center;
     justify-content: flex-start;
     height: auto;
-    width: 100vw;
+    width: 100%;
     border-radius: 0;
   }
 
