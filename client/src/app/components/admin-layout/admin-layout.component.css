@@ -5,3 +5,26 @@
   align-items: center;
   background-color: #f5f5f5;
 }
+
+.header-bottom {
+  display: none;
+}
+
+@media only screen and (max-width: 700px) {
+  .layout {
+    height: 100%;
+    background-color: #054a91;
+  }
+
+  .main {
+    height: 100%;
+  }
+
+  .header-top {
+    display: none;
+  }
+
+  .header-bottom {
+    display: block;
+  }
+}

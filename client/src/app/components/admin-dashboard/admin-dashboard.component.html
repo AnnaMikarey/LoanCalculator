@@ -10,6 +10,10 @@
               type="number"
               class="form-control"
               formControlName="adminEuriborRate"
+              (click)="onFocus($event)"
+              [ngClass]="{
+                'modified-field': adminForm.get('adminEuriborRate').dirty
+              }"
             />
             <span class="euribor-date"
               >Last updated on {{ adminEuriborDate }}</span
@@ -33,6 +37,10 @@
               type="number"
               class="form-control"
               formControlName="adminBankMargin"
+              (click)="onFocus($event)"
+              [ngClass]="{
+                'modified-field': adminForm.get('adminBankMargin').dirty
+              }"
             />
             <div
               class="error-msg"
@@ -56,6 +64,10 @@
               type="number"
               class="form-control"
               formControlName="adminMinDepositPercent"
+              (click)="onFocus($event)"
+              [ngClass]="{
+                'modified-field': adminForm.get('adminMinDepositPercent').dirty
+              }"
             />
             <div
               class="error-msg"
@@ -82,7 +94,11 @@
               type="number"
               class="form-control"
               formControlName="adminMinPropertyPrice"
-              (input)="handleMinMaxPrices()"
+              (blur)="handleMinMaxPrices()"
+              (click)="onFocus($event)"
+              [ngClass]="{
+                'modified-field': adminForm.get('adminMinPropertyPrice').dirty
+              }"
             />
             <div
               class="error-msg"
@@ -102,7 +118,11 @@
               type="number"
               class="form-control"
               formControlName="adminMaxPropertyPrice"
-              (input)="handleMinMaxPrices()"
+              (blur)="handleMinMaxPrices()"
+              (click)="onFocus($event)"
+              [ngClass]="{
+                'modified-field': adminForm.get('adminMaxPropertyPrice').dirty
+              }"
             />
             <div
               class="error-msg"
@@ -122,6 +142,11 @@
               type="text"
               class="form-control"
               formControlName="adminDefaultPropertyPrice"
+              (click)="onFocus($event)"
+              [ngClass]="{
+                'modified-field': adminForm.get('adminDefaultPropertyPrice')
+                  .dirty
+              }"
             />
             <div
               class="error-msg"
@@ -147,6 +172,10 @@
               type="number"
               class="form-control"
               formControlName="adminContractFee"
+              (click)="onFocus($event)"
+              [ngClass]="{
+                'modified-field': adminForm.get('adminContractFee').dirty
+              }"
             />
             <div
               class="error-msg"
@@ -166,6 +195,10 @@
               type="number"
               class="form-control"
               formControlName="adminMonthlyBankFee"
+              (click)="onFocus($event)"
+              [ngClass]="{
+                'modified-field': adminForm.get('adminMonthlyBankFee').dirty
+              }"
             />
             <div
               class="error-msg"
@@ -185,6 +218,10 @@
               type="number"
               class="form-control"
               formControlName="adminRegistrationFee"
+              (click)="onFocus($event)"
+              [ngClass]="{
+                'modified-field': adminForm.get('adminRegistrationFee').dirty
+              }"
             />
             <div
               *ngIf="
@@ -199,23 +236,37 @@
       </div>
     </div>
     <div class="row">
-      <button class="btn-save" type="submit" [disabled]="adminForm.invalid">
+      <button
+        class="btn-save"
+        type="submit"
+        [disabled]="adminForm.invalid"
+        [ngClass]="{
+          'saveButton-ok': !adminForm.invalid && adminForm.dirty
+        }"
+      >
         <div class="svg-container">
           <object
             type="image/svg+xml"
             data="/assets/save-svgrepo-com.svg"
           ></object>
         </div>
-        <span>Save Changes</span>
+        <span>SAVE CHANGES</span>
       </button>
-      <button class="btn-discard" type="button" (click)="discardChanges()">
+      <button
+        class="btn-discard"
+        type="button"
+        (click)="discardChanges()"
+        [ngClass]="{
+          'button-discard': adminForm.dirty
+        }"
+      >
         <div class="svg-container">
           <object
             type="image/svg+xml"
             data="/assets/revert-svgrepo-com.svg"
           ></object>
         </div>
-        <span>Discard Changes</span>
+        <span>REVERT CHANGES</span>
       </button>
     </div>
   </form>
