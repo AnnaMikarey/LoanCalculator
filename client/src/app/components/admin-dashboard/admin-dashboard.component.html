@@ -151,13 +151,15 @@
             <div
               class="error-msg"
               *ngIf="
-          (adminForm.get('adminDefaultPropertyPrice').invalid &&
+          adminForm.get('adminDefaultPropertyPrice').invalid &&
           adminForm.get('adminDefaultPropertyPrice').touched || 
-          adminForm.get('adminDefaultPropertyPrice').errors?.['priceDefaultInvalid'])||
-          errorMessage
+          adminForm.get('adminDefaultPropertyPrice').errors?.['priceDefaultInvalid']
           "
             >
               <span> Error: Invalid value </span>
+            </div>
+            <div class="error-msg" *ngIf="errorMessage">
+              <span> Price value not in range </span>
             </div>
           </div>
         </div>

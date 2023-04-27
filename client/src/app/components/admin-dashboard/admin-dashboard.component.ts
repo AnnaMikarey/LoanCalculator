@@ -87,9 +87,9 @@ export class AdminDashboardComponent implements OnInit {
           }
         }
       );
-    // setTimeout(() => {
-    //   this.ngOnInit();
-    // }, 100);
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 100);
   }
 
   discardChanges() {
