@@ -9,6 +9,7 @@ import {
 import { AdminService } from '../../services/admin.service';
 import { EuriborService } from '../../services/euribor.service';
 import { forkJoin, take } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 export function checkIfLessThanZero(
   control: AbstractControl
@@ -28,7 +29,8 @@ export function checkIfLessThanZero(
 export class AdminDashboardComponent implements OnInit {
   constructor(
     private adminService: AdminService,
-    private euriborService: EuriborService
+    private euriborService: EuriborService,
+    private datePipe: DatePipe
   ) {}
 
   adminForm: FormGroup;
@@ -61,8 +63,10 @@ export class AdminDashboardComponent implements OnInit {
       .pipe(take(1))
       .subscribe(({ adminData, euriborData }) => {
         this.adminForm.patchValue(adminData);
-        this.adminEuriborDate =
-          euriborData['non_central_bank_rates'][4]['last_updated'];
+        this.adminEuriborDate = this.datePipe.transform(
+          euriborData['non_central_bank_rates'][4]['last_updated'],
+          'yyyy/MM/dd'
+        );
         this.adminForm.patchValue({
           adminEuriborRate:
             euriborData['non_central_bank_rates'][4]['rate_pct'],
