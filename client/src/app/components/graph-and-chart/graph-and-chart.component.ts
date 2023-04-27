@@ -15,6 +15,7 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
   @Input() contractFee: number;
   @Input() registrationFee: number;
   @Input() monthlyBankFee: number;
+  position:string="bottom";
   loading: boolean = false;
   //data for linear and annuity
   linearOrAnnuity: string //= 'annuity';
@@ -85,7 +86,7 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
       this.options = {
         tooltip: {
           trigger: 'item',
-          position: "left",
+          position: this.position,
           textStyle: {
             color: "#000",
           }
