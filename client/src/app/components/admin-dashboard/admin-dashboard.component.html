@@ -1,8 +1,14 @@
 <div class="container">
+  <div class="logo">
+    <a href="/admin"
+      ><span style="font-weight: bolder">THE BIG D</span
+      ><span style="font-weight: lighter">ecimal</span></a
+    >
+  </div>
   <form [formGroup]="adminForm" (ngSubmit)="saveChanges()" class="form">
     <div class="row upper">
       <div class="big-column">
-        <label for="column">RATES</label>
+        <label class="label-col" for="column">RATES</label>
         <div class="column">
           <div class="field-container">
             <label for="adminEuriborRate" class="form-label">EURIBOR %</label>
@@ -84,7 +90,7 @@
         </div>
       </div>
       <div class="big-column">
-        <label for="column">PRICE</label>
+        <label class="label-col" for="column">PRICE</label>
         <div class="column">
           <div class="field-container">
             <label for="adminMinPropertyPrice" class="form-label"
@@ -162,7 +168,7 @@
         </div>
       </div>
       <div class="big-column">
-        <label for="column">FEES</label>
+        <label class="label-col" for="column">FEES</label>
         <div class="column">
           <div class="field-container">
             <label for="adminContractFee" class="form-label"

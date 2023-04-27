@@ -1,11 +1,15 @@
 .container {
   display: flex;
-  width: 1526px;
+  width: 1420px;
   height: 670px;
   margin: auto;
   justify-content: center;
   background-color: #054a91;
   border-radius: 10px;
+}
+
+a {
+  display: none;
 }
 
 .field-container {
@@ -29,7 +33,7 @@
 .column {
   border: 1px solid black;
   border-radius: 10px;
-  padding: 50px 30px 30px 50px;
+  padding: 50px 30px 30px 30px;
   margin-top: 10px;
 }
 
@@ -37,11 +41,15 @@
   margin-top: 54px;
 }
 
+.label-col {
+  padding-left: 15px;
+}
+
 label {
   font-size: 18px;
   color: #f5f5f5;
   line-height: 1.3rem;
-  width: 300px;
+  width: 270px;
   margin-bottom: 10px;
 }
 
@@ -127,6 +135,17 @@ object {
 }
 
 @media screen and (max-width: 700px) {
+  .logo {
+    margin-top: 30px;
+    font-size: 32px;
+    color: #f5f5f5;
+  }
+
+  a {
+    display: block;
+    color: #f5f5f5;
+    text-decoration: none;
+  }
   .container {
     flex-direction: column;
     align-items: center;

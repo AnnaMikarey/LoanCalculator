@@ -54,5 +54,14 @@ object {
   .header {
     height: 100px;
     justify-content: center;
+    width: 100vw;
+  }
+
+  button {
+    margin-right: 80px;
+  }
+
+  a {
+    display: none;
   }
 }
