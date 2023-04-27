@@ -1,9 +1,10 @@
 <div class="big-card">
     <h2>REPRESENTATIVE EXAMPLE:</h2>
+    <!-- 
+ [monthlyBankFee]="monthlyBankFee" -->
     <app-graph-and-chart [chartData]="calculations"
     [contractFee]="contractFee"
  [registrationFee]="registrationFee"
- [monthlyBankFee]="monthlyBankFee"
  ></app-graph-and-chart>
  <div class="big-output-container">
 
@@ -18,11 +19,16 @@
     </div>
     <div class="line">
         <div class="left">
-    <div class="graph-legend" id="three"></div><div>BANK FEE:</div></div> <span class="output">{{monthlyBankFee}} EUR</span>
+    <div class="graph-legend" id="three"></div><div>BANK FEE:</div></div> <span class="output">{{totalBankFee}} EUR</span>
     </div>
     <div class="line">
         <div class="left">
-    <div class="graph-legend" id="four"></div><div>MORTGAGE REGISTRATION FEE:</div></div> {{registrationFee}} EUR
+    <div class="graph-legend" id="five"></div><div>TOTAL INTEREST AMOUNT:</div></div> <span class="output">{{totalInterestAmount}} EUR</span>
+    </div>
+
+    <div class="line">
+        <div class="left">
+    <div class="graph-legend" id="four"></div><div>REGISTRATION FEE:</div></div><span class="output">{{registrationFee}} EUR </span> 
     </div>
 </div>
 <div class="output-container-two">
@@ -50,7 +56,7 @@
         of salary</span> -->
         <div class="line">
             <div class="left">  
-        <li>ANNUAL INTEREST RATE TOTAL:</li></div> {{annualInterestRate}} %</div>
+        <li>TOTAL PAYMENT AMOUNT:</li></div><span class="output"> {{totalAmountToBePaid}} EUR</span></div>
     </ul>
     </div>
  </div>   

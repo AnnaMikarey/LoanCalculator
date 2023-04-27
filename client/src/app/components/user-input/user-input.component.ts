@@ -96,7 +96,7 @@ export class UserInputComponent implements OnInit {
       event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
     }
     this.postForm.controls['initialDeposit'].setValue(Math.ceil(Math.abs(parseInt(event.target.value))) || "");
-    this.postForm.controls['depositPercent'].setValue(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('propertyPrice').value);
+    this.postForm.controls['depositPercent'].setValue(Math.round(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('propertyPrice').value));
   }
 
   setAnnuityLinear(event: any) {
@@ -192,6 +192,8 @@ export class UserInputComponent implements OnInit {
             this.postForm.controls["mortgagePeriod"].setValue(this.minMortgagePeriod);
           } else if (event.target.getAttribute('formControlName') == "salary") {
             this.postForm.controls["salary"].setValue(1);
+          } else if (event.target.getAttribute('formControlName') == "financialObligation") {
+            this.postForm.controls["financialObligation"].setValue(0);
           } else {
             this.postForm.controls[event.target.getAttribute('formControlName')].setValue(0);
           }

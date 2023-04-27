@@ -22,6 +22,7 @@
                 <div>{{maxPropertyPrice}} EUR</div>
             </div>
             <!--  -->
+           
             <div class="slider">
                 <input type="range" id="price-of-property-slider" formControlName="propertyPrice"
                     min="{{minPropertyPrice}}" max="{{maxPropertyPrice}}" (input)="setPriceOfProperty($event)" />
@@ -98,7 +99,7 @@
         <div class="mini-container">
             <label for="salary">SALARY (EUR)</label>
             <br />
-                <input class="flex" type="text" formControlName="salary" id="salary" maxlength="10"
+                <input class="flex" type="text" formControlName="salary" id="salary" maxlength="9"
                     (input)="checkIfNotNumber($event)" />
             <ul *ngIf="salary.errors">
                 <li *ngIf="salary.errors['required']">
