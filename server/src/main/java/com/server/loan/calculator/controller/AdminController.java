@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = {"http://localhost:4200/", " http://16.16.120.205:8081/"})
+@CrossOrigin(origins = {"http://localhost:4200/", " http://16.16.120.205:8081/", "http://13.48.162.1:8081/"})
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;
