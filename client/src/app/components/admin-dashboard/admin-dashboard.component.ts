@@ -63,10 +63,10 @@ export class AdminDashboardComponent implements OnInit {
       .pipe(take(1))
       .subscribe(({ adminData, euriborData }) => {
         this.adminForm.patchValue(adminData);
-        this.adminEuriborDate = this.datePipe.transform(
-          euriborData['non_central_bank_rates'][4]['last_updated'],
-          'yyyy/MM/dd'
-        );
+        const dateFromAPI = '04-27-2023';
+        // euriborData['non_central_bank_rates'][4]['last_updated'];
+        this.adminEuriborDate =
+          this.datePipe.transform(dateFromAPI, 'yyyy/MM/dd') || dateFromAPI;
         this.adminForm.patchValue({
           adminEuriborRate:
             euriborData['non_central_bank_rates'][4]['rate_pct'],
