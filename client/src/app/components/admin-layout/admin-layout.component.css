@@ -1,0 +1,31 @@
+.main {
+  height: calc(100vh - 72px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.header-bottom {
+  display: none;
+}
+
+@media only screen and (max-width: 700px) {
+  .layout {
+    height: 100%;
+    background-color: #054a91;
+    width: 100vw;
+  }
+
+  .main {
+    height: 100%;
+  }
+
+  .header-top {
+    display: none;
+  }
+
+  .header-bottom {
+    display: block;
+  }
+}

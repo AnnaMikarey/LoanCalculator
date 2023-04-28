@@ -2,7 +2,9 @@ package com.server.loan.calculator.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -10,6 +12,8 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @Table(name = "ADMIN")
+@AllArgsConstructor
+@NoArgsConstructor
 public class AdminData implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

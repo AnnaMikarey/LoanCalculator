@@ -1,0 +1,167 @@
+.container {
+  display: flex;
+  width: 1420px;
+  height: 670px;
+  margin: 0 auto;
+  justify-content: center;
+  background-color: #054a91;
+  border-radius: 10px;
+}
+
+a {
+  display: none;
+}
+
+.field-container {
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.upper {
+  margin-bottom: 40px;
+  gap: 90px;
+}
+
+.column {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 50px 30px 30px 30px;
+  margin-top: 10px;
+}
+
+.big-column {
+  margin-top: 54px;
+}
+
+.label-col {
+  padding-left: 15px;
+}
+
+label {
+  font-size: 18px;
+  color: #f5f5f5;
+  line-height: 1.3rem;
+  width: 270px;
+  margin-bottom: 10px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid #e71d36;
+}
+
+.error-msg {
+  color: #e71d36;
+  font-size: 13px;
+  width: 270px;
+}
+
+.euribor-date {
+  font-size: 14px;
+  color: #f5f5f5;
+  line-height: 1.5rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input {
+  width: 270px;
+  appearance: textfield;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+  padding-left: 10px;
+  border: none;
+}
+
+button {
+  display: flex;
+  gap: 5px;
+  width: 325px;
+  height: 50px;
+  background-color: #f5f5f5;
+  color: #054a91;
+  border-radius: 10px;
+  font-size: 19px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  background-color: #81a4cd;
+}
+
+button:disabled {
+  background-color: #e71d36;
+  cursor: auto;
+}
+
+object {
+  width: 35px;
+  height: 35px;
+  font-weight: bolder;
+}
+
+.svg-container {
+  width: 60px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.modified-field {
+  border: 5px solid #ffbf00;
+}
+
+.saveButton-ok {
+  background-color: #c7f9cc;
+}
+
+.button-discard {
+  background-color: #fdffb6;
+}
+
+@media screen and (max-width: 700px) {
+  .logo {
+    margin-top: 40px;
+    font-size: 32px;
+    color: #f5f5f5;
+  }
+
+  a {
+    display: block;
+    color: #f5f5f5;
+    text-decoration: none;
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .upper {
+    gap: 0;
+  }
+}

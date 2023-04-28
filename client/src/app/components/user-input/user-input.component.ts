@@ -41,7 +41,7 @@ export class UserInputComponent implements OnInit {
         initialDeposit: [(this.defaultPropertyPrice * this.minDepositPercent / 100), [Validators.pattern(/[0-9]/), Validators.required, (control: AbstractControl) => Validators.max(this.maxDeposit)(control), (control: AbstractControl) => Validators.min(this.minDeposit)(control)]],
         depositPercent: [this.minDepositPercent, [Validators.required, Validators.min(this.minDepositPercent), Validators.max(99)]],
         mortgagePeriod: [this.defaultMortgagePeriod, [Validators.required, Validators.pattern(/[0-9]/), Validators.min(this.minMortgagePeriod), Validators.max(this.maxMortgagePeriod)]],
-        salary: [this.defaultSalary, [Validators.pattern(/[0-9]/), Validators.min(1), Validators.required],],
+        salary: [this.defaultSalary, [Validators.pattern(/[0-9]/), Validators.min(1), Validators.required,Validators.max(10000)],],
         financialObligation: [this.defaultFinancialObligation, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
         annuityLinear: [this.initialAnnuityLinear, [],],
       },
@@ -96,7 +96,7 @@ export class UserInputComponent implements OnInit {
       event.target.value = event.target.value.split``.filter(value => /[0-9]/.test(value)).join``
     }
     this.postForm.controls['initialDeposit'].setValue(Math.ceil(Math.abs(parseInt(event.target.value))) || "");
-    this.postForm.controls['depositPercent'].setValue(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('propertyPrice').value);
+    this.postForm.controls['depositPercent'].setValue(Math.round(Math.abs(parseInt(event.target.value) || 0) * 100 / this.postForm.get('propertyPrice').value));
   }
 
   setAnnuityLinear(event: any) {
@@ -192,6 +192,8 @@ export class UserInputComponent implements OnInit {
             this.postForm.controls["mortgagePeriod"].setValue(this.minMortgagePeriod);
           } else if (event.target.getAttribute('formControlName') == "salary") {
             this.postForm.controls["salary"].setValue(1);
+          } else if (event.target.getAttribute('formControlName') == "financialObligation") {
+            this.postForm.controls["financialObligation"].setValue(0);
           } else {
             this.postForm.controls[event.target.getAttribute('formControlName')].setValue(0);
           }

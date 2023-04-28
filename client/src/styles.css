@@ -1,16 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500&display=swap");
-
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "JetBrains Mono", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "JetBrains Mono", sans-serif;
 }
 
-body { 
-    background-color: #F5F5F5;
+body {
+  background-color: #f5f5f5;
 }
-
 
