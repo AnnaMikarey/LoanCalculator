@@ -1,11 +1,40 @@
-<div>
-    <label for="username">Username:</label>
-    <input type="text" name="username" [(ngModel)]="username">
+<div class="login-form-container">
+  <div class="logo">
+    <span style="font-weight: bolder">THE BIG D</span>
+    <span style="font-weight: lighter">ecimal</span>
   </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" name="password" [(ngModel)]="password">
+
+  <h3 class="login-title">Log in to server</h3>
+
+  <div class="login-container">
+    <div>
+      <div class="log-input-label">
+        <label id="log-username" for="username">Username:</label>
+        <input
+          class="log-input-username"
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+        />
+      </div>
+    </div>
+    <div>
+      <div class="log-input-label">
+        <label id="log-password" for="password">Password:</label>
+        <input
+          class="log-input-password"
+          type="password"
+          name="password"
+          placeholder="PASSWORD"
+          [(ngModel)]="password"
+        />
+        <div class="error-log" *ngIf="isError">
+          Incorrect username or password
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="log-button" (click)="login()">Log in</button>
+    </div>
   </div>
-  <div>
-    <button (click)="login()">Login</button>
-  </div>
+</div>
