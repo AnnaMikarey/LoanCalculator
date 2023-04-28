@@ -64,4 +64,4 @@ jobs:
           SCRIPT_BEFORE: |
             cd ./client/loan-calculator
             pm2 delete all
-            pm2 serve loan-calculator/ 8081 --watch -i max
+            pm2 serve loan-calculator/ 8081 --spa --watch -i max
