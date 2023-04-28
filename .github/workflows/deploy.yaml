@@ -54,7 +54,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           SOURCE: ./client/dist/loan-calculator/*
-          TARGET: ../../var/www/html/
+          TARGET: sudo chown apache:apache -R ../../var/www/html/
 
       - name: Run PM2 for angular app
         uses: easingthemes/ssh-deploy@main
