@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-
+permissions: read-all|write-all
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -54,7 +54,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           SOURCE: ./client/dist/loan-calculator/*
-          TARGET: ./var/www/html/
+          TARGET: ../../var/www/html/
 
       - name: Run PM2 for angular app
         uses: easingthemes/ssh-deploy@main
@@ -64,6 +64,6 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ./client/loan-calculator
           SCRIPT_BEFORE: |
-            cd ./var/www/
+            cd ../../var/www/
             pm2 delete all
             pm2 serve html/ 8081 --watch -i max
