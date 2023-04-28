@@ -1,85 +1,80 @@
 * {
-    font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .login-form-container {
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        width: 434px;
-        margin: 251px auto;
-            
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 434px;
+  margin: 251px auto;
 }
 .login-title {
-        text-transform: uppercase;
-        font-weight: 800;
-        font-size: 24px;
-        line-height: 32px;
-        margin: 27px auto;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 27px auto;
 }
 .login-container {
-    
-        justify-content: center;
-        flex-direction: column;
-        
-        display: flex;
-        height: 100%;
-        width: 434px;
-        height: 318px;
-        border: 1px solid #000000;
-        border-radius: 10px;
-        background-color: #054A91;
-        
-    }
-    .image-border {
-        margin-top: 78px;
-        border: 2px solid #000000;
-        border-radius: 217px;  
-        padding-left: 1px;
-        padding-right: 1px;
+  justify-content: center;
+  flex-direction: column;
 
-    }
-    .log-input-password, .log-input-username{
-        background-color: #F5F5F5;
-        border-radius: 10px;
-        width: 400px;
-        height: 50px;
-        padding: 5px;
-        font-weight: 700;
-        font-size: 20px;
-    }
+  display: flex;
+  height: 100%;
+  width: 434px;
+  height: 318px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  background-color: #054a91;
+}
+.image-border {
+  margin-top: 78px;
+  border: 2px solid #000000;
+  border-radius: 217px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.log-input-password,
+.log-input-username {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  width: 400px;
+  height: 50px;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 20px;
+}
 
-    .log-input-password{
-        margin-bottom: 42px;
-    }
-
-    .log-input-label {
-        padding-left: 20px;
-        font-style: normal;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: #FFFFFF;
-        text-align: left;
-        font-size: 18px;
-
-    }
-    .log-button {
-        color: #054A91;
-        border-radius: 10px;
-        width: 400px;
-        height: 50px;
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 26px;
-        text-align: center;
-        text-transform: uppercase;
-    }
-.error-log{
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 26px;
-    text-transform: uppercase;
-    color: #E71D36;}
-.error-log-border{
-    border: 1px solid #000000;
+.log-input-label {
+  padding-left: 18px;
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: left;
+  font-size: 18px;
+  height: 100px;
+}
+.log-button {
+  color: #054a91;
+  border-radius: 10px;
+  width: 400px;
+  height: 50px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+.error-log {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  text-transform: uppercase;
+  color: #e71d36;
+}
+.error-log-border {
+  border: 1px solid #000000;
 }
