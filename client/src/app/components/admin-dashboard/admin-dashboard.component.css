@@ -8,12 +8,12 @@
   border-radius: 10px;
 }
 
-a {
+.logo {
   display: none;
 }
 
 .field-container {
-  height: 130px;
+  height: 125px;
   display: flex;
   flex-direction: column;
 }
@@ -26,7 +26,7 @@ a {
 }
 
 .upper {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   gap: 90px;
 }
 
@@ -35,6 +35,7 @@ a {
   border-radius: 10px;
   padding: 50px 30px 30px 30px;
   margin-top: 10px;
+  height: 480px;
 }
 
 .big-column {
@@ -134,15 +135,15 @@ object {
   background-color: #fdffb6;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
   .logo {
+    display: block;
     margin-top: 40px;
     font-size: 32px;
     color: #f5f5f5;
   }
 
   a {
-    display: block;
     color: #f5f5f5;
     text-decoration: none;
   }
