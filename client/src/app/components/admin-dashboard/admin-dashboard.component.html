@@ -33,6 +33,15 @@
             >
               <span> ERROR: COULD NOT FETCH VALUE </span>
             </div>
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminEuriborRate').hasError('required') &&
+                adminForm.get('adminEuriborRate').touched
+              "
+            >
+              <span> THIS FIELD IS REQUIRED </span>
+            </div>
           </div>
 
           <div class="field-container">
@@ -51,13 +60,25 @@
             <div
               class="error-msg"
               *ngIf="
-                adminForm.get('adminBankMargin').invalid &&
+                (adminForm.get('adminBankMargin').hasError('pattern') ||
+                  adminForm
+                    .get('adminBankMargin')
+                    .hasError('lessThanZeroError')) &&
                 adminForm.get('adminBankMargin').touched
               "
             >
               <span>
-                ERROR: VALUE MIST BE GREATER THAN 0 AND LESS OR EQUAL TO 100
+                ERROR: VALUE MUST BE GREATER THAN 0 AND LESS OR EQUAL TO 100
               </span>
+            </div>
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminBankMargin').hasError('required') &&
+                adminForm.get('adminBankMargin').touched
+              "
+            >
+              <span> THIS FIELD IS REQUIRED </span>
             </div>
           </div>
           <div class="field-container">
@@ -78,13 +99,25 @@
             <div
               class="error-msg"
               *ngIf="
-                adminForm.get('adminMinDepositPercent').invalid &&
+                (adminForm.get('adminMinDepositPercent').hasError('pattern') ||
+                  adminForm
+                    .get('adminMinDepositPercent')
+                    .hasError('lessThanZeroError')) &&
                 adminForm.get('adminMinDepositPercent').touched
               "
             >
               <span>
-                ERROR: VALUE MIST BE GREATER THAN 0 AND LESS OR EQUAL TO 100
+                ERROR: VALUE MUST BE GREATER THAN 0 AND LESS OR EQUAL TO 100
               </span>
+            </div>
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminMinDepositPercent').hasError('required') &&
+                adminForm.get('adminMinDepositPercent').touched
+              "
+            >
+              <span> THIS FIELD IS REQUIRED </span>
             </div>
           </div>
         </div>
@@ -94,7 +127,7 @@
         <div class="column">
           <div class="field-container">
             <label for="adminMinPropertyPrice" class="form-label"
-              >MIN PRICE OF PROPERTY (EUR)</label
+              >MIN PROPERTY PRICE (EUR)</label
             >
             <input
               type="number"
@@ -110,16 +143,28 @@
             <div
               class="error-msg"
               *ngIf="
-                adminForm.get('adminMinPropertyPrice').invalid &&
+                (adminForm.get('adminMinPropertyPrice').hasError('pattern') ||
+                  adminForm
+                    .get('adminMinPropertyPrice')
+                    .hasError('lessThanZeroError')) &&
                 adminForm.get('adminMinPropertyPrice').touched
               "
             >
               <span> ERROR: INVALID VALUE </span>
             </div>
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminMinPropertyPrice').hasError('required') &&
+                adminForm.get('adminMinPropertyPrice').touched
+              "
+            >
+              <span> THIS FIELD IS REQUIRED </span>
+            </div>
           </div>
           <div class="field-container">
             <label for="adminMaxPropertyPrice" class="form-label"
-              >MAX PRICE OF PROPERTY (EUR)</label
+              >MAX PROPERTY PRICE (EUR)</label
             >
             <input
               type="number"
@@ -135,16 +180,28 @@
             <div
               class="error-msg"
               *ngIf="
-                adminForm.get('adminMaxPropertyPrice').invalid &&
+                (adminForm.get('adminMaxPropertyPrice').hasError('pattern') ||
+                  adminForm
+                    .get('adminMaxPropertyPrice')
+                    .hasError('lessThanZeroError')) &&
                 adminForm.get('adminMaxPropertyPrice').touched
               "
             >
               <span> ERROR: INVALID VALUE </span>
             </div>
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminMaxPropertyPrice').hasError('required') &&
+                adminForm.get('adminMaxPropertyPrice').touched
+              "
+            >
+              <span> THIS FIELD IS REQUIRED </span>
+            </div>
           </div>
           <div class="field-container">
             <label for="adminDefaultPropertyPrice" class="form-label"
-              >DEFAULT PRICE OF PROPERTY (EUR)</label
+              >DEFAULT PROPERTY PRICE (EUR)</label
             >
             <input
               type="text"
@@ -161,14 +218,41 @@
             <div
               class="error-msg"
               *ngIf="
-          adminForm.get('adminDefaultPropertyPrice').invalid &&
-          adminForm.get('adminDefaultPropertyPrice').touched || 
+              ((adminForm.get('adminDefaultPropertyPrice').hasError('pattern') ||
+              adminForm
+                .get('adminDefaultPropertyPrice')
+                .hasError('lessThanZeroError')) &&
+          adminForm.get('adminDefaultPropertyPrice').touched) && !adminForm
+          .get('adminDefaultPropertyPrice')
+          .hasError('required') || 
           adminForm.get('adminDefaultPropertyPrice').errors?.['priceDefaultInvalid']
           "
             >
               <span> ERROR: INVALID VALUE </span>
             </div>
-            <div class="error-msg" *ngIf="errorMsg">
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm
+                  .get('adminDefaultPropertyPrice')
+                  .hasError('required') &&
+                adminForm.get('adminDefaultPropertyPrice').touched
+              "
+            >
+              <span> THIS FIELD IS REQUIRED </span>
+            </div>
+            <div
+              class="error-msg"
+              *ngIf="
+                errorMsg &&
+                !adminForm
+                  .get('adminDefaultPropertyPrice')
+                  .hasError('required') &&
+                !adminForm
+                  .get('adminDefaultPropertyPrice')
+                  .hasError('lessThanZeroError')
+              "
+            >
               <span> {{ errorMsg }} </span>
             </div>
           </div>
@@ -193,11 +277,23 @@
             <div
               class="error-msg"
               *ngIf="
-                adminForm.get('adminContractFee').invalid &&
+                (adminForm.get('adminBankMargin').hasError('pattern') ||
+                  adminForm
+                    .get('adminBankMargin')
+                    .hasError('lessThanZeroError')) &&
                 adminForm.get('adminContractFee').touched
               "
             >
               <span> ERROR: INVALID VALUE </span>
+            </div>
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminContractFee').hasError('required') &&
+                adminForm.get('adminContractFee').touched
+              "
+            >
+              <span> THIS FIELD IS REQUIRED </span>
             </div>
           </div>
           <div class="field-container">
@@ -216,11 +312,23 @@
             <div
               class="error-msg"
               *ngIf="
-                adminForm.get('adminMonthlyBankFee').invalid &&
+                (adminForm.get('adminMonthlyBankFee').hasError('pattern') ||
+                  adminForm
+                    .get('adminMonthlyBankFee')
+                    .hasError('lessThanZeroError')) &&
                 adminForm.get('adminMonthlyBankFee').touched
               "
             >
               <span> ERROR: INVALID VALUE </span>
+            </div>
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminMonthlyBankFee').hasError('required') &&
+                adminForm.get('adminMonthlyBankFee').touched
+              "
+            >
+              <span> THIS FIELD IS REQUIRED </span>
             </div>
           </div>
           <div class="field-container">
@@ -238,11 +346,23 @@
             />
             <div
               *ngIf="
-                adminForm.get('adminRegistrationFee').invalid &&
+                (adminForm.get('adminRegistrationFee').hasError('pattern') ||
+                  adminForm
+                    .get('adminRegistrationFee')
+                    .hasError('lessThanZeroError')) &&
                 adminForm.get('adminRegistrationFee').touched
               "
             >
               <span class="error-msg"> ERROR: INVALID VALUE </span>
+            </div>
+            <div
+              class="error-msg"
+              *ngIf="
+                adminForm.get('adminRegistrationFee').hasError('required') &&
+                adminForm.get('adminRegistrationFee').touched
+              "
+            >
+              <span> THIS FIELD IS REQUIRED </span>
             </div>
           </div>
         </div>

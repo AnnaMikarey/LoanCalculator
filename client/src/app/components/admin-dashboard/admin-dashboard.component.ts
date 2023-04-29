@@ -115,7 +115,7 @@ export class AdminDashboardComponent implements OnInit {
 
   swapMinMaxPricesIfNeeded() {
     const { min, max } = this.getMinMaxPrices();
-    if (min > max) {
+    if (min > max && max != null) {
       const priceDef = (min + max) / 2;
       this.adminForm.patchValue({
         adminMinPropertyPrice: max,
@@ -124,7 +124,7 @@ export class AdminDashboardComponent implements OnInit {
       });
       this.isFieldChanged = true;
       this.errorMsg =
-        'WARNING!!! SAVE CHANGES IF THE VALUES HERE ARE CORRECT, AS IT MAY CAUSE ERRORS IN CALCULATIONS!!!';
+        'WARNING!!! ONLYSAVE CHANGES IF THE VALUES HERE ARE CORRECT, AS IT MAY CAUSE ERRORS IN CALCULATIONS!!!';
     }
   }
 
