@@ -50,7 +50,7 @@ object {
   align-items: center;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
   .header {
     margin-right: 0;
     height: 100px;
@@ -60,5 +60,15 @@ object {
 
   a {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 1800px) and (min-width: 900px) {
+  button,
+  .logo {
+    transform: scale(0.8);
+  }
+  .header {
+    height: calc(72px * 0.8);
   }
 }

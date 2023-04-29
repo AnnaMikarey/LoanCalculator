@@ -135,7 +135,7 @@ object {
   background-color: #fdffb6;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
   .logo {
     display: block;
     margin-top: 40px;
