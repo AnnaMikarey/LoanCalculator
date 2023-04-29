@@ -103,7 +103,8 @@
               (blur)="handleMinMaxPrices()"
               (click)="onFocus($event)"
               [ngClass]="{
-                'modified-field': adminForm.get('adminMinPropertyPrice').dirty
+                'modified-field':
+                  adminForm.get('adminMinPropertyPrice').dirty || isFieldChanged
               }"
             />
             <div
@@ -127,7 +128,8 @@
               (blur)="handleMinMaxPrices()"
               (click)="onFocus($event)"
               [ngClass]="{
-                'modified-field': adminForm.get('adminMaxPropertyPrice').dirty
+                'modified-field':
+                  adminForm.get('adminMaxPropertyPrice').dirty || isFieldChanged
               }"
             />
             <div
@@ -148,10 +150,12 @@
               type="text"
               class="form-control"
               formControlName="adminDefaultPropertyPrice"
+              (blur)="handleMinMaxPrices()"
               (click)="onFocus($event)"
               [ngClass]="{
-                'modified-field': adminForm.get('adminDefaultPropertyPrice')
-                  .dirty
+                'modified-field':
+                  adminForm.get('adminDefaultPropertyPrice').dirty ||
+                  isFieldChanged
               }"
             />
             <div
@@ -163,6 +167,9 @@
           "
             >
               <span> ERROR: INVALID VALUE </span>
+            </div>
+            <div class="error-msg" *ngIf="errorMsg">
+              <span> {{ errorMsg }} </span>
             </div>
           </div>
         </div>

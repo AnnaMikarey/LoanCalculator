@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { CommonModule, DatePipe } from '@angular/common';
     CommonModule,
   ],
 
-  providers: [DatePipe],
+  providers: [],
   bootstrap: [AppComponent],
   exports: [DisclaimerComponent, AdminDashboardComponent],
 })

@@ -9,7 +9,6 @@ import {
 import { AdminService } from '../../services/admin.service';
 import { EuriborService } from '../../services/euribor.service';
 import { forkJoin, take } from 'rxjs';
-import { DatePipe } from '@angular/common';
 
 export function checkIfLessThanZero(
   control: AbstractControl
@@ -29,12 +28,13 @@ export function checkIfLessThanZero(
 export class AdminDashboardComponent implements OnInit {
   constructor(
     private adminService: AdminService,
-    private euriborService: EuriborService,
-    private datePipe: DatePipe
+    private euriborService: EuriborService
   ) {}
 
   adminForm: FormGroup;
   adminEuriborDate!: string;
+  isFieldChanged = false;
+  errorMsg: string;
 
   validatorsNum = [
     Validators.required,
@@ -63,10 +63,10 @@ export class AdminDashboardComponent implements OnInit {
       .pipe(take(1))
       .subscribe(({ adminData, euriborData }) => {
         this.adminForm.patchValue(adminData);
-        this.adminEuriborDate = this.datePipe.transform(
-          euriborData['non_central_bank_rates'][4]['last_updated'],
-          'yyyy/MM/dd'
-        );
+        const dateFromAPI =
+          euriborData['non_central_bank_rates'][4]['last_updated'];
+        let parts = dateFromAPI.split('-');
+        this.adminEuriborDate = `${parts[2]}/${parts[0]}/${parts[1]}`;
         this.adminForm.patchValue({
           adminEuriborRate:
             euriborData['non_central_bank_rates'][4]['rate_pct'],
@@ -79,24 +79,64 @@ export class AdminDashboardComponent implements OnInit {
     this.adminService.postData(this.adminForm.value).pipe(take(1)).subscribe();
     setTimeout(() => {
       this.ngOnInit();
-    }, 100);
+    }, 10);
+    this.isFieldChanged = false;
+    this.errorMsg = null;
   }
 
   discardChanges() {
     this.ngOnInit();
+    this.isFieldChanged = false;
+    this.errorMsg = null;
+  }
+
+  getMinMaxPrices() {
+    const priceMin = this.adminForm.value.adminMinPropertyPrice;
+    const priceMax = this.adminForm.value.adminMaxPropertyPrice;
+    return { min: priceMin, max: priceMax };
+  }
+
+  setDefaultPriceIfNeeded() {
+    const { min, max } = this.getMinMaxPrices();
+    let priceDef = this.adminForm.value.adminDefaultPropertyPrice;
+
+    if (priceDef < min || priceDef > max) {
+      this.isFieldChanged = true;
+      this.errorMsg = 'THE DEFAULT PRICE VALUE IS INVALID';
+
+      this.adminForm.setErrors({
+        invalidPrice: true,
+      });
+    } else {
+      this.adminForm.setErrors(null);
+      this.errorMsg = '';
+    }
+  }
+
+  swapMinMaxPricesIfNeeded() {
+    const { min, max } = this.getMinMaxPrices();
+    if (min > max) {
+      const priceDef = (min + max) / 2;
+      this.adminForm.patchValue({
+        adminMinPropertyPrice: max,
+        adminMaxPropertyPrice: min,
+        adminDefaultPropertyPrice: priceDef,
+      });
+      this.isFieldChanged = true;
+      this.errorMsg =
+        'WARNING!!! SAVE CHANGES IF THE VALUES HERE ARE CORRECT, AS IT MAY CAUSE ERRORS IN CALCULATIONS!!!';
+    }
+  }
+
+  updateFormValues() {
+    this.setDefaultPriceIfNeeded();
+    this.swapMinMaxPricesIfNeeded();
   }
 
   handleMinMaxPrices() {
-    const priceMin = this.adminForm.value.adminMinPropertyPrice;
-    const priceMax = this.adminForm.value.adminMaxPropertyPrice;
-
-    if (priceMin > priceMax) {
-      this.adminForm.patchValue({
-        adminMinPropertyPrice: priceMax,
-        adminMaxPropertyPrice: priceMin,
-      });
-    }
+    this.updateFormValues();
   }
+
   onFocus(event: any) {
     event.target.select();
   }
