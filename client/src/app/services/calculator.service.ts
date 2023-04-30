@@ -13,12 +13,13 @@ const httpOptions = {
 })
 export class CalculatorService {
   // private apiUrl = 'http://16.16.120.205:8080/client/';
-  //private apiUrl = 'http://localhost:3000/';
+  private apiUrl = 'http://localhost:3000/';
   constructor(private httpClient: HttpClient) {}
 
   getInitialData(): Observable<any[]> {
     return this.httpClient.get<any[]>(
-      environment.baseUrl + 'client' + 'get-initial-values'
+     // environment.baseUrl + 'client' + 'get-initial-values'
+     this.apiUrl + 'get-initial-values'
     );
   }
 

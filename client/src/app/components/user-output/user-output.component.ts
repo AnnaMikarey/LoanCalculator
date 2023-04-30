@@ -8,7 +8,7 @@ import { Observable, Observer } from 'rxjs';
   styleUrls: ['./user-output.component.css']
 })
 export class UserOutputComponent implements OnChanges {
-  //data fetch is mocked
+  
   @Input() calculations!: CalculatedValues;
 
   requestedLoanAmount!: number;

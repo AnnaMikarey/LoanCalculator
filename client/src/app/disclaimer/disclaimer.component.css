@@ -1,0 +1,51 @@
+.modalWindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #f5f5f5;
+    font-size: 0.5rem;
+    text-align: center;
+}
+
+button {
+    color: #f5f5f5;
+    font-size: 0.5rem;
+    text-align: center;
+    text-decoration: underline;
+
+}
+
+@media screen and (min-width: 300px) {
+    .modalWindow {
+        font-size: 0.7rem;
+    }
+
+    button {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .modalWindow {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        color: #f5f5f5;
+        text-align: center;
+    }
+
+    p {
+        text-align: left;
+        width: 42%;
+    }
+
+    button {
+        color: #f5f5f5;
+        font-size: 0.8rem;
+        text-align: center;
+        text-decoration: underline;
+    }
+}

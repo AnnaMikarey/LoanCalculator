@@ -2,10 +2,11 @@
     <ul *ngIf="(serverErrorMessage)">
         <li>{{serverErrorMessage}}</li>
     </ul>
-    <form style="margin-top: 32px;" [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
+    <!-- style="margin-top: 32px;" -->
+    <form [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
         <div class="mini-container">
-            <label for="price-of-property">PRICE OF PROPERTY (EUR)</label>
-            <br />
+            <label for="price-of-property">TOTAL PROPERTY PRICE (EUR)</label>
+
             <input class="flex" type="text" formControlName="propertyPrice" id="price-of-property"
                 (input)="setPriceOfProperty($event)" maxlength={{(maxPropertyPrice.toString()).length+1}} />
             <ul *ngIf="propertyPrice.errors">
@@ -17,20 +18,17 @@
                     Price of property must be less than {{maxPropertyPrice}} EUR
                 </li>
             </ul>
-            <br />
-            <div class="dataL">
+            <div class="data-label">
                 <div>{{minPropertyPrice}} EUR</div>
                 <div>{{maxPropertyPrice}} EUR</div>
             </div>
-            <!--  -->
-
             <div class="slider">
                 <input type="range" id="price-of-property-slider" formControlName="propertyPrice"
                     min="{{minPropertyPrice}}" max="{{maxPropertyPrice}}" (input)="setPriceOfProperty($event)" />
             </div>
         </div>
         <div class="mini-container">
-            <div class="dataL">
+            <div class="data-label" id="initial-deposit-label">
                 <label for="deposit">INITIAL DEPOSIT (EUR)</label>
                 <label for="depositPercent">%</label>
             </div>
@@ -39,7 +37,8 @@
                     maxlength={{(maxPropertyPrice.toString()).length+1}} (input)="setDeposit($event)" />
                 <div class="percent">
                     <span class="updown"><button style="background:transparent; border:none; color:transparent;"
-                            class="updownbutton" (mousedown)="depositPercentPlus()" (mouseup)="onSubmit()" (touchend)="onSubmit()" (touchstart)="depositPercentPlus()" >
+                            class="updownbutton" (mousedown)="depositPercentPlus()" (mouseup)="onSubmit()"
+                            (touchend)="onSubmit()" (touchstart)="depositPercentPlus()">
                             <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -51,7 +50,8 @@
                             </svg>
                         </button>
                         <button style="background:transparent; border:none; color:transparent;" class="updownbutton"
-                        (touchend)="onSubmit()" (touchstart)="depositPercentMinus()" (mousedown)="depositPercentMinus()" (mouseup)="onSubmit()">
+                            (touchend)="onSubmit()" (touchstart)="depositPercentMinus()"
+                            (mousedown)="depositPercentMinus()" (mouseup)="onSubmit()">
                             <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -78,7 +78,6 @@
         </div>
         <div class="mini-container">
             <label for="mortgage-period">MORTGAGE PERIOD (YEARS)</label>
-            <br />
             <input class="flex" type="text" formControlName="mortgagePeriod" id="mortgage-period"
                 (input)="checkIfNotNumber($event)" maxlength="3" />
             <ul *ngIf="mortgagePeriod.errors">
@@ -90,10 +89,9 @@
                 <li *ngIf="mortgagePeriod.errors['max']">
                     Mortgage period must be lower or equal to {{maxMortgagePeriod}}</li>
             </ul>
-            <br />
-            <div class="dataL">
-                <div>{{minMortgagePeriod}} YEAR</div>
-                <div>{{maxMortgagePeriod}} YEARS</div>
+            <div class="data-label">
+                <div>{{minMortgagePeriod}} YEAR<span *ngIf="minMortgagePeriod>1">S</span></div>
+                <div>{{maxMortgagePeriod}} YEAR<span *ngIf="maxMortgagePeriod>1">S</span></div>
             </div>
             <div class="slider">
                 <input type="range" id="mortgage-period-slider" formControlName="mortgagePeriod"
@@ -104,16 +102,15 @@
         <!-- turned off linear-annuity-->
         <div style="display:none" class="mini-container">
             <label for="annuity-linear">MORTGAGE TYPE</label>
-            <br />
             <div class=" linear-annuity">
                 <div>ANNUITY</div>
                 <input (click)="setAnnuityLinear($event)" type="checkbox" id="annuity-linear" />
                 <div>LINEAR</div>
             </div>
         </div>
+
         <div class="mini-container">
             <label for="salary">SALARY (EUR)</label>
-            <br />
             <input class="flex" type="text" formControlName="salary" id="salary" maxlength="5"
                 (input)="checkIfNotNumber($event)" />
             <ul *ngIf="salary.errors">
@@ -129,7 +126,6 @@
         </div>
         <div class="mini-container">
             <label for="financial-obligation">FINANCIAL OBLIGATION (EUR)</label>
-            <br />
             <input class="flex" type="text" formControlName="financialObligation" id="financial-obligation"
                 (input)="checkIfNotNumber($event)" maxlength="10" />
             <ul *ngIf="financialObligation.errors">

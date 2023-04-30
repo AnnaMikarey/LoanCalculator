@@ -40,4 +40,7 @@ body {
     color: #FFFFFF;
     margin-top: 78px;
   }
+  #modal-btn{
+    margin:0;
+}
 }

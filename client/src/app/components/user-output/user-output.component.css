@@ -3,32 +3,33 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: 50px;
-    font-size: 14px;
+    width: 100%;
 }
-h2{
-    font-size: 20px;
+
+h2 {
+    text-align: center;
+    font-size: 0.5rem;
+    /* according to the design no need to display */
+    display: none;
 }
 
 .big-output-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 0px 15px;
-    height: 150px;
-    width: 740px;
-    margin: 0px;
-    margin-top: 20px;
-    /* border:1px black solid; */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 95%;
+    height: auto;
 }
 
+
+.output-container-two,
 .output-container-one {
-    width: 340px;
-}
-
-.output-container-two {
-    width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
 }
 
 .line {
@@ -36,23 +37,47 @@ h2{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-}
-
-.output-container-two .line {
-    margin-bottom: 15px;
+    margin-bottom: 10%;
+    width: 100%;
 }
 
 .left {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: stretch;
+    width: 70%;
 }
 
+ul li {
+    margin-left: 1.6em;
+    width: 100%;
+}
+
+li span {
+    display: block;
+    margin-left: -0.9em;
+}
+
+
 .graph-legend {
-    width: 25px;
-    height: 12px;
+    width: 5%;
+    height: 0.5rem;
     border-radius: 1px;
+}
+
+.line .info-text {
+    width: 100%;
+    font-size: 0.5rem;
+    padding-left: 1%;
+}
+
+.line .output {
+    width: 30%;
+    font-size: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center
 }
 
 #one {
@@ -78,30 +103,98 @@ h2{
 .output {
     background-color: #FAFF1A;
     color: #000;
-    display:flex;
+    display: flex;
     justify-content: center;
     /* display: table; */
     /* margin: 0 auto; */
-    min-width: 120px;
+    /* min-width: 120px; */
     font-weight: 900;
+    width: 100%;
 }
 
-@media screen and (max-width: 1290px) {
-    .output-container-two, .output-container-one {
-        width: 360px;
-        /* border:1px red solid; */
+
+@media screen and (min-width: 300px) {
+    h2 {
+        /* this is still turned off */
     }
-    .output-container-two{
-        width: 340px;
+
+    .graph-legend {
+        width: 1.5rem;
+        height: 0.6rem;
+        border-radius: 1px;
+    }
+
+    .line .info-text {
+        width: 100%;
+        font-size: 0.7rem;
+        padding-left: 3%;
+    }
+
+    .line .output {
+        font-size: 0.7rem;
+    }
+
+    .line {
+        margin-bottom: 5%;
+
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    h2 {
+        font-size: 1.1rem;
+        display: contents;
     }
 
     .big-output-container {
-        
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-end;
-        width: 370px;
-        height:auto;
-        padding:0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 95%;
+    }
+
+    .output-container-two,
+    .output-container-one {
+        width: 48%;
+    }
+
+    .line .info-text {
+        font-size: 0.7rem;
+    }
+
+    .line .output {
+        font-size: 0.7rem;
+    }
+
+    .output-container-one .line {
+        align-items: flex-start;
+        margin-bottom: 7%;
+    }
+
+    .graph-legend {
+        margin-right: 2%;
+    }
+
+    ul div.line {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    ul div.left {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    span.output {
+        margin-top: 2%;
+    }
+
+    div.info-text {
+        margin-top: 2%;
+    }
+
+    .graph-legend {
+        margin-top: 2%;
     }
 }
