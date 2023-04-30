@@ -142,6 +142,20 @@ ul {
   display: none;
 }
 
+li {
+  font-size: 0.5rem;
+  color: #e43a8f;
+  list-style-type: none;
+  position: absolute;
+  font-weight: bolder;
+}
+
+.serverErrorMessage {
+  text-align: left;
+  top: 2.15rem;
+  inline-size: 80vw;
+}
+
 input[type=text].ng-invalid {
   outline: 1px solid red;
 }
@@ -215,10 +229,6 @@ input[type=range]::-moz-range-thumb {
     font-size: 0.7rem;
   }
 
-  /* input{
-    
-  } */
-
   input#deposit-percent {
     padding-left: 0.7rem;
   }
@@ -236,23 +246,23 @@ input[type=range]::-moz-range-thumb {
 
 @media screen and (min-width: 1201px) {
   .mini-container {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.6rem;
   }
 
   ul {
     max-width: 20%;
     display: block;
-    position: absolute;
+    /* position: absolute; */
   }
 
   li {
+    inline-size: 18vw;
     font-size: 0.7rem;
-    color: #e43a8f;
-    list-style-type: none;
   }
 
+
   .data-label {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
 
   #price-of-property,
@@ -263,5 +273,10 @@ input[type=range]::-moz-range-thumb {
   /* #financial-obligation  */
     {
     margin-bottom: 0rem;
+  }
+
+  .serverErrorMessage {
+    top: 7rem;
+    inline-size: 20vw;
   }
 }

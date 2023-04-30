@@ -1,6 +1,7 @@
-<div class="cardcontainer">
-    <ul *ngIf="(serverErrorMessage)">
-        <li>{{serverErrorMessage}}</li>
+
+<div style="width:90%" class="cardcontainer">
+    <ul *ngIf="(serverErrorMessage)"  style="display:contents">
+        <li class="serverErrorMessage">{{serverErrorMessage}}</li>
     </ul>
     <!-- style="margin-top: 32px;" -->
     <form [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
