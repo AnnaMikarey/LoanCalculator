@@ -152,6 +152,7 @@ li {
   text-align: center;
   top: 50vh;
   inline-size: 80vw;
+  align-self: center;
 }
 
 input[type=text].ng-invalid {
