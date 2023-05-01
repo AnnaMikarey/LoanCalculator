@@ -22,7 +22,6 @@ h2 {
     height: auto;
 }
 
-
 .output-container-two,
 .output-container-one {
     display: flex;
@@ -57,7 +56,6 @@ li span {
     display: block;
     margin-left: -0.9em;
 }
-
 
 .graph-legend {
     width: 5%;
@@ -112,7 +110,6 @@ li span {
     width: 100%;
 }
 
-
 @media screen and (min-width: 300px) {
     h2 {
         /* this is still turned off */
@@ -160,11 +157,11 @@ li span {
     }
 
     .line .info-text {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
 
     .line .output {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
 
     .output-container-one .line {
@@ -192,6 +189,9 @@ li span {
 
     div.info-text {
         margin-top: 3%;
+    }
+    li span{
+        margin-top: 1%;
     }
 
     .graph-legend {

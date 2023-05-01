@@ -1,4 +1,3 @@
-
 <div style="width:90%" class="cardcontainer">
     <ul *ngIf="(serverErrorMessage)"  style="display:contents">
         <li class="serverErrorMessage">{{serverErrorMessage}}</li>
@@ -7,7 +6,6 @@
     <form [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
         <div class="mini-container">
             <label for="price-of-property">TOTAL PROPERTY PRICE (EUR)</label>
-
             <input class="flex" type="text" formControlName="propertyPrice" id="price-of-property"
                 (input)="setPriceOfProperty($event)" maxlength={{(maxPropertyPrice.toString()).length+1}} />
             <ul *ngIf="propertyPrice.errors">
@@ -15,7 +13,7 @@
                 <li *ngIf="propertyPrice.errors['min']">
                     Price of property must be at least {{minPropertyPrice}} EUR
                 </li>
-                <li *ngIf="propertyPrice.errors['max']">
+                <li *ngIf="propertyPrice.errors['max']" style="font-size: 0.78rem;">
                     Price of property must be less than {{maxPropertyPrice}} EUR
                 </li>
             </ul>
@@ -109,7 +107,6 @@
                 <div>LINEAR</div>
             </div>
         </div>
-
         <div class="mini-container">
             <label for="salary">SALARY (EUR)</label>
             <input class="flex" type="text" formControlName="salary" id="salary" maxlength="5"

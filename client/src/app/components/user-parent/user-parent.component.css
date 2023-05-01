@@ -13,6 +13,10 @@
   text-align: center;
 }
 
+.user-output-container{
+  height: 69vh;
+}
+
 .logo {
   font-size: 0.9rem;
   color: #F5F5F5;
@@ -67,7 +71,13 @@ a {
 
 @media screen and (min-width: 300px) {
   .logo {
-    font-size: 1.3rem;
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .user-output-container{
+    height: 100vh;
   }
 }
 
@@ -102,7 +112,6 @@ a {
   .user-input-container,
   .user-output-container {
     height: 90%;
-
   }
 
   .user-input-container {
@@ -112,5 +121,4 @@ a {
   .user-output-container {
     width: 40%;
   }
-
 }
