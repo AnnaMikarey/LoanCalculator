@@ -15,7 +15,7 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
   @Input() contractFee: number;
   @Input() registrationFee: number;
   @Input() monthlyBankFee: number;
-  position:string="bottom";
+  position: string = "bottom";
   loading: boolean = false;
   //data for linear and annuity
   linearOrAnnuity: string //= 'annuity';
@@ -85,11 +85,17 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
 
       this.options = {
         tooltip: {
-          trigger: 'item',
+          show: true,
+          // trigger: 'item',
           position: this.position,
+          type: 'none',
+          // label: {
+          //   show: "none"
+          // },
           textStyle: {
             color: "#000",
-          }
+          },
+          // confine: true
         },
         // legend: {
         //   top: '0%',
@@ -98,16 +104,29 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
         series: [
           {
             type: 'pie',
-
             startAngle: 359,
             minAngle: 20,
-            animation: true, animationTypeUpdate: 'transition', animationDuration: 1500,
-
-            radius: ['100%', '90%'],
+            animation: true,
+            animationTypeUpdate: 'transition',
+            animationDuration: 1500,
+            radius: ['90%', '80%'],
             avoidLabelOverlap: true,
             label: {
               show: false,
-              position: 'center',
+            },
+            tooltip: {
+              padding: 1,
+              trigger: "item",
+              alwaysShowContent: false,
+              axisPointer: { label: { width: "20px" }, lineStyle: { width: "20px" } },
+              show: true,
+              position: 'bottom',
+              textStyle: {
+                fontSize: 11, color: "#000",
+                overflow: 'break',
+              },
+              confine: 'true',
+              extraCssText: 'width:auto; white-space:pre-wrap;',
             },
             data: [
               { "value": this.chartData?.requestedLoanAmount, "name": "Requested loan amount", itemStyle: { color: "#DBE4EE" } },
@@ -119,24 +138,24 @@ export class GraphAndChartComponent implements OnChanges, OnInit {
               { "value": this.registrationFee, "name": "Registration fee", itemStyle: { color: "#3E7CB1" } },
 
             ],
-            emphasis: {
-              label: {
-                show: false,
-                fontSize: 40,
-                fontWeight: 'bold'
-              },
-              labelLine: {
-                show: false
-              },
-              itemStyle: {
+            // emphasis: {
+            //   label: {
+            //     show: false,
+            //     fontSize: 40,
+            //     fontWeight: 'bold'
+            //   },
+            //   labelLine: {
+            //     show: false
+            //   },
+            //   itemStyle: {
 
 
-                shadowBlur: 0,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              },
+            //     shadowBlur: 0,
+            //     shadowOffsetX: 0,
+            //     shadowColor: 'rgba(0, 0, 0, 0.5)'
+            //   },
 
-            }
+            // }
           }
         ]
       };

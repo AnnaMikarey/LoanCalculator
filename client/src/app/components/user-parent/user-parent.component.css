@@ -1,15 +1,22 @@
 .header {
   background: #054A91;
-  height: 75px;
+  height: 7vh;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+.server-error:before {
+  content: '💸 YOU BROKE! ';
+  font-size: 2rem;
+  text-align: center;
 }
 
 .logo {
-  margin-left: 30px;
-  font-size: 36px;
+  font-size: 0.9rem;
   color: #F5F5F5;
+  margin: 0;
 }
 
 a {
@@ -17,66 +24,93 @@ a {
   text-decoration: none;
 }
 
-.container {
-  height: 100vh;
+.footer {
+  background: #054A91;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* height: 100%;  */
+  height: 18vh;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.parent-container {
+  height: auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #054A91;
 }
 
 .box {
-  background: #054A91;
-  margin: 10px;
+  background-color: #054A91;
   border-radius: 5px;
   color: #F5F5F5;
+  width: 100%;
 }
 
-.a {
-  width: 430px;
-  height: 740px;
-  padding-left: 15px;
-  padding-right: 15px;
+.user-input-container,
+.user-output-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: initial;
 }
 
-.b {
-  width: 750px;
-  height: 740px;
+.user-input-container {
+  order: 1;
 }
 
-@media screen and (max-width: 1290px) {
+@media screen and (min-width: 300px) {
+  .logo {
+    font-size: 1.3rem;
+  }
+}
 
-  .container {
-    flex-direction: column;
+@media screen and (min-width: 1201px) {
+  .header {
+    justify-content: flex-start;
+    padding-left: 2vw;
+  }
+
+  .footer {
+    height: 8vh;
+    position: fixed;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  .parent-container {
+    height: 85vh;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: auto;
-    /* width: 390px; */
+    background-color: #F5F5F5;
+    gap: 8vh;
   }
 
-  .b,
-  .a {
-    width: 390px;
-
+  .user-input-container {
+    order: 0;
   }
 
-  * {
-    background: #054A91;
-  }
-
-  .a {
-    order: 1;
-    margin-top: 0px;
-    height: 600px;
+  .user-input-container,
+  .user-output-container {
+    height: 90%;
 
   }
 
-  .b {
-    margin-bottom: 90px;
-    height: 650px;
+  .user-input-container {
+    width: 20%;
   }
+
+  .user-output-container {
+    width: 40%;
+  }
+
 }

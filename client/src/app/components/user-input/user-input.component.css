@@ -1,11 +1,27 @@
 .cardcontainer {
-  width: 400px;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
 }
 
-@media screen and (max-width: 1290px) {
-  .cardcontainer {
-    width: 360px;
-  }
+.mini-container {
+  margin-bottom: 1rem;
+  width: 100%;
+
+}
+
+label {
+  font-size: 0.5rem;
+}
+
+#price-of-property,
+.depositAndPercent,
+#mortgage-period,
+#salary,
+#financial-obligation {
+  margin-top: 0.3rem;
 }
 
 input {
@@ -13,28 +29,36 @@ input {
   border-radius: 5px;
   background: #F5F5F5;
   color: black;
-  padding: 8px 24px;
   resize: none;
-  font-size: 18;
+  font-size: 1rem;
   font-weight: bold;
-  padding-left: 10px;
-
+  padding-left: 0.4rem;
+  height: 2rem;
 }
 
-.mini-container {
-  margin-bottom: 30px;
+input[type="range"] {
+  height: 0.5rem;
 }
 
-.dataL {
+#price-of-property,
+/* .depositAndPercent, */
+#mortgage-period
+
+/* #salary, */
+/* #financial-obligation  */
+  {
+  margin-bottom: 0.5rem;
+}
+
+.data-label {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-
 }
 
-.dataL>div {
-  font-size: 13px;
+.data-label>div {
+  font-size: 0.5rem;
 }
 
 input[type="range"] {
@@ -55,24 +79,22 @@ input:focus {
 .flex {
   display: flex;
   width: 100%;
-
 }
 
-.flex input {
+/* .flex input {
   flex: 1 1 100%;
-}
+} */
 
-.linear-annuity input {
+/* .linear-annuity input {
   width: 25px;
-}
+} */
 
-
-.linear-annuity {
+/* .linear-annuity {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 10px;
-}
+} */
 
 .updown {
   display: flex;
@@ -80,18 +102,17 @@ input:focus {
   justify-content: space-evenly;
   background-color: #f5f5f5;
   border-radius: 5px 0px 0px 5px;
-  width: 20px;
+  width: 1.4rem;
 
 }
 
 .updownbutton {
-  margin-left: 5px;
+  margin-left: 0.1rem;
   height: 1em;
   width: 1em;
   display: inline-flex;
   align-self: center;
 }
-
 
 .depositAndPercent {
   display: flex;
@@ -101,44 +122,44 @@ input:focus {
 }
 
 .initial-deposit {
-  flex: 1 0 auto;
-  width: 200px;
+  width: 60%;
 }
 
 .percent {
-  flex: 1 0 auto;
   border-radius: 0px 5px 5px 0px;
-  padding-left: 25px;
   justify-content: flex-end;
   display: flex;
   flex-direction: row;
-
+  width: 35%;
 }
 
 #deposit-percent {
-  max-width: 80px;
-  min-width: 80px;
-  padding-left: 20px;
+  width: 100%;
   border-radius: 0px 5px 5px 0px;
 }
 
 ul {
-  position: absolute;
-  margin-top: 0px;
-  padding-top: 0px;
-  padding-left: 0px;
-  color: red;
+  display: none;
+}
+
+li {
+  font-size: 0.5rem;
+  color: #e43a8f;
   list-style-type: none;
-  font-size: smaller;
-  max-width: 380px;
+  position: absolute;
+  font-weight: bolder;
+}
+
+.serverErrorMessage {
+  text-align: left;
+  top: 2.15rem;
+  inline-size: 80vw;
 }
 
 input[type=text].ng-invalid {
   outline: 1px solid red;
 }
 
-
-/* input range */
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
@@ -193,6 +214,69 @@ input[type=range]::-moz-range-thumb {
 #mortgage-period,
 #salary,
 #financial-obligation {
-  margin-top: 5px;
+  /* margin-top: 5px;
   margin-bottom: 5px;
+  width:100%; */
+}
+
+
+@media screen and (min-width: 300px) {
+  label {
+    font-size: 0.9rem;
+  }
+
+  .data-label>div {
+    font-size: 0.7rem;
+  }
+
+  input#deposit-percent {
+    padding-left: 0.7rem;
+  }
+
+  input {
+    padding-left: 0.7rem;
+  }
+
+  .percent {
+    width: 25%;
+  }
+
+}
+
+
+@media screen and (min-width: 1201px) {
+  .mini-container {
+    margin-bottom: 1.6rem;
+  }
+
+  ul {
+    max-width: 20%;
+    display: block;
+    /* position: absolute; */
+  }
+
+  li {
+    inline-size: 18vw;
+    font-size: 0.7rem;
+  }
+
+
+  .data-label {
+    margin-top: 1.5rem;
+  }
+
+  #price-of-property,
+  /* .depositAndPercent, */
+  #mortgage-period
+
+  /* #salary, */
+  /* #financial-obligation  */
+    {
+    margin-bottom: 0rem;
+  }
+
+  .serverErrorMessage {
+    top: 7rem;
+    inline-size: 20vw;
+  }
 }
