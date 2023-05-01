@@ -18,13 +18,13 @@ export class CalculatorService {
 
   getInitialData(): Observable<any[]> {
     return this.httpClient.get<any[]>(
-      environment.baseUrl + 'client' + 'get-initial-values'
+      environment.baseUrl + 'client/' + 'get-initial-values'
     );
   }
 
   postUserDataGetsCalc(userData: UserData): Observable<CalculatedValues> {
     return this.httpClient.post<CalculatedValues>(
-      environment.baseUrl + 'client' + 'calculate',
+      environment.baseUrl + 'client/' + 'calculate',
       userData,
       httpOptions
     );
