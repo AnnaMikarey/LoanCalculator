@@ -19,6 +19,7 @@ jobs:
           sudo apt install -y curl
           curl -fsSL https://deb.nodesource.com/setup_19.3 | sudo -E bash -
           sudo apt install -y nodejs
+          sudo npm i -g rimraf
           sudo apt-get install -y openjdk-17-jdk
           sudo npm install --save-dev @types/node
           sudo npm install -g @angular/cli
