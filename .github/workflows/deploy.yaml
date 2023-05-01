@@ -22,6 +22,7 @@ jobs:
       - name: Set up JDK 17 environment variable
         run: |
           echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/" >> $GITHUB_ENV
+
       - name: Build and package Angular app
         run: |
           cd client/
@@ -32,6 +33,7 @@ jobs:
           cd server/
           chmod +x ./gradlew
           ./gradlew clean build
+
       - name: Deploy Spring Boot app to EC2
         uses: easingthemes/ssh-deploy@main
         with:
@@ -62,6 +64,6 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ./client/loan-calculator
           SCRIPT_BEFORE: |
-            cd ./client/loan-calculator
+            cd ./client/
             pm2 delete all
             pm2 serve loan-calculator/ 8081 --spa --watch -i max
