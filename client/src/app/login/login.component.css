@@ -127,3 +127,9 @@
     color: #ffffff;
   }
 }
+@media only screen and (max-width: 1800px) and (min-width: 480px) {
+  .login-form-container {
+    transform: scale(0.8);
+    margin: 0 auto;
+  }
+}
