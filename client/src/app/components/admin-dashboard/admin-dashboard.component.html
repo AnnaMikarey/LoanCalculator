@@ -31,16 +31,7 @@
                 adminForm.get('adminEuriborRate').touched
               "
             >
-              <span> ERROR: COULD NOT FETCH VALUE </span>
-            </div>
-            <div
-              class="error-msg"
-              *ngIf="
-                adminForm.get('adminEuriborRate').hasError('required') &&
-                adminForm.get('adminEuriborRate').touched
-              "
-            >
-              <span> THIS FIELD IS REQUIRED </span>
+              <span>FIELD IS REQUIRED/ NOT FETCHED </span>
             </div>
           </div>
 
@@ -242,7 +233,7 @@
               <span> THIS FIELD IS REQUIRED </span>
             </div>
             <div
-              class="error-msg"
+              class="error-msg custom"
               *ngIf="
                 errorMsg &&
                 !adminForm
