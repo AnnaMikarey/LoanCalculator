@@ -16,8 +16,10 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo npm cache clean --force
-          sudo apt-get install -y openjdk-17-jdk nodejs npm
+          sudo apt install -y curl
+          curl -fsSL https://deb.nodesource.com/setup_19.3 | sudo -E bash -
+          sudo apt install -y nodejs
+          sudo apt-get install -y openjdk-17-jdk
           sudo npm install --save-dev @types/node
           sudo npm install -g @angular/cli
           sudo npm install -g pm2
