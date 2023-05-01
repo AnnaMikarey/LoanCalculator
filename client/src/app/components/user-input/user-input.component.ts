@@ -41,7 +41,7 @@ export class UserInputComponent implements OnInit {
         initialDeposit: [(this.defaultPropertyPrice * this.minDepositPercent / 100), [Validators.pattern(/[0-9]/), Validators.required, (control: AbstractControl) => Validators.max(this.maxDeposit)(control), (control: AbstractControl) => Validators.min(this.minDeposit)(control)]],
         depositPercent: [this.minDepositPercent, [Validators.required, Validators.min(this.minDepositPercent), Validators.max(99)]],
         mortgagePeriod: [this.defaultMortgagePeriod, [Validators.required, Validators.pattern(/[0-9]/), Validators.min(this.minMortgagePeriod), Validators.max(this.maxMortgagePeriod)]],
-        salary: [this.defaultSalary, [Validators.pattern(/[0-9]/), Validators.min(1), Validators.required,Validators.max(10000)],],
+        salary: [this.defaultSalary, [Validators.pattern(/[0-9]/), Validators.min(1), Validators.required, Validators.max(10000)],],
         financialObligation: [this.defaultFinancialObligation, [Validators.pattern(/[0-9]/), Validators.min(0), Validators.required],],
         annuityLinear: [this.initialAnnuityLinear, [],],
       },
