@@ -92,7 +92,7 @@ a {
     align-items: center;
     justify-content: center;
     background-color: #F5F5F5;
-    gap: 4rem;
+    gap: 8vh;
   }
 
   .user-input-container {
