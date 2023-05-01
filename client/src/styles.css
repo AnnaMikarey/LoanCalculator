@@ -19,28 +19,3 @@ body {
   font-size: 36px;
 }
 
-@media only screen and (max-width: 480px) {
-  .login-form-container {
-      width: 100%;
-      height: 130vh;
-      background-color: #054A91;
-  }
-  .login-title {
-    color: #FFFFFF;
-    font-weight: 700;
-  }
-  .error-log {
-    font-weight: 700;
-    font-size: 18px;
-  }
-  .logo{
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    color: #FFFFFF;
-    margin-top: 78px;
-  }
-  #modal-btn{
-    margin:0;
-}
-}
