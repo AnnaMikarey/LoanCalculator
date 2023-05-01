@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .mini-container {
@@ -148,11 +149,17 @@ li {
 }
 
 .serverErrorMessage {
+  height:2rem;
   font-size: 1rem;
   text-align: center;
   top: 50vh;
   inline-size: 80vw;
   align-self: center;
+  color: #d17ba6;
+  /* list-style-type: none; */
+  position: absolute;
+  font-weight: bolder;
+  /* visibility:hidden */
 }
 
 input[type=text].ng-invalid {
@@ -264,7 +271,7 @@ input[type=range]::-moz-range-thumb {
 
   li {
     inline-size: 18vw;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   .data-label {
@@ -282,9 +289,14 @@ input[type=range]::-moz-range-thumb {
   }
 
   .serverErrorMessage {
-    top: 12vh;
+    /* top: 12vh; */
     inline-size: 19vw;
     font-size: 0.9rem;
     text-align: left;
+    position: static;
+    align-self: auto;
+    width: 100%;
+    margin-top: 3%;
+    margin-bottom: 3%;
   }
 }

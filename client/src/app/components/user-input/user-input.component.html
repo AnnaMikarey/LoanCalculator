@@ -1,7 +1,8 @@
 <div style="width:90%" class="cardcontainer">
-    <ul *ngIf="(serverErrorMessage)"  style="display:contents">
-        <li class="serverErrorMessage">{{serverErrorMessage}}</li>
-    </ul>
+    <!-- <ul *ngIf="(serverErrorMessage)"  style="display:contents"> -->
+        <!-- <li class="serverErrorMessage">{{serverErrorMessage}}</li> -->
+    <!-- </ul> -->
+    <div  class="serverErrorMessage" [ngStyle]="{'opacity': serverErrorMessage ? '1' : '0'}">{{serverErrorMessage}}</div>
     <!-- style="margin-top: 32px;" -->
     <form [formGroup]="postForm" (change)="onSubmit($event)" autocomplete="off">
         <div class="mini-container">
