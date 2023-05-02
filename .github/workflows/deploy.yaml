@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo npm install -g rimraf
+          sudo npm install rimraf --global
           sudo apt-get update
           sudo apt-get install -y openjdk-17-jdk
           sudo npm install -g @angular/cli
