@@ -21,6 +21,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y openjdk-17-jdk nodejs npm
+          sudo npm cache clean --force
+          sudo rm -rf node_modules
+          sudo rm -rf package-lock.json
           sudo npm install -g @angular/cli
           sudo npm install -g pm2
       - name: Set up JDK 17 environment variable
