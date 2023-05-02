@@ -12,14 +12,16 @@ jobs:
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '17'
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 19
+          cache: 'npm'
 
       - name: Install dependencies
         run: |
-          sudo reboot
           sudo apt-get update
-          sudo apt-get install -y openjdk-17-jdk nodejs npm
-          sudo npm install -g @angular/cli
-          sudo npm install -g pm2
+          sudo apt-get install -y openjdk-17-jdk
+
       - name: Set up JDK 17 environment variable
         run: |
           echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/" >> $GITHUB_ENV
