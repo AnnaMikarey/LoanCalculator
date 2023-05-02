@@ -22,6 +22,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y openjdk-17-jdk
+          sudo npm install -g rimraf
           sudo npm install -g @angular/cli
           sudo npm install -g pm2
 
