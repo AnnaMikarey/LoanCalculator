@@ -79,7 +79,7 @@ export class AdminDashboardComponent implements OnInit {
     this.adminService.postData(this.adminForm.value).pipe(take(1)).subscribe();
     setTimeout(() => {
       this.ngOnInit();
-    }, 10);
+    }, 500);
     this.isFieldChanged = false;
     this.errorMsg = null;
   }
