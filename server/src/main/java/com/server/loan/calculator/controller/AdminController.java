@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 @CrossOrigin(origins = {"http://localhost:4200/", " http://16.16.120.205:8081/", "http://13.48.162.1:8081/", "https://loan-calculator.site/"})
 @RequiredArgsConstructor
 public class AdminController {
