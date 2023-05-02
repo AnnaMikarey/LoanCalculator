@@ -18,15 +18,12 @@ jobs:
           node-version: 19
           cache: 'npm'
 
-      - name: Install dependencies
+            - name: Install dependencies
         run: |
-          sudo npm install
-          sudo npm install rimraf
           sudo apt-get update
-          sudo apt-get install -y openjdk-17-jdk
+          sudo apt-get install -y openjdk-17-jdk nodejs npm
           sudo npm install -g @angular/cli
           sudo npm install -g pm2
-
       - name: Set up JDK 17 environment variable
         run: |
           echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/" >> $GITHUB_ENV
