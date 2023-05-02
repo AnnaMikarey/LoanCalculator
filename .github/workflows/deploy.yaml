@@ -16,18 +16,12 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt install -y curl
-          curl -fsSL https://deb.nodesource.com/setup_19.3 | sudo -E bash -
-          sudo apt install -y nodejs
-          sudo npm i -g rimraf
-          sudo apt-get install -y openjdk-17-jdk
-          sudo npm install --save-dev @types/node
+          sudo apt-get install -y openjdk-17-jdk nodejs npm
           sudo npm install -g @angular/cli
           sudo npm install -g pm2
       - name: Set up JDK 17 environment variable
         run: |
           echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/" >> $GITHUB_ENV
-
       - name: Build and package Angular app
         run: |
           cd client/
@@ -38,7 +32,6 @@ jobs:
           cd server/
           chmod +x ./gradlew
           ./gradlew clean build
-
       - name: Deploy Spring Boot app to EC2
         uses: easingthemes/ssh-deploy@main
         with:
@@ -51,7 +44,6 @@ jobs:
             cd ./server
             sudo killall java
             nohup java -jar loanCalculator-0.0.1-SNAPSHOT.jar > nohup.out 2> nohup.err < /dev/null &
-
       - name: Deploy Angular app to EC2
         uses: easingthemes/ssh-deploy@main
         with:
